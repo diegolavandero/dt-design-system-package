@@ -15,13 +15,17 @@ interface TopbarProps {
   helpMenu?: HelpMenuItem[];
 }
 
+/** Orden oficial del DS (Topbar › iconOrder): apps, alerts, messages, help, settings, user. */
 const ACTIONS: { icon: IconName; label: string; badge?: boolean }[] = [
   { icon: 'apps', label: 'Aplicaciones' },
-  { icon: 'help', label: 'Ayuda' },
-  { icon: 'messages', label: 'Mensajes' },
   { icon: 'alerts', label: 'Alertas', badge: true },
+  { icon: 'messages', label: 'Mensajes' },
+  { icon: 'help', label: 'Ayuda' },
+  { icon: 'settings', label: 'Configuración' },
   { icon: 'user', label: 'Perfil' },
 ];
+
+const LOGO = `${import.meta.env.BASE_URL}sections/assets/logos/lastmile-desktop-white.svg`;
 
 function HelpButton({ items }: { items: HelpMenuItem[] }) {
   const [open, setOpen] = useState(false);
@@ -69,12 +73,12 @@ function HelpButton({ items }: { items: HelpMenuItem[] }) {
   );
 }
 
-/** Barra superior del DS. El logo es un wordmark de texto: el asset SVG original no existe en el repo del DS. */
-export function Topbar({ tenant = 'beetrack', extra, helpMenu }: TopbarProps) {
+/** Barra superior del DS (desktop): logo blanco · acciones · slot del cliente con esquina superior izquierda redondeada. */
+export function Topbar({ tenant = 'ACME CO', extra, helpMenu }: TopbarProps) {
   return (
-    <header className="flex h-ds-topbar items-center bg-nav pl-ds-6">
-      <span className="text-ds-body-l font-bold tracking-ds-title text-fg-inverse">LastMile</span>
-      <nav aria-label="Acciones globales" className="ml-auto flex items-center gap-ds-7 pr-ds-7">
+    <header className="flex h-ds-topbar items-center overflow-hidden bg-nav pl-ds-6">
+      <img src={LOGO} alt="LastMile" className="block h-ds-logo w-auto shrink-0" />
+      <nav aria-label="Acciones globales" className="ml-auto flex items-center gap-ds-7">
         {extra}
         {ACTIONS.map((a) =>
           a.icon === 'help' && helpMenu ? (
@@ -87,7 +91,7 @@ export function Topbar({ tenant = 'beetrack', extra, helpMenu }: TopbarProps) {
           ),
         )}
       </nav>
-      <div className="flex h-ds-topbar w-ds-slot items-center justify-center rounded-ds-slot bg-surface text-ds-body-s font-bold text-fg">{tenant}</div>
+      <div className="ml-ds-5 flex h-ds-topbar w-ds-slot shrink-0 items-center justify-center rounded-ds-slot bg-surface text-ds-caption font-bold text-nav">{tenant}</div>
     </header>
   );
 }

@@ -4,9 +4,13 @@
 :root {
   /* Dimensiones de layout */
   --size-control: calc(var(--space-4) + var(--space-6)); /* 40px: alto de fila/control, compuesto con la escala */
+  --size-nav-bar: 6px;      /* barra del ítem seleccionado (spec Sidebar) */
+  --size-nav-icon: calc(var(--size-sidebar) - var(--size-nav-bar)); /* 46px: columna del ícono */
+  --size-logo: 18px;        /* alto del logo en Topbar desktop (spec Topbar) */
+  --radius-nav: var(--space-6); /* esquina inferior derecha del sidebar expandido */
   --size-topbar: var(--topbar-h);        /* topbar.json: 52 */
   --size-sidebar: 52px;                  /* sidebar.json: colapsado */
-  --size-sidebar-open: 248px;            /* sidebar.json: expandido (hover) */
+  --size-sidebar-open: 240px;            /* sidebar.json: expandido (hover) */
   --size-slot: 100px;                    /* topbar.json: slot de compañía */
   --size-drawer: 400px;                  /* modal.json: drawer */
   --size-modal: 520px;                   /* modal.json: modal estándar */

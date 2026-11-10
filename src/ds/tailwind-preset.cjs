@@ -5,7 +5,7 @@ const semantic = (name) => `var(--color-${name})`;
 /** Dimensiones nombradas (layout.css) que se suman a la escala `ds-1…ds-10` en width/height/min/max. */
 const sizes = () => ({
   ...Object.fromEntries([...Array(10)].map((_, i) => [`ds-${i + 1}`, `var(--space-${i + 1})`])),
-  'ds-topbar': 'var(--size-topbar)', 'ds-control': 'var(--size-control)', 'ds-sidebar': 'var(--size-sidebar)', 'ds-sidebar-open': 'var(--size-sidebar-open)', 'ds-slot': 'var(--size-slot)',
+  'ds-topbar': 'var(--size-topbar)', 'ds-control': 'var(--size-control)', 'ds-nav-bar': 'var(--size-nav-bar)', 'ds-nav-icon': 'var(--size-nav-icon)', 'ds-logo': 'var(--size-logo)', 'ds-sidebar': 'var(--size-sidebar)', 'ds-sidebar-open': 'var(--size-sidebar-open)', 'ds-slot': 'var(--size-slot)',
   'ds-drawer': 'var(--size-drawer)', 'ds-modal': 'var(--size-modal)', 'ds-modal-wide': 'var(--size-modal-wide)', 'ds-readable': 'var(--size-readable)',
   'ds-menu': 'var(--size-menu)', 'ds-popover': 'var(--size-popover)', 'ds-list': 'var(--size-list)', 'ds-settings-nav': 'var(--size-settings-nav)',
   'ds-main': 'var(--size-main)', 'ds-viewport-inset': 'var(--size-viewport-inset)',
@@ -53,7 +53,7 @@ module.exports = {
       spacing: Object.fromEntries([...Array(10)].map((_, i) => [`ds-${i + 1}`, `var(--space-${i + 1})`])),
       borderRadius: {
         'ds-sm': 'var(--radius-sm)', 'ds-md': 'var(--radius-md)', 'ds-lg': 'var(--radius-lg)', 'ds-xl': 'var(--radius-xl)',
-        'ds-chip': 'var(--radius-chip)', 'ds-sidebar': 'var(--radius-sidebar)', 'ds-pill': 'var(--radius-pill)', 'ds-slot': 'var(--radius-topbar-slot)',
+        'ds-chip': 'var(--radius-chip)', 'ds-sidebar': 'var(--radius-sidebar)', 'ds-pill': 'var(--radius-pill)', 'ds-slot': 'var(--radius-topbar-slot)', 'ds-nav': 'var(--radius-nav)',
       },
       borderWidth: { 'ds-accent': 'var(--stroke-accent)' },
       lineHeight: { 'ds-caption': 'var(--lh-caption)', 'ds-body': 'var(--lh-body-s)', 'ds-subtitle': 'var(--lh-subtitle)', 'ds-title': 'var(--lh-title)' },
