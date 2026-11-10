@@ -6,6 +6,7 @@ import { Card, SectionHeader } from './ui';
 import { AuthGate, useAuth } from './auth';
 import Overview from './sections/Overview';
 import { Colors, Iconography, Radii, Shadows, Spacing, Typography } from './sections/Foundations';
+import { Modal } from './sections/Components6';
 import { Selection } from './sections/Components5';
 import { Inputs } from './sections/Components4';
 import { Tooltip } from './sections/Components3';
@@ -18,7 +19,7 @@ import './docs.css';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const RENDERERS: Record<string, ComponentType<any>> = {
   overview: Overview, colors: Colors, typography: Typography, spacing: Spacing, radii: Radii, shadows: Shadows, iconography: Iconography,
-  alerts: Alerts, imageUploader: ImageUploader, emptyState: EmptyState, changelog: Changelog, charts: Charts, dataviz: DataViz, serviceunits: ServiceUnits, logos: Logos, figma: Figma, tooltip: Tooltip, inputs: Inputs, selection: Selection, brand: Brand, voice: Voice, buttons: Buttons, badges: Badges, chips: Chips,
+  alerts: Alerts, imageUploader: ImageUploader, emptyState: EmptyState, changelog: Changelog, charts: Charts, dataviz: DataViz, serviceunits: ServiceUnits, logos: Logos, figma: Figma, tooltip: Tooltip, inputs: Inputs, selection: Selection, modal: Modal, brand: Brand, voice: Voice, buttons: Buttons, badges: Badges, chips: Chips,
 };
 
 const loaders = import.meta.glob('./content/sections/**/*.json', { import: 'default' }) as Record<string, () => Promise<unknown>>;
