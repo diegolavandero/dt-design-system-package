@@ -1,0 +1,382 @@
+{
+  "title": "Topbar",
+  "titleKey": "nav.topbar",
+  "description": "Height 52px ($hp-top-bar-height), bg $hp-dt-indigo (#132045). Customer slot 100px, border-radius 25px 0 0 0. Icon order invariable: apps · alerts · messages · help · settings · user. Source: styles/packages/top-bar/src/",
+  "keywords": [
+    "topbar",
+    "header",
+    "navigation",
+    "top",
+    "bar"
+  ],
+  "tokens": {
+    "height": "52px",
+    "bg": "#132045",
+    "ink": "#fff",
+    "customerWidth": "100px",
+    "customerRadius": "25px 0 0 0",
+    "productColors": {
+      "lastmile": "#F27B42",
+      "firstmile": "#FF3E50",
+      "planner": "#47D09A",
+      "ondemand": "#6B9AFF"
+    }
+  },
+  "iconOrder": [
+    "apps",
+    "alerts",
+    "messages",
+    "help",
+    "settings",
+    "user"
+  ],
+  "breakpoints": {
+    "desktop": "≥1024px — full logo + all 6 icons + customer slot",
+    "tablet": "768–1023px — full logo + 3 icons (alerts, messages, user) + customer slot abbreviated",
+    "mobile": "<768px — mobile logo (icon only) + 2 icons (alerts, user) + no customer slot"
+  },
+  "products": [
+    {
+      "id": "lastmile",
+      "name": "Last Mile",
+      "color": "#F27B42",
+      "logoDesktop": "sections/assets/logos/lastmile-desktop-white.svg",
+      "logoMobile": "sections/assets/logos/lastmile-mobile-white.svg",
+      "variants": [
+        {
+          "breakpoint": "desktop",
+          "label": "Desktop",
+          "width": "100%",
+          "logo": "sections/assets/logos/lastmile-desktop-white.svg",
+          "icons": [
+            "apps",
+            "alerts",
+            "messages",
+            "help",
+            "settings",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "ACME CO",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "tablet",
+          "label": "Tablet",
+          "width": "768px",
+          "logo": "sections/assets/logos/lastmile-desktop-white.svg",
+          "icons": [
+            "messages",
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "AC",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "mobile",
+          "label": "Mobile",
+          "width": "375px",
+          "logo": "sections/assets/logos/lastmile-mobile-white.svg",
+          "icons": [
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "show": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "plannerpro",
+      "name": "Planner Pro",
+      "color": "#47D09A",
+      "logoDesktop": "sections/assets/logos/plannerpro-desktop-white.svg",
+      "logoMobile": "sections/assets/logos/plannerpro-mobile-white.svg",
+      "variants": [
+        {
+          "breakpoint": "desktop",
+          "label": "Desktop",
+          "width": "100%",
+          "logo": "sections/assets/logos/plannerpro-desktop-white.svg",
+          "icons": [
+            "apps",
+            "alerts",
+            "messages",
+            "help",
+            "settings",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "ACME CO",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "tablet",
+          "label": "Tablet",
+          "width": "768px",
+          "logo": "sections/assets/logos/plannerpro-desktop-white.svg",
+          "icons": [
+            "messages",
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "AC",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "mobile",
+          "label": "Mobile",
+          "width": "375px",
+          "logo": "sections/assets/logos/plannerpro-mobile-white.svg",
+          "icons": [
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "show": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "ondemand",
+      "name": "On Demand",
+      "color": "#6B9AFF",
+      "logoDesktop": "sections/assets/logos/ondemand-desktop-white.svg",
+      "logoMobile": "sections/assets/logos/ondemand-mobile-white.svg",
+      "variants": [
+        {
+          "breakpoint": "desktop",
+          "label": "Desktop",
+          "width": "100%",
+          "logo": "sections/assets/logos/ondemand-desktop-white.svg",
+          "icons": [
+            "apps",
+            "alerts",
+            "messages",
+            "help",
+            "settings",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "ACME CO",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "tablet",
+          "label": "Tablet",
+          "width": "768px",
+          "logo": "sections/assets/logos/ondemand-desktop-white.svg",
+          "icons": [
+            "messages",
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "AC",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "mobile",
+          "label": "Mobile",
+          "width": "375px",
+          "logo": "sections/assets/logos/ondemand-mobile-white.svg",
+          "icons": [
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "show": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "customer-portal",
+      "name": "Customer Portal",
+      "color": "#1F60ED",
+      "logoDesktop": "sections/assets/logos/customer-portal-desktop-white.svg",
+      "logoMobile": null,
+      "variants": [
+        {
+          "breakpoint": "desktop",
+          "label": "Desktop",
+          "width": "100%",
+          "logo": "sections/assets/logos/customer-portal-desktop-white.svg",
+          "icons": [
+            "apps",
+            "alerts",
+            "messages",
+            "help",
+            "settings",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "ACME CO",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "tablet",
+          "label": "Tablet",
+          "width": "768px",
+          "logo": "sections/assets/logos/customer-portal-desktop-white.svg",
+          "icons": [
+            "messages",
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "AC",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "mobile",
+          "label": "Mobile",
+          "width": "375px",
+          "logo": "sections/assets/logos/customer-portal-desktop-white.svg",
+          "icons": [
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "show": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "lastmile-backoffice",
+      "name": "Last Mile Backoffice",
+      "color": "#F27B42",
+      "logoDesktop": "sections/assets/logos/dt-wordmark-white.svg",
+      "logoMobile": null,
+      "variants": [
+        {
+          "breakpoint": "desktop",
+          "label": "Desktop",
+          "width": "100%",
+          "logo": "sections/assets/logos/dt-wordmark-white.svg",
+          "icons": [
+            "apps",
+            "alerts",
+            "messages",
+            "help",
+            "settings",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "ACME CO",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "tablet",
+          "label": "Tablet",
+          "width": "768px",
+          "logo": "sections/assets/logos/dt-wordmark-white.svg",
+          "icons": [
+            "messages",
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "AC",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "mobile",
+          "label": "Mobile",
+          "width": "375px",
+          "logo": "sections/assets/logos/dt-wordmark-white.svg",
+          "icons": [
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "show": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "soporte",
+      "name": "Soporte",
+      "color": "#F5A623",
+      "logoDesktop": "sections/assets/logos/soporte-desktop-white.svg",
+      "logoMobile": null,
+      "variants": [
+        {
+          "breakpoint": "desktop",
+          "label": "Desktop",
+          "width": "100%",
+          "logo": "sections/assets/logos/soporte-desktop-white.svg",
+          "icons": [
+            "apps",
+            "alerts",
+            "messages",
+            "help",
+            "settings",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "ACME CO",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "tablet",
+          "label": "Tablet",
+          "width": "768px",
+          "logo": "sections/assets/logos/soporte-desktop-white.svg",
+          "icons": [
+            "messages",
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "text": "AC",
+            "show": true
+          }
+        },
+        {
+          "breakpoint": "mobile",
+          "label": "Mobile",
+          "width": "375px",
+          "logo": "sections/assets/logos/soporte-desktop-white.svg",
+          "icons": [
+            "alerts",
+            "user"
+          ],
+          "customerSlot": {
+            "show": false
+          }
+        }
+      ]
+    }
+  ],
+  "helpDropdown": {
+    "trigger": "help icon (?) in .acts",
+    "items": [
+      { "label": "Help Center",       "icon": "help" },
+      { "label": "API Documentation", "icon": "code" },
+      { "label": "Capacitaciones",    "icon": "education" }
+    ],
+    "tokens": "bg #fff · border 1px var(--n3) · radius 8px · shadow 0 4px 16px rgba(19,32,69,.14) · min-width 210px",
+    "behavior": "toggle on click, close on outside click · rendered via topbarHelpBtn() in renderers.js"
+  },
+  "propagationRule": "ALWAYS update ALL instances when this component changes. Instances: renderers.js (tablepage, settingsShell, formShell), strategy-planner-PLANNER.html, Diego_Designs/ONBOARDING_help-center-video.html. New prototypes must also include the dropdown.",
+  "pageUsage": "Renderer : renderers.topbar(data)\nSource   : sections/components/topbar.json\nCSS class: .tbar  (defined in index.html)\n\nIn page templates — use topbarHelpBtn() for the help icon:\n  <div class=\"tbar\" style=\"border-radius:0;padding:0 0 0 22px\">\n    [logo]\n    <div class=\"acts\">\n      ${iconSvg('apps',18,'#fff')}\n      ${topbarHelpBtn()}   ← ALWAYS use this, never bare iconSvg('help',...)\n      ${iconSvg('messages',18,'#fff')}\n      <div class=\"bell\">${iconSvg('alerts',18,'#fff')}</div>\n      ${iconSvg('user',18,'#fff')}\n    </div>\n    [.slot]\n  </div>"
+}

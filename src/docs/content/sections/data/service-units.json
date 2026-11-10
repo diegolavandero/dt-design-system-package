@@ -1,0 +1,18 @@
+{
+  "title": "Service units",
+  "titleKey": "nav.serviceunits",
+  "description": "Color palette for service units. Each color visually identifies a unit type. Assign in order.",
+  "keywords": ["service", "units", "colors", "palette"],
+  "palette": [
+    { "hex": "#FE4EC4", "label": "Pink" },
+    { "hex": "#36B37E", "label": "G5" },
+    { "hex": "#00B8D9", "label": "T5" },
+    { "hex": "#1F60ED", "label": "B6" },
+    { "hex": "#8777D9", "label": "P5" },
+    { "hex": "#FF5630", "label": "R5" },
+    { "hex": "#FFAB00", "label": "O5" },
+    { "hex": "#83E873", "label": "Lime" },
+    { "hex": "#FFEC3F", "label": "Yellow" },
+    { "hex": "#67768D", "label": "N5" }
+  ]
+}

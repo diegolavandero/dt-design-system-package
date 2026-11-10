@@ -1,0 +1,66 @@
+{
+  "title": "Map elements",
+  "titleKey": "nav.mappins",
+  "description": "All map pin SVGs used across DispatchTrack products. Download individually or as a ZIP package.",
+  "keywords": ["map", "pins", "markers", "location", "cluster", "map elements"],
+  "pinsPath": "sections/assets/pins/",
+  "groups": [
+    {
+      "id": "with-order",
+      "label": "With order",
+      "color": "#0C47C7",
+      "pins": [
+        { "file": "pin-with-order-unselected.svg",       "label": "Unselected" },
+        { "file": "pin-with-order-selected.svg",          "label": "Selected" },
+        { "file": "pin-with-order-badge-unselected.svg",  "label": "Badge · Unselected" },
+        { "file": "pin-with-order-badge-selected.svg",    "label": "Badge · Selected" }
+      ]
+    },
+    {
+      "id": "sin-asignar",
+      "label": "Sin asignar",
+      "color": "#8FA0BA",
+      "pins": [
+        { "file": "pin-sin-asignar-unselected.svg",            "label": "Unselected" },
+        { "file": "pin-sin-asignar-selected.svg",               "label": "Selected" },
+        { "file": "pin-sin-asignar-selected-close.svg",         "label": "Selected · Close" },
+        { "file": "pin-sin-asignar-badge-unselected.svg",       "label": "Badge · Unselected" },
+        { "file": "pin-sin-asignar-badge-selected.svg",         "label": "Badge · Selected" },
+        { "file": "pin-sin-asignar-badge-selected-close.svg",   "label": "Badge · Selected · Close" }
+      ]
+    },
+    {
+      "id": "route",
+      "label": "Route",
+      "color": "#00B8D9",
+      "pins": [
+        { "file": "pin-route-unselected.svg",       "label": "Unselected" },
+        { "file": "pin-route-selected.svg",          "label": "Selected" },
+        { "file": "pin-route-badge-unselected.svg",  "label": "Badge · Unselected" },
+        { "file": "pin-route-badge-selected.svg",    "label": "Badge · Selected" }
+      ]
+    },
+    {
+      "id": "no-order",
+      "label": "No order",
+      "color": "#FFAB00",
+      "pins": [
+        { "file": "pin-no-order-unselected.svg",                  "label": "Unselected" },
+        { "file": "pin-no-order-unselected-unassigned.svg",        "label": "Unselected · Unassigned" },
+        { "file": "pin-no-order-selected.svg",                     "label": "Selected" },
+        { "file": "pin-no-order-selected-unassigned.svg",          "label": "Selected · Unassigned" },
+        { "file": "pin-no-order-selected-close.svg",               "label": "Selected · Close" },
+        { "file": "pin-no-order-selected-close-unassigned.svg",    "label": "Selected · Close · Unassigned" }
+      ]
+    },
+    {
+      "id": "distribution-center",
+      "label": "Distribution center",
+      "color": "#132045",
+      "pins": [
+        { "file": "pin-distribution-center-unselected.svg",  "label": "Unselected" },
+        { "file": "pin-distribution-center-selected.svg",     "label": "Selected" }
+      ]
+    }
+  ]
+}

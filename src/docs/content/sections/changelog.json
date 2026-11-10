@@ -1,0 +1,3015 @@
+{
+  "title": "Changelog",
+  "titleKey": "nav.changelog",
+  "description": "Auto-generated from git history. Updated on every push to main.",
+  "generated": "2026-07-13T21:49:17.252Z",
+  "days": [
+    {
+      "date": "2026-07-13",
+      "entries": [
+        {
+          "hash": "c8342b6",
+          "type": "feat",
+          "section": "Topbar",
+          "message": "Add \"Usar en Claude\" button to top bar",
+          "author": "Cristina"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-26",
+      "entries": [
+        {
+          "hash": "82ea6d9",
+          "type": "update",
+          "section": "Tables",
+          "message": "DES-827 v2: reports table 1:1 + Usuarios asociados empty-by-default",
+          "author": "Carlos"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-25",
+      "entries": [
+        {
+          "hash": "238a4a9",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827 v2: rebuild Usuarios asociados to match production 1:1",
+          "author": "Carlos"
+        },
+        {
+          "hash": "27bcf25",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827 v2: align 2FA wizard steps 2-4 to exact production copy",
+          "author": "Carlos"
+        },
+        {
+          "hash": "128e3fe",
+          "type": "feat",
+          "section": "General",
+          "message": "DES-827 v2: add 2FA activation wizard (4-step flow) for production parity",
+          "author": "Carlos"
+        },
+        {
+          "hash": "3a4853b",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827 v2: rename MFA tab to \"Verificación en dos pasos\" (match production)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "b817cf8",
+          "type": "feat",
+          "section": "General",
+          "message": "DES-827 v2: add missing report fields for 1:1 production parity",
+          "author": "Carlos"
+        },
+        {
+          "hash": "cc2431b",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827 / LMW-2682: profile settings v2 — mirror production structure",
+          "author": "Carlos"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-17",
+      "entries": [
+        {
+          "hash": "e4ecc01",
+          "type": "update",
+          "section": "General",
+          "message": "chore: remove unused CIC prototypes (custom-fields, orders-list)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "5530bd0",
+          "type": "update",
+          "section": "General",
+          "message": "chore(orders): rename CIC_orders-list-improved.html -> CIC_orders-columns.html",
+          "author": "Carlos"
+        },
+        {
+          "hash": "42ec2f7",
+          "type": "feat",
+          "section": "Tables",
+          "message": "feat(orders): column manager + cloned chrome; add Column editor to DS table section",
+          "author": "Carlos"
+        },
+        {
+          "hash": "ecfbcd7",
+          "type": "update",
+          "section": "General",
+          "message": "refactor(ds): move dropdown utils (dtDrop/dtDropClose/dtPickOpt) into renderers.js",
+          "author": "Diego"
+        },
+        {
+          "hash": "3f1ea9e",
+          "type": "update",
+          "section": "Tables",
+          "message": "feat(monitoring): functional filters that drive charts, stats and tables",
+          "author": "Diego"
+        },
+        {
+          "hash": "c6e837a",
+          "type": "update",
+          "section": "General",
+          "message": "refactor(monitoring): single-row KPI stat cards",
+          "author": "Diego"
+        },
+        {
+          "hash": "539818d",
+          "type": "update",
+          "section": "Tables",
+          "message": "refactor(monitoring): tighten chart density to surface the table",
+          "author": "Diego"
+        },
+        {
+          "hash": "21fd507",
+          "type": "update",
+          "section": "Tables",
+          "message": "feat(monitoring): use DS Tabs + DS filter bar + full-column table",
+          "author": "Diego"
+        },
+        {
+          "hash": "b36d916",
+          "type": "update",
+          "section": "General",
+          "message": "feat(charts+monitoring): DS chart components + admin Monitoreo de tutoriales",
+          "author": "Diego"
+        },
+        {
+          "hash": "792517d",
+          "type": "update",
+          "section": "General",
+          "message": "feat(onboarding): replace custom toast with DS dsAlert() component",
+          "author": "Diego"
+        },
+        {
+          "hash": "7af407a",
+          "type": "update",
+          "section": "General",
+          "message": "feat(onboarding): rename Capacitaciones→Tutoriales and wire hat to catalog tutorial",
+          "author": "Diego"
+        },
+        {
+          "hash": "6caecb0",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat(onboarding): unify drawer header template across all sidebar views",
+          "author": "Diego"
+        },
+        {
+          "hash": "64f4839",
+          "type": "update",
+          "section": "Topbar",
+          "message": "feat(onboarding): promote Capacitaciones to a topbar chip + section tutorial entry",
+          "author": "Diego"
+        },
+        {
+          "hash": "a74864d",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(onboarding): add Capacitaciones tutorial catalog to help-center drawer",
+          "author": "Diego"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-16",
+      "entries": [
+        {
+          "hash": "14ffe34",
+          "type": "fix",
+          "section": "Topbar",
+          "message": "fix(topbar): use position:fixed for help dropdown to escape overflow:hidden clipping",
+          "author": "Diego"
+        },
+        {
+          "hash": "319e1df",
+          "type": "update",
+          "section": "General",
+          "message": "feat(empty-state): wire Empty State into live app (index.html + renderers.js)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "b00d536",
+          "type": "feat",
+          "section": "Topbar",
+          "message": "feat(topbar): add help dropdown (Help Center / API Docs / Capacitaciones)",
+          "author": "Diego"
+        },
+        {
+          "hash": "5068a8a",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(empty-state): add Empty State component to the DS",
+          "author": "Carlos"
+        },
+        {
+          "hash": "caf40dd",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat(settings): Web Users screen on the 'Sidebar de ajustes' template",
+          "author": "Diego"
+        },
+        {
+          "hash": "9ac8eb3",
+          "type": "feat",
+          "section": "Icons",
+          "message": "DES-828: add phone icon next to the driver's number in list cards for clarity",
+          "author": "Carlos"
+        },
+        {
+          "hash": "0562aa0",
+          "type": "feat",
+          "section": "Buttons",
+          "message": "DES-828: remove lasso selection, add 'Encuadrar' (fit-to-bounds) control below the zoom buttons",
+          "author": "Carlos"
+        },
+        {
+          "hash": "ea4d159",
+          "type": "feat",
+          "section": "General",
+          "message": "DES-828: remove workspace padding — panel + map go flush edge-to-edge (true fullscreen), keep only the panel/map divider",
+          "author": "Carlos"
+        },
+        {
+          "hash": "e9745b1",
+          "type": "update",
+          "section": "Inputs",
+          "message": "DES-828: tighten workspace to a uniform 12px gap — module goes near-fullscreen",
+          "author": "Carlos"
+        },
+        {
+          "hash": "24c30e2",
+          "type": "update",
+          "section": "Badges",
+          "message": "DES-828: redesign KPI band (Opción B) — clean stat row + protagonist delivery progress bar + clickable outcome legend that filters the fleet",
+          "author": "Carlos"
+        },
+        {
+          "hash": "86fbd10",
+          "type": "update",
+          "section": "General",
+          "message": "feat(onboarding): open help-center articles inline in the drawer",
+          "author": "Diego"
+        },
+        {
+          "hash": "8145b81",
+          "type": "feat",
+          "section": "General",
+          "message": "DES-828: box the info KPI tiles to match the outcome pills; more internal padding",
+          "author": "Carlos"
+        },
+        {
+          "hash": "05df679",
+          "type": "update",
+          "section": "General",
+          "message": "ux-copy(onboarding): 'Aceptar el reto' → 'Prueba tus conocimientos'",
+          "author": "Diego"
+        },
+        {
+          "hash": "c18ac41",
+          "type": "update",
+          "section": "General",
+          "message": "ux-copy(onboarding): rename quiz 'Comprobar' → 'Verificar respuesta'",
+          "author": "Diego"
+        },
+        {
+          "hash": "25b5f33",
+          "type": "update",
+          "section": "General",
+          "message": "ux-copy(onboarding): replace quiz CTAs with challenge-framing copy",
+          "author": "Diego"
+        },
+        {
+          "hash": "f88fe6d",
+          "type": "update",
+          "section": "General",
+          "message": "feat(onboarding): inline video playback + 'Nueva función' announcement variant",
+          "author": "Diego"
+        },
+        {
+          "hash": "2dbc3fc",
+          "type": "update",
+          "section": "General",
+          "message": "chore(onboarding): move help-center prototype to Diego_Designs/",
+          "author": "Diego"
+        },
+        {
+          "hash": "c06ae9f",
+          "type": "update",
+          "section": "General",
+          "message": "feat(onboarding): section-scoped help drawer with video + comprehension quiz (Órdenes)",
+          "author": "Diego"
+        },
+        {
+          "hash": "fb6fc9b",
+          "type": "fix",
+          "section": "General",
+          "message": "DES-828: revert KPI band to pill version; labels on two lines",
+          "author": "Carlos"
+        },
+        {
+          "hash": "b440874",
+          "type": "update",
+          "section": "General",
+          "message": "DES-828: unify delivery KPIs into a segmented control (proportion bar + 3 clickable segments)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "fef45ac",
+          "type": "feat",
+          "section": "General",
+          "message": "DES-828: more breathing room in KPI band (padding, gaps, larger tiles/pills)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "b8c9111",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(LMW-2604): add bulk mark-all-as-read to alerts drawer (AC5)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "912bbd0",
+          "type": "update",
+          "section": "Icons",
+          "message": "DES-828: visual + interactive KPI band — icon tiles, stacked delivery bar, clickable outcome filters",
+          "author": "Carlos"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-15",
+      "entries": [
+        {
+          "hash": "05f6119",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): Login screen — fondo neutral-2 en todas las variantes",
+          "author": "Diego"
+        },
+        {
+          "hash": "ae82f5f",
+          "type": "update",
+          "section": "General",
+          "message": "feat(mobile-ds): pantalla Login con flujo funcional de fuerza bruta",
+          "author": "Diego"
+        },
+        {
+          "hash": "aa585ad",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): DTMToast — align-items:center para centrado vertical en 1 línea",
+          "author": "Diego"
+        },
+        {
+          "hash": "44aba57",
+          "type": "fix",
+          "section": "Colors",
+          "message": "fix(mobile-ds): DTMToast — íconos Carbon correctos con fill-rule evenodd y colores hex",
+          "author": "Diego"
+        },
+        {
+          "hash": "e69f01d",
+          "type": "fix",
+          "section": "Colors",
+          "message": "fix(mobile-ds): DTMToast — íconos coloreados, advertencia en círculo, alineación top",
+          "author": "Diego"
+        },
+        {
+          "hash": "46ae7a9",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): DTMToast — borde 1.5px para mejor visibilidad en fondo oscuro",
+          "author": "Diego"
+        },
+        {
+          "hash": "c2351f6",
+          "type": "update",
+          "section": "General",
+          "message": "feat(mobile-ds): DTMToast — grilla 4×3 (info/error/warning/success × sin acción/cierre/acción)",
+          "author": "Diego"
+        },
+        {
+          "hash": "4a25227",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): Lista de rutas — footer centrado, dropdown pickup interactivo y toast cerrable",
+          "author": "Diego"
+        },
+        {
+          "hash": "19d040c",
+          "type": "update",
+          "section": "Inputs",
+          "message": "feat(mobile-ds): DTMInputs — live interactive previews para los 6 componentes",
+          "author": "Diego"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-12",
+      "entries": [
+        {
+          "hash": "6fdd18c",
+          "type": "update",
+          "section": "General",
+          "message": "feat(mobile-ds): nueva sección Pantallas — Mapa + Lista y Lista de rutas",
+          "author": "Diego"
+        },
+        {
+          "hash": "7018762",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): DTMBottomSheet — mapas Leaflet auto-inicializan en los 3 estados estáticos",
+          "author": "Diego"
+        },
+        {
+          "hash": "6ae6adc",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): DTMBottomSheet estáticos — 3 estados sincronizados con demo funcional (mapa+gris+tabs+chips)",
+          "author": "Diego"
+        },
+        {
+          "hash": "964648c",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): DTMBottomSheet grab area — fondo gris var(--n1) igual que lista de órdenes",
+          "author": "Diego"
+        },
+        {
+          "hash": "b542dc0",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): DTMBottomSheet mapa completo — solo muestra route header (tabs y chips ocultos)",
+          "author": "Diego"
+        },
+        {
+          "hash": "f4d0dc9",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): DTMBottomSheet — fondo blanco en grab area + mapa completo muestra header+tabs+chips completos",
+          "author": "Diego"
+        },
+        {
+          "hash": "0250d20",
+          "type": "update",
+          "section": "General",
+          "message": "feat(mobile-ds): DTMBottomSheet demo funcional 3 estados — mapa CARTO + swipe up/down con snap",
+          "author": "Diego"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-11",
+      "entries": [
+        {
+          "hash": "697a2a6",
+          "type": "update",
+          "section": "General",
+          "message": "DES-828: fit map viewport to fleet pins on load (no over-wide zoom)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "f239abe",
+          "type": "update",
+          "section": "General",
+          "message": "DES-828: fleet summary strip, rich driver detail (KPIs + stop timeline), route trace on map",
+          "author": "Carlos"
+        },
+        {
+          "hash": "980515f",
+          "type": "update",
+          "section": "Badges",
+          "message": "DES-828: subtle shadow on selected pin + center numbers (pin & badge)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "6f4aa04",
+          "type": "update",
+          "section": "Badges",
+          "message": "DES-828: apply DS 'with order' map pins (number + badge) reproduced 1:1",
+          "author": "Carlos"
+        },
+        {
+          "hash": "da89d92",
+          "type": "update",
+          "section": "General",
+          "message": "DES-828: use literal DS pin SVG assets for map markers",
+          "author": "Carlos"
+        },
+        {
+          "hash": "a394cdd",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): DTMOrderCard — campo personalizado pill gris, orden caption-semibold, pin actual vs otras",
+          "author": "Diego"
+        },
+        {
+          "hash": "f47505d",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): DTMStatusSelector segmented conectado 64px texto en linea + DTMSuccessScreen 360x640",
+          "author": "Diego"
+        },
+        {
+          "hash": "10b72fb",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): DTMItemCard escaneo — checkbox arriba-derecha + lapiz editar abajo-derecha",
+          "author": "Diego"
+        },
+        {
+          "hash": "274549a",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): padding superior e inferior del drawer a 24px",
+          "author": "Diego"
+        },
+        {
+          "hash": "30e8d93",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): altura del drawer del menu lateral a 640px en los ejemplos",
+          "author": "Diego"
+        },
+        {
+          "hash": "7799ab4",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(mobile-ds): drawer al 76.94% (277/360), proporcion fija en toda resolucion",
+          "author": "Diego"
+        },
+        {
+          "hash": "381863b",
+          "type": "fix",
+          "section": "Logos",
+          "message": "fix(mobile-ds): menu lateral — drawer 75%+overlay, logo desktop, dividers entre grupos",
+          "author": "Diego"
+        },
+        {
+          "hash": "fb2f2d9",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(ds): resuelve rutas de seccion a URL absoluta antes de fetch",
+          "author": "Diego"
+        },
+        {
+          "hash": "49aff6c",
+          "type": "update",
+          "section": "Modal",
+          "message": "feat(mobile-ds): seccion Mapa (DTMMapPin, DTMRouteLine, DTMMapFABs, DTMNavWidget, DTMGeorefModal)",
+          "author": "Diego"
+        },
+        {
+          "hash": "9060ac1",
+          "type": "update",
+          "section": "General",
+          "message": "feat(mobile-ds): seccion Gestion de ordenes (DTMStatusSelector, DTMSubstatusSelect, DTMManagementAccordion, DTMMilestones, DTMBulkManagement, DTMCashCollection, DTMSuccessScreen)",
+          "author": "Diego"
+        },
+        {
+          "hash": "2be17d7",
+          "type": "update",
+          "section": "Inputs",
+          "message": "feat(mobile-ds): seccion Pruebas de entrega (DTMRequirementRow, DTMPhotoCapture, DTMSignaturePad, DTMScanner, DTMLoadValidation, DTMStartForm)",
+          "author": "Diego"
+        },
+        {
+          "hash": "8436282",
+          "type": "update",
+          "section": "Banners",
+          "message": "feat(mobile-ds): seccion Toasts y banners (DTMToast, DTMSyncBar, DTMWarningBanner, DTMInfoBanner, DTMConfirmModal)",
+          "author": "Diego"
+        },
+        {
+          "hash": "cd7b7f6",
+          "type": "update",
+          "section": "Modal",
+          "message": "feat(mobile-ds): seccion Bottom sheets (DTMBottomSheet, DTMRouteHeader, DTMSheetActionMenu, DTMUnsavedChangesModal)",
+          "author": "Diego"
+        },
+        {
+          "hash": "591e512",
+          "type": "update",
+          "section": "General",
+          "message": "feat(mobile-ds): seccion Listas y filtros (DTMRouteTabs, DTMGroupChips, DTMStatusFilterChips, DTMListDivider, DTMSyncLabel, DTMEmptyState)",
+          "author": "Diego"
+        },
+        {
+          "hash": "6c85bfb",
+          "type": "update",
+          "section": "General",
+          "message": "feat(mobile-ds): seccion Cards (DTMOrderCard, DTMRouteCard, DTMItemCard, DTMCollectCard, DTMGroupCard, DTMServiceUnitCard)",
+          "author": "Diego"
+        },
+        {
+          "hash": "b5b6e4c",
+          "type": "update",
+          "section": "Inputs",
+          "message": "feat(mobile-ds): seccion Inputs (DTMTextInput, DTMSearchBar, DTMPinInput, DTMStepper, DTMDropdown, DTMTextarea)",
+          "author": "Diego"
+        },
+        {
+          "hash": "ef48c79",
+          "type": "update",
+          "section": "Buttons",
+          "message": "DES-828: equal-width filter fields (grid) + low-radius Filtrar/reset buttons",
+          "author": "Carlos"
+        },
+        {
+          "hash": "3b53121",
+          "type": "feat",
+          "section": "General",
+          "message": "DES-828: add Status dropdown filter — 4-filter row (date range · groups · status · search)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "fb47314",
+          "type": "update",
+          "section": "Buttons",
+          "message": "DES-828: date-range picker, DS map pins (pinSVG), DS Filtrar button + literal filter--reset icon",
+          "author": "Carlos"
+        },
+        {
+          "hash": "fbd2b14",
+          "type": "update",
+          "section": "General",
+          "message": "DES-828: join driver list and map seamlessly — no gap, single divider",
+          "author": "Carlos"
+        },
+        {
+          "hash": "5b20aff",
+          "type": "update",
+          "section": "Buttons",
+          "message": "feat(mobile-ds): sección Botones (DTMButton, DTMButtonPair, DTMIconCircleButton, DTMQuickActionChip)",
+          "author": "Diego"
+        },
+        {
+          "hash": "448ad04",
+          "type": "update",
+          "section": "General",
+          "message": "feat(mobile-ds): sección Menú lateral (DTMNavDrawer, DTMDrawerProfile)",
+          "author": "Diego"
+        },
+        {
+          "hash": "4057f70",
+          "type": "update",
+          "section": "General",
+          "message": "feat(mobile-ds): sección Top app bar (DTMTopAppBar, DTMDateNavigator, DTMPickupSelector)",
+          "author": "Diego"
+        },
+        {
+          "hash": "c9687d9",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat(mobile-ds): pestaña App móvil con sidebar propio + sección Introducción",
+          "author": "Diego"
+        },
+        {
+          "hash": "3f8729e",
+          "type": "update",
+          "section": "General",
+          "message": "DES-828: replace custom SVG map with DS Map · Flexible component (Leaflet + CARTO Positron)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "41fa9e2",
+          "type": "update",
+          "section": "General",
+          "message": "DES-828: reduce bold usage in driver cards — only the driver name stays bold",
+          "author": "Carlos"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-10",
+      "entries": [
+        {
+          "hash": "7fd5464",
+          "type": "update",
+          "section": "General",
+          "message": "DES-828: more vertical breathing room in driver cards",
+          "author": "Carlos"
+        },
+        {
+          "hash": "0cf2525",
+          "type": "update",
+          "section": "Map pins",
+          "message": "DES-828: Fleet Module redesign — auto-apply filters, status chips, inline driver detail, DS map pins",
+          "author": "Carlos"
+        },
+        {
+          "hash": "fe63d86",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: standardize HTML tab title to match other prototypes",
+          "author": "Carlos"
+        },
+        {
+          "hash": "76daa22",
+          "type": "update",
+          "section": "Buttons",
+          "message": "DES-827: blue Cancelar button + Eliminar reporte moved to global header",
+          "author": "Carlos"
+        },
+        {
+          "hash": "5474e9f",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: dynamic page header — section title for tabs 1-3, user profile for tab 0",
+          "author": "Carlos"
+        },
+        {
+          "hash": "b7ae794",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: keyboard-accessible toggles + inline field validation errors",
+          "author": "Carlos"
+        },
+        {
+          "hash": "d32c656",
+          "type": "update",
+          "section": "Inputs",
+          "message": "DES-827: consistency audit — modal radius 4px, form-grid gap 16px, btn.danger, label for/id a11y associations",
+          "author": "Carlos"
+        },
+        {
+          "hash": "b873354",
+          "type": "fix",
+          "section": "Iconography",
+          "message": "DES-827: consistency audit fixes — b6 token, r3 token, form-label→lbl, form-helper→helper, req spans, badge tokens, Alertas IBM Carbon icon",
+          "author": "Carlos"
+        },
+        {
+          "hash": "55f9a6f",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): position:fixed directly on element — no container wrapper",
+          "author": "Diego"
+        },
+        {
+          "hash": "982e4d9",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): floating popover layer escapes overflow containers",
+          "author": "Diego"
+        },
+        {
+          "hash": "7eb8caa",
+          "type": "update",
+          "section": "Inputs",
+          "message": "DES-827: always single-column form-grid inside tab-grid cards — removes fragile width-dependent breakpoint",
+          "author": "Carlos"
+        },
+        {
+          "hash": "61dc35a",
+          "type": "fix",
+          "section": "General",
+          "message": "DES-827: add min-width:0 to .inp-wrap to fix overflow in flex rows",
+          "author": "Carlos"
+        },
+        {
+          "hash": "54ea680",
+          "type": "feat",
+          "section": "Inputs",
+          "message": "DES-827: add width:100% to .inp-wrap so inputs fill their container",
+          "author": "Carlos"
+        },
+        {
+          "hash": "484de51",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): use exact DS components — no recreation",
+          "author": "Diego"
+        },
+        {
+          "hash": "cd7a549",
+          "type": "feat",
+          "section": "Inputs",
+          "message": "DES-827: add 1200px breakpoint — inner form fields stack before outer grid collapses",
+          "author": "Carlos"
+        },
+        {
+          "hash": "5bb59a8",
+          "type": "feat",
+          "section": "General",
+          "message": "DES-827: add responsive 960px breakpoint — tab-grid collapses to single column",
+          "author": "Carlos"
+        },
+        {
+          "hash": "a1a2659",
+          "type": "update",
+          "section": "Icons",
+          "message": "DES-827: use filled Material info icon for .bn.in banners",
+          "author": "Carlos"
+        },
+        {
+          "hash": "148327b",
+          "type": "fix",
+          "section": "Icons",
+          "message": "DES-827: fix info icon to show classic i with dot and bar",
+          "author": "Carlos"
+        },
+        {
+          "hash": "c5e8515",
+          "type": "update",
+          "section": "General",
+          "message": "chore: trigger deploy",
+          "author": "Diego"
+        },
+        {
+          "hash": "04d32fb",
+          "type": "update",
+          "section": "Banners",
+          "message": "DES-827: replace custom info-banner with DS .bn.in component",
+          "author": "Carlos"
+        },
+        {
+          "hash": "766d5be",
+          "type": "fix",
+          "section": "General",
+          "message": "fix: rename back to strategy-planner-PLANNER.html (restores Vercel URL)",
+          "author": "Diego"
+        },
+        {
+          "hash": "d69e2c7",
+          "type": "update",
+          "section": "Tables",
+          "message": "DES-827: remove avatar initials circle from shared users table",
+          "author": "Carlos"
+        },
+        {
+          "hash": "bcee705",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat(territories): DS-compliant sidebar controls",
+          "author": "Diego"
+        },
+        {
+          "hash": "5d8e72d",
+          "type": "update",
+          "section": "Icons",
+          "message": "DES-827: align shared users table to standard .tbl styles and icons",
+          "author": "Carlos"
+        },
+        {
+          "hash": "1fd4a29",
+          "type": "feat",
+          "section": "Inputs",
+          "message": "DES-827: add syncSharedUsersHeight, sync user list card height to form card on tab show",
+          "author": "Carlos"
+        },
+        {
+          "hash": "428f0bb",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: Acceso y usuarios — always-visible two-column layout",
+          "author": "Carlos"
+        },
+        {
+          "hash": "5067300",
+          "type": "update",
+          "section": "Tables",
+          "message": "DES-827: redesign Acceso y usuarios — single card with empty/table states",
+          "author": "Carlos"
+        },
+        {
+          "hash": "08ef66b",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: two-column layout for Acceso y usuarios tab",
+          "author": "Carlos"
+        },
+        {
+          "hash": "d2ed9b6",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: vertically center 2FA card content",
+          "author": "Carlos"
+        },
+        {
+          "hash": "80f25f4",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: redesign 2FA card as centered full-height layout",
+          "author": "Carlos"
+        },
+        {
+          "hash": "ea9bcd6",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "DES-827: two-column equal-height layout for Seguridad tab; fix stretch in Información personal",
+          "author": "Carlos"
+        },
+        {
+          "hash": "31cca7d",
+          "type": "update",
+          "section": "Inputs",
+          "message": "DES-827: two-column layout for Información personal tab",
+          "author": "Carlos"
+        },
+        {
+          "hash": "86f6762",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: remove 820px max-width constraint — full width layout",
+          "author": "Carlos"
+        },
+        {
+          "hash": "adee580",
+          "type": "update",
+          "section": "General",
+          "message": "feat(planner): all checkboxes, switches and chips fully functional",
+          "author": "Diego"
+        },
+        {
+          "hash": "0be4d41",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: move all tab actions to global page header",
+          "author": "Carlos"
+        },
+        {
+          "hash": "7e6a504",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): Edición section matches production reference",
+          "author": "Diego"
+        },
+        {
+          "hash": "b7924a5",
+          "type": "fix",
+          "section": "Sidebar",
+          "message": "DES-827: fix sidebar navigation when in edit report view",
+          "author": "Carlos"
+        },
+        {
+          "hash": "a4870f4",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: move edit report actions to page header",
+          "author": "Carlos"
+        },
+        {
+          "hash": "d7ffe5f",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: consolidate edit report actions to header only",
+          "author": "Carlos"
+        },
+        {
+          "hash": "fa9128c",
+          "type": "update",
+          "section": "Buttons",
+          "message": "DES-827: remove back button breadcrumb from edit report view",
+          "author": "Carlos"
+        },
+        {
+          "hash": "482d1f7",
+          "type": "update",
+          "section": "Topbar",
+          "message": "DES-827: move Cerrar sesión to user dropdown in topbar",
+          "author": "Carlos"
+        },
+        {
+          "hash": "4faa7ea",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(filters): enforce height:18px on overflow panel header row in both static and live",
+          "author": "Diego"
+        },
+        {
+          "hash": "10a9fd0",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(filters): compact overflow panel — remove height:32px from close btn, reduce margin-bottom 12→8px",
+          "author": "Diego"
+        },
+        {
+          "hash": "f8d4545",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(filters): match live overflow panel title to static variant — 11px→13px, letter-spacing .06→.04em",
+          "author": "Diego"
+        },
+        {
+          "hash": "cada5a7",
+          "type": "feat",
+          "section": "Modal",
+          "message": "feat(modal): add 'In use' context preview — modal over table page with dark overlay",
+          "author": "Diego"
+        },
+        {
+          "hash": "89d1809",
+          "type": "update",
+          "section": "General",
+          "message": "DES-827: edit report — disabled save, no danger zone title, 820px width",
+          "author": "Carlos"
+        },
+        {
+          "hash": "d91e57a",
+          "type": "feat",
+          "section": "General",
+          "message": "DES-827: add Edit Report full-page view",
+          "author": "Carlos"
+        },
+        {
+          "hash": "bee0d46",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(inputs): number input layout and browser spinner",
+          "author": "Diego"
+        },
+        {
+          "hash": "4c6a04d",
+          "type": "update",
+          "section": "Tables",
+          "message": "DES-827: replace custom table with DS tbl component in Reportes tab",
+          "author": "Carlos"
+        },
+        {
+          "hash": "387f2d7",
+          "type": "feat",
+          "section": "Inputs",
+          "message": "feat(inputs): add 6 new special input variants — number, textarea, password, readonly, search, input+button",
+          "author": "Diego"
+        },
+        {
+          "hash": "dae4eb1",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "DES-827: fix modal form styling — use dt-dtrigger instead of dt-dbtn",
+          "author": "Carlos"
+        },
+        {
+          "hash": "2f2728e",
+          "type": "feat",
+          "section": "Modal",
+          "message": "DES-827: add Reportes programados tab — modal + table flow",
+          "author": "Carlos"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-09",
+      "entries": [
+        {
+          "hash": "4c48af8",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(DES-827): add 16px gap between form rows for visual separation",
+          "author": "Carlos"
+        },
+        {
+          "hash": "ac1b702",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(i18n): translate table page and form page templates",
+          "author": "Diego"
+        },
+        {
+          "hash": "d2f0325",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-827): align profile settings components to DS tokens",
+          "author": "Carlos"
+        },
+        {
+          "hash": "d94a894",
+          "type": "fix",
+          "section": "General",
+          "message": "feat(i18n): complete ES/EN audit — fix critical bug, add 40+ keys, re-render on switch",
+          "author": "Diego"
+        },
+        {
+          "hash": "6f1f23f",
+          "type": "update",
+          "section": "General",
+          "message": "chore: move PLANNER prototype out of Charlie_Designs — authored by Diego",
+          "author": "Carlos"
+        },
+        {
+          "hash": "d96a15e",
+          "type": "update",
+          "section": "General",
+          "message": "chore: organize prototypes into Charlie_Designs/ with unified naming",
+          "author": "Carlos"
+        },
+        {
+          "hash": "191a6db",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(search): always show block hits regardless of parent section match",
+          "author": "Diego"
+        },
+        {
+          "hash": "3b02657",
+          "type": "update",
+          "section": "General",
+          "message": "feat(search): static BLOCK_MAP + h2/h3 scanner for instant deep block search",
+          "author": "Diego"
+        },
+        {
+          "hash": "7bf4942",
+          "type": "update",
+          "section": "General",
+          "message": "feat(search): pre-index all section blocks at startup for instant deep search",
+          "author": "Diego"
+        },
+        {
+          "hash": "fa3172e",
+          "type": "update",
+          "section": "General",
+          "message": "chore: enforce mandatory git sync protocol at session start",
+          "author": "Carlos"
+        },
+        {
+          "hash": "553c2d3",
+          "type": "update",
+          "section": "General",
+          "message": "feat(search): deep block-level indexing — search finds h2 blocks within sections",
+          "author": "Diego"
+        },
+        {
+          "hash": "9c19f6a",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(search): never auto-navigate while typing, preserve focus on dropdown clicks",
+          "author": "Diego"
+        },
+        {
+          "hash": "70508e9",
+          "type": "update",
+          "section": "Topbar",
+          "message": "feat(topbar): remove Star/Fork buttons, make search dropdown functional",
+          "author": "Diego"
+        },
+        {
+          "hash": "1b86516",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(ds): wire Image uploader into live NAV + add renderer — DES-827",
+          "author": "Carlos"
+        },
+        {
+          "hash": "c5cf22a",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(ds): add Image uploader component — DES-827",
+          "author": "Carlos"
+        },
+        {
+          "hash": "d37caf6",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): DS-exact pins + correct anchor + 50% polyline opacity",
+          "author": "Diego"
+        },
+        {
+          "hash": "0dac1f3",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): CARTO Positron + DS pins + sequential routes",
+          "author": "Diego"
+        },
+        {
+          "hash": "db6e361",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): Hallazgos y Cambios sobre toda la UI",
+          "author": "Diego"
+        },
+        {
+          "hash": "86dfa33",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat(planner): full sidebar controls rewrite — Vista + Edición + Controls",
+          "author": "Diego"
+        },
+        {
+          "hash": "71d668a",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat(nav/layout): remove subnav bar + search, sticky sidebar, Ready for Dev badges",
+          "author": "Diego"
+        },
+        {
+          "hash": "3545ea8",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(filters): remove panel shadow, mobile 1 field per line",
+          "author": "Diego"
+        },
+        {
+          "hash": "04d058a",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(filters): remove shadow from dropdowns inside overflow panel",
+          "author": "Diego"
+        },
+        {
+          "hash": "e6b4922",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(filters live 5+): overflow panel style + mobile version",
+          "author": "Diego"
+        },
+        {
+          "hash": "e75de11",
+          "type": "update",
+          "section": "Icons",
+          "message": "feat(filters): live 5+ filter demo + Carbon close icon rule",
+          "author": "Diego"
+        },
+        {
+          "hash": "019f55d",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(filters): add filter bar variants section (1–4, 5+, overflow panel)",
+          "author": "Diego"
+        },
+        {
+          "hash": "f23204f",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(timepicker): stay in hour mode after selecting hour",
+          "author": "Diego"
+        },
+        {
+          "hash": "c2424fd",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(timepicker): stop event propagation on clock circle clicks",
+          "author": "Diego"
+        },
+        {
+          "hash": "5ed9a1b",
+          "type": "update",
+          "section": "General",
+          "message": "feat(timepicker): minute selection, two-step flow, Guardar to close",
+          "author": "Diego"
+        },
+        {
+          "hash": "b4a2f3e",
+          "type": "fix",
+          "section": "Badges",
+          "message": "fix(nav): status badges survive language switch + 3 states",
+          "author": "Diego"
+        },
+        {
+          "hash": "4008d3b",
+          "type": "update",
+          "section": "General",
+          "message": "refactor(alerts): promote dsAlert() to module level — single canonical component",
+          "author": "Diego"
+        },
+        {
+          "hash": "05518db",
+          "type": "update",
+          "section": "Inputs",
+          "message": "refactor(modal): use exact DS components for inputs, select, banner, buttons",
+          "author": "Diego"
+        },
+        {
+          "hash": "a51f882",
+          "type": "update",
+          "section": "General",
+          "message": "feat(maps): switch all map tiles to CartoDB Positron",
+          "author": "Diego"
+        },
+        {
+          "hash": "20f4b86",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(form page): initialize all fp-map-* divs with geofence map",
+          "author": "Diego"
+        },
+        {
+          "hash": "862b117",
+          "type": "fix",
+          "section": "Map pins",
+          "message": "fix(map pins): polylines connect exactly at pin tip",
+          "author": "Diego"
+        },
+        {
+          "hash": "6b69b2d",
+          "type": "fix",
+          "section": "Colors",
+          "message": "fix(map): number color → var(--n7) always, polyline weight → 3px",
+          "author": "Diego"
+        },
+        {
+          "hash": "00b6d5d",
+          "type": "update",
+          "section": "General",
+          "message": "feat(map elements): routes with order pins (white circle + stop number)",
+          "author": "Diego"
+        },
+        {
+          "hash": "909e908",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(tooltip): 3 bugs — calc spaces, persistent reopen, pin click",
+          "author": "Diego"
+        },
+        {
+          "hash": "80b0f61",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(tooltip): no-overlap layout + input+icon + map pin variants",
+          "author": "Diego"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-08",
+      "entries": [
+        {
+          "hash": "d89fe49",
+          "type": "fix",
+          "section": "Icons",
+          "message": "fix(tablepage): use exact Figma SVG filter icon buttons, same as filters section",
+          "author": "Diego"
+        },
+        {
+          "hash": "8453fad",
+          "type": "update",
+          "section": "Tables",
+          "message": "refactor(tablepage): use exact filter from filters.json — no recreation",
+          "author": "Diego"
+        },
+        {
+          "hash": "85001a9",
+          "type": "update",
+          "section": "General",
+          "message": "feat(datepicker): month/year selector + filled state shows full date",
+          "author": "Diego"
+        },
+        {
+          "hash": "39f2c2b",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(filters+tablepage): replace remaining old date inputs with datepicker",
+          "author": "Diego"
+        },
+        {
+          "hash": "f906ec9",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(pickers): timepicker below input, range Aceptar width, date fields in filters",
+          "author": "Diego"
+        },
+        {
+          "hash": "b8deee5",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(pickers): popovers not opening — empty data-popover attr is falsy",
+          "author": "Diego"
+        },
+        {
+          "hash": "b52ab57",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(date range picker): single input same width as datepicker, opens 2-month popover",
+          "author": "Diego"
+        },
+        {
+          "hash": "55980fa",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(datepicker): range popover not opening + correct 600px width",
+          "author": "Diego"
+        },
+        {
+          "hash": "8d7b8ba",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(datepicker+timepicker): input-triggered popovers, compact range picker",
+          "author": "Diego"
+        },
+        {
+          "hash": "605ef90",
+          "type": "feat",
+          "section": "Inputs",
+          "message": "feat(inputs): add functional datepicker + timepicker components",
+          "author": "Diego"
+        },
+        {
+          "hash": "a5fa026",
+          "type": "feat",
+          "section": "Sidebar",
+          "message": "feat(table page): add settings sidebar variant",
+          "author": "Diego"
+        },
+        {
+          "hash": "54d05ac",
+          "type": "fix",
+          "section": "Sidebar",
+          "message": "fix(form page): settings sidebar displays as single flex row",
+          "author": "Diego"
+        },
+        {
+          "hash": "a973e5c",
+          "type": "fix",
+          "section": "Sidebar",
+          "message": "fix(form page): use existing LM settings sidebar — no recreation",
+          "author": "Diego"
+        },
+        {
+          "hash": "4031a91",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat(form page): real Leaflet map + settings sidebar variant",
+          "author": "Diego"
+        },
+        {
+          "hash": "9f6c3e3",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(form page): wrap header+blocks in white container, breadcrumb outside",
+          "author": "Diego"
+        },
+        {
+          "hash": "2983d5c",
+          "type": "feat",
+          "section": "Inputs",
+          "message": "feat(pages): add Form page with 6 composable block types + 3 assembled examples",
+          "author": "Diego"
+        },
+        {
+          "hash": "e061e22",
+          "type": "update",
+          "section": "Tables",
+          "message": "feat(filters): use real table from table.json for demo",
+          "author": "Diego"
+        },
+        {
+          "hash": "18dfb43",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(filters): filtering + reset both broken",
+          "author": "Diego"
+        },
+        {
+          "hash": "bbfb4bc",
+          "type": "update",
+          "section": "Buttons",
+          "message": "feat(filters): exact SVG buttons, functional filter bar + demo table",
+          "author": "Diego"
+        },
+        {
+          "hash": "90e31ec",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(map elements): address autocomplete dropdown with Nominatim",
+          "author": "Diego"
+        },
+        {
+          "hash": "ef79600",
+          "type": "update",
+          "section": "Inputs",
+          "message": "feat(map elements): geocoding + lat/lng inputs + draggable pin",
+          "author": "Diego"
+        },
+        {
+          "hash": "eccc06b",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "feat(map elements): fix form layout — table-page container, flex:1 columns, aligned labels",
+          "author": "Diego"
+        },
+        {
+          "hash": "7d871e3",
+          "type": "update",
+          "section": "General",
+          "message": "chore: bump renderers.js to v2.4.2 to bust browser cache",
+          "author": "Diego"
+        },
+        {
+          "hash": "248e150",
+          "type": "fix",
+          "section": "Sidebar",
+          "message": "fix(sidebar): restore missing gid variable in phoneInteractive — caused 'gid is not defined' error",
+          "author": "Diego"
+        },
+        {
+          "hash": "3a8849f",
+          "type": "fix",
+          "section": "Sidebar",
+          "message": "fix(sidebar+topbar): drawer display, real logos, hamburger on all mobile variants",
+          "author": "Diego"
+        },
+        {
+          "hash": "1791956",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat(sidebar+topbar): mobile hamburger, interactive drawer, compact nav rows",
+          "author": "Diego"
+        },
+        {
+          "hash": "6fc883a",
+          "type": "feat",
+          "section": "Tables",
+          "message": "feat(tables): add mobile responsive patterns section",
+          "author": "Diego"
+        },
+        {
+          "hash": "fe268c2",
+          "type": "update",
+          "section": "Tables",
+          "message": "chore(nav): update status labels — WIP for brand/voice/tooltip, Done for table page",
+          "author": "Diego"
+        },
+        {
+          "hash": "5314f73",
+          "type": "feat",
+          "section": "Sidebar",
+          "message": "feat: add status labels to sidebar + Backlog section",
+          "author": "Diego"
+        },
+        {
+          "hash": "a6a7bc2",
+          "type": "update",
+          "section": "General",
+          "message": "feat(planner): Territory Planner screens 10–15",
+          "author": "Diego"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-04",
+      "entries": [
+        {
+          "hash": "5de8e06",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(ds): map init via index.html hook — scripts in innerHTML never execute",
+          "author": "Diego"
+        },
+        {
+          "hash": "7a434ce",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(ds): rewrite mapScript cleanly — no duplicate init/const TDZ bug",
+          "author": "Diego"
+        },
+        {
+          "hash": "8b48c3e",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(ds): map elements — OSM tiles + DS SVG pins (same as planner)",
+          "author": "Diego"
+        },
+        {
+          "hash": "83d11b7",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): prevent stepper from jumping to wrong step during scroll",
+          "author": "Carlos"
+        },
+        {
+          "hash": "d8c24dd",
+          "type": "fix",
+          "section": "Map pins",
+          "message": "fix(ds): map controls + tiles in renderers.js mappins section",
+          "author": "Diego"
+        },
+        {
+          "hash": "1232a36",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): fix stepper anchor — use direct querySelector instead of closure variable",
+          "author": "Carlos"
+        },
+        {
+          "hash": "9480960",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(ds): map elements tiles render on load — double rAF + window.load",
+          "author": "Diego"
+        },
+        {
+          "hash": "28e6ec5",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(DES-824): add active section glow when step is focused in stepper",
+          "author": "Carlos"
+        },
+        {
+          "hash": "32d5cdd",
+          "type": "update",
+          "section": "General",
+          "message": "ci: auto-deploy to Vercel on push to main",
+          "author": "Diego"
+        },
+        {
+          "hash": "d255ab3",
+          "type": "fix",
+          "section": "Topbar",
+          "message": "fix: topbar icons use stroke/outline style (fill:none, stroke-width:1.8)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "4104eea",
+          "type": "feat",
+          "section": "Overview",
+          "message": "feat(ds): add Map elements section to Design System",
+          "author": "Diego"
+        },
+        {
+          "hash": "39c6baf",
+          "type": "update",
+          "section": "Topbar",
+          "message": "feat: move settings gear to topbar per DS spec",
+          "author": "Carlos"
+        },
+        {
+          "hash": "572a665",
+          "type": "fix",
+          "section": "General",
+          "message": "fix: Medium DS fixes + reorder drawer tabs",
+          "author": "Carlos"
+        },
+        {
+          "hash": "2c90f02",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): lazo dibuja sobre el mapa — capture phase listeners",
+          "author": "Diego"
+        },
+        {
+          "hash": "281dce3",
+          "type": "fix",
+          "section": "General",
+          "message": "fix: apply High priority DS spec fixes",
+          "author": "Carlos"
+        },
+        {
+          "hash": "2fbbded",
+          "type": "fix",
+          "section": "General",
+          "message": "fix: correct primary CTA to Blue 6 (#1F60ED), hover Blue 7 (#0052CC)",
+          "author": "Carlos"
+        },
+        {
+          "hash": "26e919d",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): lazo sigue el mouse correctamente en todas las grillas",
+          "author": "Diego"
+        },
+        {
+          "hash": "f567406",
+          "type": "fix",
+          "section": "General",
+          "message": "fix: set primary CTA to Blue 7 (#0052CC) across all prototypes",
+          "author": "Carlos"
+        },
+        {
+          "hash": "a926eea",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): lasso en grilla — mapa no se arrastra al dibujar",
+          "author": "Diego"
+        },
+        {
+          "hash": "fe07733",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix: apply DS spec consistency fixes — chips radius, input spec, coverage chips",
+          "author": "Carlos"
+        },
+        {
+          "hash": "bb90645",
+          "type": "update",
+          "section": "General",
+          "message": "feat(planner): lazo independiente por celda en todas las grillas",
+          "author": "Diego"
+        },
+        {
+          "hash": "8141927",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): layout flow + real lasso drawing",
+          "author": "Diego"
+        },
+        {
+          "hash": "99f4ea1",
+          "type": "update",
+          "section": "General",
+          "message": "feat(planner): Ver + Seleccionar con lazo en el mapa",
+          "author": "Diego"
+        },
+        {
+          "hash": "c0c04bb",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat: replace sidebar with full 15-item spec from sidebar.json",
+          "author": "Carlos"
+        },
+        {
+          "hash": "cf6a0f5",
+          "type": "update",
+          "section": "General",
+          "message": "feat(planner): bidirectional sync días visibles ↔ layout dropdown ↔ mapa",
+          "author": "Diego"
+        },
+        {
+          "hash": "0ddd781",
+          "type": "update",
+          "section": "General",
+          "message": "feat(planner): map layout dropdown + multi-day grid views",
+          "author": "Diego"
+        },
+        {
+          "hash": "a170d32",
+          "type": "feat",
+          "section": "General",
+          "message": "docs(CLAUDE.md): add full DS resource index — all sections/*.json specs with key values",
+          "author": "Carlos"
+        },
+        {
+          "hash": "1298004",
+          "type": "update",
+          "section": "Topbar",
+          "message": "feat: apply official DS spec to all prototypes — Carbon icons, correct button/input/topbar tokens",
+          "author": "Carlos"
+        },
+        {
+          "hash": "b1d6e30",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat: replace legacy sb-icons sidebar with updated DS pg-sidenav across all prototypes",
+          "author": "Carlos"
+        },
+        {
+          "hash": "a4fafd8",
+          "type": "fix",
+          "section": "Badges",
+          "message": "fix(planner): merge to 2 rows — tabs+actions | badge+metrics",
+          "author": "Diego"
+        },
+        {
+          "hash": "b02fa68",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): two-row canvas header — title/actions + metrics always visible",
+          "author": "Diego"
+        },
+        {
+          "hash": "052f576",
+          "type": "update",
+          "section": "General",
+          "message": "feat(planner): compact bullet-separated metrics bar on canvas header",
+          "author": "Diego"
+        },
+        {
+          "hash": "0183965",
+          "type": "update",
+          "section": "Tables",
+          "message": "feat(planner): rebuild list view as DS table page template",
+          "author": "Diego"
+        },
+        {
+          "hash": "42f58c6",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): replace underline tabs with DS pill tab (tabGroup from renderers.js)",
+          "author": "Diego"
+        },
+        {
+          "hash": "07daff6",
+          "type": "update",
+          "section": "General",
+          "message": "feat(planner): lift Planes/Territorios tabs to top of hierarchy",
+          "author": "Diego"
+        },
+        {
+          "hash": "a705a48",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(tabs): use inline onclick — remove global function that never executed",
+          "author": "Diego"
+        },
+        {
+          "hash": "5471236",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(tabs): fix sliding pill animation on click",
+          "author": "Diego"
+        },
+        {
+          "hash": "792d0ac",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(tabs): replace individual pills with full tab groups, all combinations",
+          "author": "Diego"
+        },
+        {
+          "hash": "729eede",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(selection): add File Uploader + Tabs components",
+          "author": "Diego"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-03",
+      "entries": [
+        {
+          "hash": "14b642c",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): remove notif-name padding-left leftover from dot alignment",
+          "author": "Carlos"
+        },
+        {
+          "hash": "75abc06",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): remove gap from status-name and clean up stale sub-row/status-header CSS",
+          "author": "Carlos"
+        },
+        {
+          "hash": "5955fd1",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): remove status dots and set Add notification to regular weight",
+          "author": "Carlos"
+        },
+        {
+          "hash": "4b77048",
+          "type": "fix",
+          "section": "Buttons",
+          "message": "fix(DES-824): change Cancel and Send test header buttons from ghost to blue outline",
+          "author": "Carlos"
+        },
+        {
+          "hash": "44c7788",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): close Groups dropdown on scroll to keep it anchored to trigger",
+          "author": "Carlos"
+        },
+        {
+          "hash": "f1c3786",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): fix Groups dropdown clipped by overflow:hidden container",
+          "author": "Carlos"
+        },
+        {
+          "hash": "ad84f07",
+          "type": "fix",
+          "section": "Map pins",
+          "message": "fix(planner): move map pins to Santiago de Chile",
+          "author": "Diego"
+        },
+        {
+          "hash": "f365c90",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "feat(planner): collapsed LM sidebar + real Leaflet/OSM map with DS pins",
+          "author": "Diego"
+        },
+        {
+          "hash": "175b8e4",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): redesign Schedule section as Mute notifications",
+          "author": "Carlos"
+        },
+        {
+          "hash": "d8db518",
+          "type": "fix",
+          "section": "Banners",
+          "message": "fix(DES-824): generalize upsell banner title to 'Unlock other channels'",
+          "author": "Carlos"
+        },
+        {
+          "hash": "6304b8b",
+          "type": "update",
+          "section": "Buttons",
+          "message": "feat(DES-824): improve SMS/WhatsApp upsell banner with CTA button",
+          "author": "Carlos"
+        },
+        {
+          "hash": "82cdbc4",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(planner): force redeploy — Last Mile shell + DS SVG pins",
+          "author": "Diego"
+        },
+        {
+          "hash": "83e098f",
+          "type": "update",
+          "section": "General",
+          "message": "feat(DES-824): separate outbound channels into individual cards with dummy data",
+          "author": "Carlos"
+        },
+        {
+          "hash": "032eea8",
+          "type": "update",
+          "section": "Map pins",
+          "message": "feat(planner): switch shell to Last Mile + use DS SVG map pins",
+          "author": "Diego"
+        },
+        {
+          "hash": "cd0b259",
+          "type": "update",
+          "section": "General",
+          "message": "feat(DES-824): redesign Outbound widget with channel health bars and sparkline",
+          "author": "Carlos"
+        },
+        {
+          "hash": "5efcf07",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): use standard row pattern for all 3 Partial delivery notifications",
+          "author": "Carlos"
+        },
+        {
+          "hash": "d375885",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(planner): add Strategy Planner (Plans tab) screens 01–09 navigable prototype",
+          "author": "Diego"
+        },
+        {
+          "hash": "bb55240",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): separate status header from notification rows for Partial delivery",
+          "author": "Carlos"
+        },
+        {
+          "hash": "b3dd499",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(DES-824): add multiple notifications example for Partial delivery status",
+          "author": "Carlos"
+        },
+        {
+          "hash": "732b4f6",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-825): add subtle hover background to unread alert items",
+          "author": "Carlos"
+        },
+        {
+          "hash": "a209654",
+          "type": "fix",
+          "section": "Colors",
+          "message": "fix(DES-825): remove colored dots and normalize alert type labels to grey",
+          "author": "Carlos"
+        },
+        {
+          "hash": "ab2eb0a",
+          "type": "fix",
+          "section": "Buttons",
+          "message": "fix(DES-825): remove View order button — whole alert item is clickable",
+          "author": "Carlos"
+        },
+        {
+          "hash": "eed1a6d",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(DES-825): add notifications drawer to all three prototype pages",
+          "author": "Carlos"
+        },
+        {
+          "hash": "faa8dc5",
+          "type": "feat",
+          "section": "General",
+          "message": "feat: add Drafts section with component approval workflow",
+          "author": "Diego"
+        },
+        {
+          "hash": "877413c",
+          "type": "feat",
+          "section": "Map pins",
+          "message": "feat(mappins): add flexible Google Map to Map elements section",
+          "author": "Diego"
+        },
+        {
+          "hash": "f949abc",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(DES-825): add Alerts tab drawer prototype",
+          "author": "Carlos"
+        },
+        {
+          "hash": "906df96",
+          "type": "feat",
+          "section": "General",
+          "message": "feat: add Drafts section + Google Maps component to Map elements",
+          "author": "Diego"
+        },
+        {
+          "hash": "2b53049",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(DES-825): add Notify and Group selects to all alert rows",
+          "author": "Carlos"
+        },
+        {
+          "hash": "138cf69",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "Table page: use Last Mile sidebar from sidebar.json",
+          "author": "Diego"
+        },
+        {
+          "hash": "7604a52",
+          "type": "update",
+          "section": "Tables",
+          "message": "CLAUDE.md: document table page as reusable layout template",
+          "author": "Diego"
+        },
+        {
+          "hash": "5033f6a",
+          "type": "update",
+          "section": "Tables",
+          "message": "Table page: wrap table in 1px var(--n4) stroke, border-radius 4px",
+          "author": "Diego"
+        },
+        {
+          "hash": "511e9d7",
+          "type": "update",
+          "section": "Tables",
+          "message": "Table page: replace custom table with tblDemoTable(data.scrollDemo)",
+          "author": "Diego"
+        },
+        {
+          "hash": "c107998",
+          "type": "update",
+          "section": "General",
+          "message": "DS: replace pageUsage HTML dumps with concise call nomenclature",
+          "author": "Diego"
+        },
+        {
+          "hash": "953079f",
+          "type": "fix",
+          "section": "Tables",
+          "message": "Fix renderers.js: restore table(data), add usageCard to 7 sections",
+          "author": "Diego"
+        },
+        {
+          "hash": "0d78fce",
+          "type": "feat",
+          "section": "General",
+          "message": "DS: add 'How to call in pages' section to 7 standard components",
+          "author": "Diego"
+        },
+        {
+          "hash": "d7a3c05",
+          "type": "update",
+          "section": "General",
+          "message": "feat(DES-825): rebuild DS review doc matching DES-824 collapsible list pattern",
+          "author": "Carlos"
+        },
+        {
+          "hash": "e58b5cd",
+          "type": "update",
+          "section": "General",
+          "message": "CLAUDE.md: document 7 standard components with exact call patterns",
+          "author": "Diego"
+        },
+        {
+          "hash": "75d63c7",
+          "type": "update",
+          "section": "General",
+          "message": "chore: update CLAUDE.md",
+          "author": "Diego"
+        },
+        {
+          "hash": "e24ce1e",
+          "type": "update",
+          "section": "General",
+          "message": "feat(DES-825): update DS review doc with final component set",
+          "author": "Carlos"
+        },
+        {
+          "hash": "61a1dac",
+          "type": "update",
+          "section": "Tables",
+          "message": "Table page: call tblDemoTable(data.scrollDemo) — zero custom table code",
+          "author": "Diego"
+        },
+        {
+          "hash": "2b46a1c",
+          "type": "update",
+          "section": "General",
+          "message": "feat(DES-825): replace native title tooltips with custom hover tooltip",
+          "author": "Carlos"
+        },
+        {
+          "hash": "91f400f",
+          "type": "update",
+          "section": "Tables",
+          "message": "Table page: use exact DS table component structure",
+          "author": "Diego"
+        },
+        {
+          "hash": "5237787",
+          "type": "fix",
+          "section": "Icons",
+          "message": "fix(DES-825): fix info icon dot visibility — increase size to 15px and dot radius to 1.5",
+          "author": "Carlos"
+        },
+        {
+          "hash": "e6b9988",
+          "type": "update",
+          "section": "Tables",
+          "message": "Filters + table page: replace <select> with exact dt-drop-wrap component",
+          "author": "Diego"
+        },
+        {
+          "hash": "fff9663",
+          "type": "fix",
+          "section": "Icons",
+          "message": "fix(DES-825): replace ? help icons with info (i) icons and improve tooltip copy",
+          "author": "Carlos"
+        },
+        {
+          "hash": "db12f75",
+          "type": "update",
+          "section": "Buttons",
+          "message": "Table page: full inline styles on header buttons — remove .btn class dependency",
+          "author": "Diego"
+        },
+        {
+          "hash": "bc42b6e",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(DES-825): add chevron indicator to multi-select inputs",
+          "author": "Carlos"
+        },
+        {
+          "hash": "03e5349",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "fix(DES-825): normalize all input widths to match Statuses field",
+          "author": "Carlos"
+        },
+        {
+          "hash": "06bf802",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(DES-825): add missing 5th alert — excess dwell time",
+          "author": "Carlos"
+        },
+        {
+          "hash": "8751ddc",
+          "type": "fix",
+          "section": "Icons",
+          "message": "fix(DES-824): remove icons from all header buttons",
+          "author": "Carlos"
+        },
+        {
+          "hash": "702ee6b",
+          "type": "update",
+          "section": "General",
+          "message": "feat(DES-825): translate page to English",
+          "author": "Carlos"
+        },
+        {
+          "hash": "6a230d5",
+          "type": "update",
+          "section": "Buttons",
+          "message": "Table page: restructure page header — buttons in wrapper div",
+          "author": "Diego"
+        },
+        {
+          "hash": "d297d78",
+          "type": "fix",
+          "section": "Buttons",
+          "message": "Buttons: fix baseline alignment — line-height 20px → 32px",
+          "author": "Diego"
+        },
+        {
+          "hash": "9f29a85",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): set group header min-height to 64.8px to match Alerts row height",
+          "author": "Carlos"
+        },
+        {
+          "hash": "51830ba",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-824): unify notification groups into single list container",
+          "author": "Carlos"
+        },
+        {
+          "hash": "fa0c4be",
+          "type": "update",
+          "section": "Buttons",
+          "message": "Table page: explicit button heights and centering",
+          "author": "Diego"
+        },
+        {
+          "hash": "63f46d0",
+          "type": "update",
+          "section": "Inputs",
+          "message": "feat(DES-825): disable form inputs when alert toggle is off",
+          "author": "Carlos"
+        },
+        {
+          "hash": "c7f664e",
+          "type": "fix",
+          "section": "Buttons",
+          "message": "Table page: fix title baseline alignment with buttons",
+          "author": "Diego"
+        },
+        {
+          "hash": "c8ff573",
+          "type": "feat",
+          "section": "Buttons",
+          "message": "Table page: align title+buttons, add 20px gap to container, border table",
+          "author": "Diego"
+        },
+        {
+          "hash": "d8eca98",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-825): remove redundant section label above alert list",
+          "author": "Carlos"
+        },
+        {
+          "hash": "0c958e3",
+          "type": "update",
+          "section": "Tables",
+          "message": "Table page: use Filters component, wrap in white container with radius 8px",
+          "author": "Diego"
+        },
+        {
+          "hash": "b05addd",
+          "type": "feat",
+          "section": "Icons",
+          "message": "Filters: 24px icons in 32px buttons with 4px padding, use filter--reset",
+          "author": "Diego"
+        },
+        {
+          "hash": "ba4135b",
+          "type": "update",
+          "section": "General",
+          "message": "filter--reset: replace broken arc+polygon with clean undo-arrow polygon",
+          "author": "Diego"
+        },
+        {
+          "hash": "d0c3edc",
+          "type": "feat",
+          "section": "Icons",
+          "message": "Filters: new SVG icons, B6/R6 colors, 32px 4px-radius icon buttons",
+          "author": "Diego"
+        },
+        {
+          "hash": "f328178",
+          "type": "fix",
+          "section": "Icons",
+          "message": "fix(DES-825): remove icon from Exportar a Excel button",
+          "author": "Carlos"
+        },
+        {
+          "hash": "c59eb59",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-825): align page header with Notifications pattern",
+          "author": "Carlos"
+        },
+        {
+          "hash": "554d2ba",
+          "type": "fix",
+          "section": "Typography",
+          "message": "fix(DES-825): change chip font-weight from 600 to 400",
+          "author": "Carlos"
+        },
+        {
+          "hash": "93ca6a6",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-825): replace subestados with real production values",
+          "author": "Carlos"
+        },
+        {
+          "hash": "20a81fc",
+          "type": "fix",
+          "section": "General",
+          "message": "fix(DES-825): move save/cancel actions to page header",
+          "author": "Carlos"
+        },
+        {
+          "hash": "3b8db86",
+          "type": "feat",
+          "section": "Buttons",
+          "message": "Buttons: horizontal padding 16px (was 32px)",
+          "author": "Diego"
+        },
+        {
+          "hash": "55944b4",
+          "type": "update",
+          "section": "Buttons",
+          "message": "Buttons: 32px height, body-small-bold (700 14px/20px), 1px stroke",
+          "author": "Diego"
+        },
+        {
+          "hash": "7797e5d",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(DES-825): add Alerts Settings redesign prototype and DS review doc",
+          "author": "Carlos"
+        },
+        {
+          "hash": "265270f",
+          "type": "feat",
+          "section": "Overview",
+          "message": "docs: add CLAUDE.md session guide for design system workflow",
+          "author": "Carlos"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-02",
+      "entries": [
+        {
+          "hash": "559ee3e",
+          "type": "feat",
+          "section": "General",
+          "message": "feat(DES-824): add notification settings redesign prototypes and DS review doc",
+          "author": "Carlos"
+        },
+        {
+          "hash": "518aaba",
+          "type": "update",
+          "section": "Inputs",
+          "message": "Filters: copy exact tokens and inline styles from inputs.json + buttons.json",
+          "author": "Diego"
+        },
+        {
+          "hash": "125c07d",
+          "type": "update",
+          "section": "General",
+          "message": "Filters: use exact DS .inp components — functional, full-width, correct states",
+          "author": "Diego"
+        },
+        {
+          "hash": "f09a44c",
+          "type": "feat",
+          "section": "Iconography",
+          "message": "Components: add Filters section with filter--add / filter--remove Carbon icons",
+          "author": "Diego"
+        },
+        {
+          "hash": "f12ea5a",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "Pages/Table: use exact DS LM Topbar + Sidebar desktop components",
+          "author": "Diego"
+        },
+        {
+          "hash": "3e0e627",
+          "type": "feat",
+          "section": "Tables",
+          "message": "Pages: add Table page to index.html — NAV entry, JSON data, renderer",
+          "author": "Diego"
+        },
+        {
+          "hash": "ade0fd0",
+          "type": "update",
+          "section": "General",
+          "message": "Nav: move Pages category to top of Components section for discoverability",
+          "author": "Diego"
+        },
+        {
+          "hash": "dd2bf94",
+          "type": "feat",
+          "section": "Tables",
+          "message": "Pages: add new section with Table page template (Órdenes)",
+          "author": "Diego"
+        },
+        {
+          "hash": "ad035c5",
+          "type": "fix",
+          "section": "Badges",
+          "message": "fix: add cache-bust ?v=2.4.1 to renderers.js script tag",
+          "author": "Cristina"
+        },
+        {
+          "hash": "abaf1ee",
+          "type": "fix",
+          "section": "General",
+          "message": "fix: move screenexamples renderer into renderers{} object",
+          "author": "Cristina"
+        },
+        {
+          "hash": "26ea0c6",
+          "type": "fix",
+          "section": "General",
+          "message": "fix: bump version comment to bust Vercel cache",
+          "author": "Cristina"
+        },
+        {
+          "hash": "c81f52c",
+          "type": "feat",
+          "section": "General",
+          "message": "feat: add screen-examples section data",
+          "author": "Cristina"
+        },
+        {
+          "hash": "780e2d0",
+          "type": "feat",
+          "section": "General",
+          "message": "feat: add screenexamples renderer",
+          "author": "Cristina"
+        },
+        {
+          "hash": "20e9d50",
+          "type": "feat",
+          "section": "General",
+          "message": "feat: add Screen examples to NAV",
+          "author": "Cristina"
+        },
+        {
+          "hash": "14a847f",
+          "type": "feat",
+          "section": "General",
+          "message": "feat: add i18n keys for Screen examples section",
+          "author": "Cristina"
+        },
+        {
+          "hash": "d9ae0d8",
+          "type": "feat",
+          "section": "General",
+          "message": "feat: add Screen examples section with Invoice list pattern",
+          "author": "Cristina"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-27",
+      "entries": [
+        {
+          "hash": "e209d5e",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "Sidebar PP: update Carbon icons, remove settings from settingsItems, homologate height",
+          "author": "Diego"
+        },
+        {
+          "hash": "4ccaba2",
+          "type": "feat",
+          "section": "Sidebar",
+          "message": "Sidebar: add PlannerPro structure with correct nav items and settings panel",
+          "author": "Diego"
+        },
+        {
+          "hash": "81db1d4",
+          "type": "update",
+          "section": "Icons",
+          "message": "Tooltip: Carbon info outline/filled icons, persistent variant, icon states",
+          "author": "Diego"
+        },
+        {
+          "hash": "17444f7",
+          "type": "fix",
+          "section": "Colors",
+          "message": "Fix placeholder colors: n6 default/hover, n8 active; add --n8 token",
+          "author": "Diego"
+        },
+        {
+          "hash": "42f5f12",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "Fix inputs & dropdowns: placeholder color, focus bg, chip dismiss",
+          "author": "Diego"
+        },
+        {
+          "hash": "75273eb",
+          "type": "update",
+          "section": "Inputs",
+          "message": "Merge Inputs and Dropdowns into single section",
+          "author": "Diego"
+        },
+        {
+          "hash": "06a6a9e",
+          "type": "feat",
+          "section": "Inputs",
+          "message": "Add Dropdowns + make inputs interactive",
+          "author": "Diego"
+        },
+        {
+          "hash": "3f2f65c",
+          "type": "fix",
+          "section": "Inputs",
+          "message": "Fix inputs + add Tooltip component",
+          "author": "Diego"
+        },
+        {
+          "hash": "a8b27a8",
+          "type": "update",
+          "section": "Inputs",
+          "message": "Rework Inputs section — 32px height, two variant groups, inline styles",
+          "author": "Diego"
+        },
+        {
+          "hash": "3f2a352",
+          "type": "update",
+          "section": "Typography",
+          "message": "Replace typography scale with 11 DM Sans styles, remove Roboto",
+          "author": "Diego"
+        },
+        {
+          "hash": "c0faea6",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "Update LM sidebar icons to Carbon DS + categorize iconography",
+          "author": "Diego"
+        },
+        {
+          "hash": "cca2439",
+          "type": "update",
+          "section": "General",
+          "message": "Apply border-radius directly on settings panel and content area divs",
+          "author": "Diego"
+        },
+        {
+          "hash": "fdec282",
+          "type": "fix",
+          "section": "General",
+          "message": "Fix border-radius: move background to outer container",
+          "author": "Diego"
+        },
+        {
+          "hash": "f9edf7f",
+          "type": "update",
+          "section": "General",
+          "message": "Apply border-radius directly to bottom-right flex child",
+          "author": "Diego"
+        },
+        {
+          "hash": "cbffe0e",
+          "type": "fix",
+          "section": "General",
+          "message": "Fix settings panel border-radius via CSS class",
+          "author": "Diego"
+        },
+        {
+          "hash": "fbd0159",
+          "type": "fix",
+          "section": "General",
+          "message": "Fix settings panel: border-radius, left divider line, header style",
+          "author": "Diego"
+        },
+        {
+          "hash": "eafe8ef",
+          "type": "fix",
+          "section": "General",
+          "message": "Fix settings panel spacing and border-radius",
+          "author": "Diego"
+        },
+        {
+          "hash": "691825b",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "Remove settings icon from sidebar — settings is in topbar",
+          "author": "Diego"
+        },
+        {
+          "hash": "ece3c8f",
+          "type": "fix",
+          "section": "Sidebar",
+          "message": "Fix settings sidebar height and remove scroll",
+          "author": "Diego"
+        },
+        {
+          "hash": "af70677",
+          "type": "feat",
+          "section": "Sidebar",
+          "message": "Add settings panel state to LM sidebar",
+          "author": "Diego"
+        },
+        {
+          "hash": "21c302c",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "Update Last Mile sidebar to match full app nav (15 items)",
+          "author": "Diego"
+        },
+        {
+          "hash": "2aefcc2",
+          "type": "update",
+          "section": "Badges",
+          "message": "Align table badge/chip cells to Pills / Tags styling",
+          "author": "Diego"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-26",
+      "entries": [
+        {
+          "hash": "b99e4ca",
+          "type": "fix",
+          "section": "Icons",
+          "message": "Fix pill padding to 6px, use Carbon DS icons throughout",
+          "author": "Diego"
+        },
+        {
+          "hash": "52c777a",
+          "type": "update",
+          "section": "General",
+          "message": "Replace dot pill variant with no-outline (light bg, no border, no dot)",
+          "author": "Diego"
+        },
+        {
+          "hash": "0239e9d",
+          "type": "fix",
+          "section": "General",
+          "message": "Fix pill border-radius and padding to 4px",
+          "author": "Diego"
+        },
+        {
+          "hash": "0cc4545",
+          "type": "update",
+          "section": "Overview",
+          "message": "Redirect unknown section IDs to overview instead of error",
+          "author": "Diego"
+        },
+        {
+          "hash": "7e2e81e",
+          "type": "feat",
+          "section": "Badges",
+          "message": "Add Pills / Tags section — replaces Badges in nav",
+          "author": "Diego"
+        },
+        {
+          "hash": "d278530",
+          "type": "update",
+          "section": "Iconography",
+          "message": "Rework alerts section — inline colored grid with Carbon icons",
+          "author": "Diego"
+        },
+        {
+          "hash": "1ac5211",
+          "type": "feat",
+          "section": "Banners",
+          "message": "Add Alerts/Toasts section — replaces Banners in nav",
+          "author": "Diego"
+        },
+        {
+          "hash": "18dfeba",
+          "type": "update",
+          "section": "General",
+          "message": "Rework bulk selection to animated overlay — no layout shift",
+          "author": "Diego"
+        },
+        {
+          "hash": "e13cb86",
+          "type": "feat",
+          "section": "Tables",
+          "message": "Add bulk selection to tables with checkbox + actions columns",
+          "author": "Diego"
+        },
+        {
+          "hash": "ef3e11b",
+          "type": "update",
+          "section": "Tables",
+          "message": "Tables: rewrite stacked cells with inline styles, no CSS classes",
+          "author": "Diego"
+        },
+        {
+          "hash": "f95329b",
+          "type": "fix",
+          "section": "Tables",
+          "message": "Tables: fix stacked cell layout, red error icon, add sub-header variant",
+          "author": "Diego"
+        },
+        {
+          "hash": "5d39c11",
+          "type": "update",
+          "section": "Colors",
+          "message": "Tables: hover-only scrollbar, ends before sticky column, N1/N4 colors",
+          "author": "Diego"
+        },
+        {
+          "hash": "07f5a77",
+          "type": "fix",
+          "section": "Tables",
+          "message": "Tables: fix Acciones header overflow — reduce th padding to 4px sides",
+          "author": "Diego"
+        },
+        {
+          "hash": "c29d7d1",
+          "type": "update",
+          "section": "Tables",
+          "message": "Tables: center Acciones header and body cells via CSS class",
+          "author": "Diego"
+        },
+        {
+          "hash": "cac5173",
+          "type": "fix",
+          "section": "General",
+          "message": "Fix overflow menu dropdown not opening (broken data-acts attribute)",
+          "author": "Diego"
+        },
+        {
+          "hash": "9c7593e",
+          "type": "feat",
+          "section": "Tables",
+          "message": "Tables: center Acciones header, add overflow menu with dropdown for 3+ actions",
+          "author": "Diego"
+        },
+        {
+          "hash": "43005ae",
+          "type": "fix",
+          "section": "Tables",
+          "message": "Tables: fix divider + force column min-widths for scroll",
+          "author": "Diego"
+        },
+        {
+          "hash": "b59f85d",
+          "type": "fix",
+          "section": "Tables",
+          "message": "Tables: fix sticky divider + horizontal scroll",
+          "author": "Diego"
+        },
+        {
+          "hash": "1702590",
+          "type": "update",
+          "section": "Iconography",
+          "message": "Tables: 82px sticky actions col, scroll demo, Carbon icons sync",
+          "author": "Diego"
+        },
+        {
+          "hash": "b037b0b",
+          "type": "feat",
+          "section": "Tables",
+          "message": "Tables: sticky actions column + 14 new cell type variants",
+          "author": "Diego"
+        },
+        {
+          "hash": "7617325",
+          "type": "update",
+          "section": "Tables",
+          "message": "Tables: full row/cell type system with all variants",
+          "author": "Diego"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-20",
+      "entries": [
+        {
+          "hash": "b729ede",
+          "type": "feat",
+          "section": "Colors",
+          "message": "Colors: add copy-to-clipboard feedback to all color swatches",
+          "author": "Diego"
+        },
+        {
+          "hash": "97f1092",
+          "type": "fix",
+          "section": "Colors",
+          "message": "Colors: replace swatch grid with scale strips, fix dataviz/service-units layout",
+          "author": "Diego"
+        },
+        {
+          "hash": "467caa1",
+          "type": "feat",
+          "section": "General",
+          "message": "Map elements: add With order group, remove En ruta/Exitosa/Fallida/Cancelada/Asignada",
+          "author": "Diego"
+        },
+        {
+          "hash": "c4e9a3e",
+          "type": "update",
+          "section": "Map pins",
+          "message": "Map pins: increase preview size to 72px with neutral background",
+          "author": "Diego"
+        },
+        {
+          "hash": "8cd4056",
+          "type": "fix",
+          "section": "Buttons",
+          "message": "fix: remove trailing comma in buttons.json",
+          "author": "Carlos"
+        },
+        {
+          "hash": "0e53c8c",
+          "type": "feat",
+          "section": "General",
+          "message": "Map elements: add 37 real pin SVGs with individual + ZIP download",
+          "author": "Diego"
+        },
+        {
+          "hash": "da7e845",
+          "type": "feat",
+          "section": "Sidebar",
+          "message": "Add sidebar search filter",
+          "author": "Cristina"
+        },
+        {
+          "hash": "94b6580",
+          "type": "fix",
+          "section": "Buttons",
+          "message": "revert: remove prueba yellow button variant from main",
+          "author": "Carlos"
+        },
+        {
+          "hash": "39d128e",
+          "type": "feat",
+          "section": "Sidebar",
+          "message": "Add mobile drawer pattern to sidebar component",
+          "author": "Cristina"
+        },
+        {
+          "hash": "30e2059",
+          "type": "update",
+          "section": "Changelog",
+          "message": "Home: rename README→Home, sync latest updates feed with changelog.json",
+          "author": "Diego"
+        },
+        {
+          "hash": "8061733",
+          "type": "feat",
+          "section": "General",
+          "message": "Login: add registration tab restricted to @dispatchtrack.com emails",
+          "author": "Diego"
+        },
+        {
+          "hash": "0071da4",
+          "type": "feat",
+          "section": "Modal",
+          "message": "Add mobile version to modal component",
+          "author": "Cristina"
+        },
+        {
+          "hash": "798bd8d",
+          "type": "fix",
+          "section": "Changelog",
+          "message": "Fix changelog: refresh with Cristina's commits + grant workflow write permission",
+          "author": "Diego"
+        },
+        {
+          "hash": "367cd17",
+          "type": "feat",
+          "section": "Buttons",
+          "message": "test: add prueba yellow button variant",
+          "author": "Carlos"
+        },
+        {
+          "hash": "be444c3",
+          "type": "update",
+          "section": "Overview",
+          "message": "Overview: replace static 'Teams' stat with live Realtime presence user count",
+          "author": "Diego"
+        },
+        {
+          "hash": "646191d",
+          "type": "update",
+          "section": "Changelog",
+          "message": "Changelog: show commit author (Diego, Carlos, Cristina, etc.)",
+          "author": "Diego"
+        },
+        {
+          "hash": "77a6136",
+          "type": "feat",
+          "section": "Buttons",
+          "message": "Add mobile variants to buttons page",
+          "author": "Cristina"
+        },
+        {
+          "hash": "24818d2",
+          "type": "update",
+          "section": "General",
+          "message": "Configure Supabase credentials for auth gate",
+          "author": "Diego"
+        },
+        {
+          "hash": "71bb9ca",
+          "type": "feat",
+          "section": "Typography",
+          "message": "Add mobile type scale to typography page",
+          "author": "Cristina"
+        },
+        {
+          "hash": "1e5a85a",
+          "type": "feat",
+          "section": "General",
+          "message": "Add Supabase auth gate: login page + session guard on index.html",
+          "author": "Diego"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-19",
+      "entries": [
+        {
+          "hash": "2a66728",
+          "type": "feat",
+          "section": "Typography",
+          "message": "Add mobile type scale to typography page + overview dashboard",
+          "author": "Cristina"
+        },
+        {
+          "hash": "a6145c2",
+          "type": "feat",
+          "section": "Changelog",
+          "message": "Add changelog section: auto-generated from git history, nav position below README",
+          "author": "Diego"
+        },
+        {
+          "hash": "07ba907",
+          "type": "fix",
+          "section": "Iconography",
+          "message": "Fix icon-cell CSS: fill not stroke for Carbon icons",
+          "author": "Diego"
+        },
+        {
+          "hash": "927c5e9",
+          "type": "fix",
+          "section": "Iconography",
+          "message": "Carbon icons in iconography section + fix bell alignment",
+          "author": "Diego"
+        },
+        {
+          "hash": "7f6f293",
+          "type": "update",
+          "section": "Iconography",
+          "message": "Switch icon library to Carbon Design System (IBM) icons",
+          "author": "Diego"
+        },
+        {
+          "hash": "881c4fb",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "Rebuild sidebar to match real design: white bg, blue icons, CSS hover expand",
+          "author": "Diego"
+        },
+        {
+          "hash": "3c5e43e",
+          "type": "feat",
+          "section": "Topbar",
+          "message": "Add mobile & tablet variants to topbar JSON and renderer",
+          "author": "Diego"
+        },
+        {
+          "hash": "d150694",
+          "type": "update",
+          "section": "Sidebar",
+          "message": "Update sidebar section: 3 products × 3 states with real hp-sidebar dark theme",
+          "author": "Diego"
+        },
+        {
+          "hash": "18c0aa8",
+          "type": "feat",
+          "section": "Topbar",
+          "message": "Add product logos: topbar variants, logo section grid, DT wordmark in header",
+          "author": "Diego"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-18",
+      "entries": [
+        {
+          "hash": "c3e4e9e",
+          "type": "update",
+          "section": "Inputs",
+          "message": "Rebuild inputs section with real hp-text-field structure",
+          "author": "Diego"
+        },
+        {
+          "hash": "ea98b72",
+          "type": "feat",
+          "section": "Overview",
+          "message": "Add modular design system: index.html, renderers, and sections data",
+          "author": "Diego"
+        },
+        {
+          "hash": "b4f2658",
+          "type": "update",
+          "section": "General",
+          "message": "Sincronization with current DT Honeypot repo 1.0",
+          "author": "Diego"
+        },
+        {
+          "hash": "6993b59",
+          "type": "feat",
+          "section": "Overview",
+          "message": "Initial commit: DT Design System v1",
+          "author": "Diego"
+        }
+      ]
+    }
+  ]
+}

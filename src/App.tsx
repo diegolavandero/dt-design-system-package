@@ -1,20 +1,25 @@
-import { useHashRoute } from '@/ds';
-import type { ComponentType } from 'react';
+import { useEffect, useState, type ComponentType } from 'react';
 import TutorialMonitoring from '@/screens/TutorialMonitoring';
 import UsersSettings from '@/screens/UsersSettings';
 import HelpCenter from '@/screens/HelpCenter';
-import Docs from '@/screens/Docs';
+import DocsApp from '@/docs/DocsApp';
 
-const ROUTES: Record<string, ComponentType> = {
+/** Prototipos de pantalla: `#/monitoreo`, `#/usuarios`, `#/ayuda`. Todo lo demás es el sitio de documentación (`#overview`, `#colors`…). */
+const SCREENS: Record<string, ComponentType> = {
   monitoreo: TutorialMonitoring,
   usuarios: UsersSettings,
   ayuda: HelpCenter,
-  docs: Docs,
-  overview: Docs,
 };
 
+const screenKey = () => (location.hash.startsWith('#/') ? location.hash.slice(2) : '');
+
 export default function App() {
-  const route = useHashRoute('docs');
-  const Page = ROUTES[route] ?? Docs;
-  return <Page />;
+  const [key, setKey] = useState(screenKey);
+  useEffect(() => {
+    const on = () => setKey(screenKey());
+    window.addEventListener('hashchange', on);
+    return () => window.removeEventListener('hashchange', on);
+  }, []);
+  const Screen = SCREENS[key];
+  return Screen ? <Screen /> : <DocsApp />;
 }

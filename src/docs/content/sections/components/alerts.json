@@ -1,0 +1,42 @@
+{
+  "title": "Alerts / Toasts",
+  "titleKey": "nav.alerts",
+  "description": "Toast notifications appear fixed at the top-right corner of the screen. They stack when multiple are active and auto-dismiss after 4 seconds. Text is always dynamic.",
+  "keywords": ["alerts", "toasts", "notifications", "info", "warning", "error", "success", "neutral"],
+  "types": ["info", "neutral", "warning", "error", "success"],
+  "groups": [
+    {
+      "rows": [
+        {
+          "text": "A simple alert—check it out!",
+          "hasClose": true
+        },
+        {
+          "text": "A simple alert—check it out!",
+          "hasClose": false
+        },
+        {
+          "text": "A simple alert—with more text and buttons.",
+          "hasClose": true,
+          "extraActions": ["eye", "download"]
+        },
+        {
+          "title": "Well done!",
+          "paragraphs": [
+            "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
+            "Whenever you need to, be sure to use margin utilities to keep things nice and tidy."
+          ],
+          "hasClose": true
+        },
+        {
+          "title": "Well done!",
+          "paragraphs": [
+            "Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.",
+            "Whenever you need to, be sure to use margin utilities to keep things nice and tidy."
+          ],
+          "hasClose": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+/* Tema del sitio de documentación del DS.
+ * Los primitivos (n1…n7, b1…b7…) vienen de ds/tokens/primitives.css; aquí solo se fijan
+ * las dos diferencias que tiene el sitio original: el azul primario (#1F60ED) y n8, más su fuente. */
+.docs-root {
+  --b6: #1F60ED;
+  --n8: #252C35;
+  --font-doc: 'DM Sans', system-ui, sans-serif;
+  font-family: var(--font-doc);
+  font-size: 14px;
+  /* El original usa el shorthand `font:` casi en todas partes, que reinicia line-height a «normal». */
+  line-height: normal;
+  color: var(--n7);
+  background: var(--n2);
+  min-height: 100vh;
+}
+:where(.docs-root) a { color: var(--b7); text-decoration: none; }
+:where(.docs-root) a:hover { text-decoration: underline; }
+.docs-root .sidebar-scroll::-webkit-scrollbar { width: 6px; }
+.docs-root .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--n3); border-radius: 3px; }
+
+/* El DS base fija html{font-size:14px}; el sitio de docs está maquetado sobre rem de 16px. */
+html:has(.docs-root) { font-size: 16px; }
+
+/* Tokens propios de la documentación (valores que el original repetía a mano) */
+.docs-root {
+  --doc-card-header: #FAFBFD;
+  --doc-code-bg: #0D1117;
+  --doc-code-fg: #c9d1d9;
+  --doc-warn-bg: var(--o2);
+  --doc-warn-fg: #7D4E00;
+}
+:where(.docs-root) :is(code, kbd) { font-family: inherit; }

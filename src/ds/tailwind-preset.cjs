@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       colors: {
         // Primitivos: solo para documentación y casos sin equivalente semántico (p. ej. visualización de datos).
-        n: { ...scale('n', [1, 2, 3, 4, 5, 6, 7]), 45: 'var(--n4-5)' },
+        n: { ...scale('n', [1, 2, 3, 4, 5, 6, 7]), 45: 'var(--n4-5)', 8: 'var(--n8)' },
         b: scale('b', [1, 2, 3, 4, 5, 6, 7]),
         g: scale('g', [1, 2, 3, 4, 5, 6, 7]),
         r: scale('r', [1, 2, 3, 4, 5, 6, 7]),
@@ -32,7 +32,7 @@ module.exports = {
         info: { DEFAULT: semantic('info'), bg: semantic('info-bg'), border: semantic('info-border'), fg: semantic('info-fg') },
         nav: { DEFAULT: semantic('nav'), selected: semantic('nav-selected') },
       },
-      fontFamily: { sans: ['var(--font-sans)'] },
+      fontFamily: { sans: ['var(--font-sans)'], doc: ['var(--font-doc)'] },
       // Escala tipográfica del DS (reemplaza a la de Tailwind a propósito: el producto trabaja en 11–24 px).
       fontSize: { '3xs': '10px', '2xs': '11px', xs: '12px', sm: '13px', base: '14px', lg: '16px', xl: '18px', '2xl': '20px', '3xl': '22px', '4xl': '24px' },
       boxShadow: {

@@ -29,6 +29,6 @@ npm run typecheck
 npm run build
 ```
 
-Rutas (hash): `#/docs` · `#/monitoreo` · `#/usuarios` · `#/ayuda`
+Rutas (hash): `#<seccion>` (documentación del DS, p.ej. `#colors`) · `#/monitoreo` · `#/usuarios` · `#/ayuda` (prototipos)
 
 Ver `AUDIT.md` para el diagnóstico del DS vanilla anterior y el backlog de migración.
