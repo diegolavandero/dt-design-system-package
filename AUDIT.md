@@ -11,11 +11,12 @@ Repo auditado: `diegolavandero/dt-design-system` (mirror de despliegue en Vercel
 | MAYOR | Login solo decorativo | Gate de Supabase en cliente; contenido en repo público | Pendiente: decidir repo privado + auth en el borde |
 | MENOR | Sin build, tests ni historial; archivos sueltos | 1 commit, `wrangler.jsonc` legado | Vite + TypeScript estricto |
 
-## Backlog de migración
+## Estado del port de la documentación (docs SPA)
 
-`renderers.js` tiene 64 funciones; esta librería porta por uso real. Pendiente: `dsAlert` inline, `dtDrop` multiselección,
-`buildSettingsSidebar` con grupos colapsables, formularios, stepper, date-range, y el resto de iconos (el DS define 77;
-aquí se incluyen los usados).
+Todas las secciones de las pestañas Desktop y Mobile del sitio original están portadas a React + Tailwind (cada `renderer` del nav tiene componente).
+Diferencias deliberadas respecto al original (bugs no replicados): margen `.sec` de 52px que choca con `.btn.sec`, `--font-mono` indefinido,
+claves i18n crudas visibles y etiquetas `<strong>` mostradas como texto. Pendientes menores: búsqueda a nivel de bloque (`navigateToBlock`),
+`dsAlert` inline y `dtDrop` multiselección fuera de la docs, y la maqueta "Table page" no es responsive (igual que el original).
 
 ## Decisiones abiertas
 
