@@ -7,7 +7,7 @@ export interface RowMenuItem {
   onSelect: () => void;
 }
 
-const MENU_WIDTH = 200;
+const MENU_WIDTH = 168; // = --size-menu
 
 /** Menú «⋮» por fila. Se dibuja en un portal con posición fija para no quedar recortado por el scroll de la tabla. */
 export function RowMenu({ items, label }: { items: RowMenuItem[]; label: string }) {
@@ -52,13 +52,13 @@ export function RowMenu({ items, label }: { items: RowMenuItem[]; label: string 
         aria-expanded={!!pos}
         title="Más acciones"
         onClick={toggle}
-        className="inline-flex h-7 w-7 items-center justify-center rounded hover:bg-canvas"
+        className="inline-flex h-ds-7 w-ds-7 items-center justify-center rounded-ds-sm hover:bg-canvas"
       >
         <Icon name="overflow-menu-vertical" size={16} color="var(--color-fg-muted)" />
       </button>
       {pos &&
         createPortal(
-          <div ref={menuRef} role="menu" style={{ top: pos.top, left: pos.left, minWidth: MENU_WIDTH }} className="fixed z-[9999] rounded-lg bg-surface py-1 shadow-[0_4px_20px_rgba(0,0,0,.16),0_0_0_1px_rgba(0,0,0,.07)]">
+          <div ref={menuRef} role="menu" style={{ top: pos.top, left: pos.left }} className="fixed min-w-ds-menu z-ds-menu rounded-ds-lg bg-surface py-ds-1 shadow-ds-md">
             {items.map((it) => (
               <button
                 key={it.label}
@@ -68,7 +68,7 @@ export function RowMenu({ items, label }: { items: RowMenuItem[]; label: string 
                   close();
                   it.onSelect();
                 }}
-                className="flex h-10 w-full items-center whitespace-nowrap px-3.5 text-left text-sm text-fg transition-colors hover:bg-action-soft hover:text-action-strong"
+                className="flex h-ds-control w-full items-center whitespace-nowrap px-ds-4 text-left text-ds-body-s text-fg transition-colors hover:bg-action-soft hover:text-action-strong"
               >
                 {it.label}
               </button>

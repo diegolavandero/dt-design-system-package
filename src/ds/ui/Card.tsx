@@ -10,7 +10,7 @@ interface CardProps {
 
 export function Card({ children, flush, className }: CardProps) {
   return (
-    <section className={cn('rounded-lg border border-line bg-surface', flush ? 'overflow-hidden' : 'px-4 py-3.5', className)}>
+    <section className={cn('rounded-ds-lg border border-line bg-surface', flush ? 'overflow-hidden' : 'px-ds-4 py-ds-4', className)}>
       {children}
     </section>
   );
@@ -18,9 +18,9 @@ export function Card({ children, flush, className }: CardProps) {
 
 export function CardHeader({ title, meta }: { title: string; meta?: string }) {
   return (
-    <header className="flex items-center justify-between border-b border-line bg-surface-subtle px-4 py-2.5">
-      <h3 className="text-xs font-bold text-fg">{title}</h3>
-      {meta && <span className="text-2xs text-fg-muted">{meta}</span>}
+    <header className="flex items-center justify-between border-b border-line bg-surface-subtle px-ds-4 py-ds-3">
+      <h3 className="text-ds-caption font-bold text-fg">{title}</h3>
+      {meta && <span className="text-ds-caption text-fg-muted">{meta}</span>}
     </header>
   );
 }
@@ -28,9 +28,9 @@ export function CardHeader({ title, meta }: { title: string; meta?: string }) {
 /** Título de tarjeta con subtítulo opcional (gráficos). */
 export function CardTitle({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
-    <div className={subtitle ? 'mb-4' : 'mb-3'}>
-      <h3 className="text-base font-bold leading-tight text-fg">{title}</h3>
-      {subtitle && <p className="mt-1 text-xs text-fg-muted">{subtitle}</p>}
+    <div className={subtitle ? 'mb-ds-4' : 'mb-ds-3'}>
+      <h3 className="text-ds-body-s font-bold leading-ds-body text-fg">{title}</h3>
+      {subtitle && <p className="mt-ds-1 text-ds-caption text-fg-muted">{subtitle}</p>}
     </div>
   );
 }

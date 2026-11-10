@@ -10,13 +10,13 @@ interface EmptyStateProps {
 
 export function EmptyState({ tag, title, description, children, actions }: EmptyStateProps) {
   return (
-    <div className="flex justify-center pb-4 pt-2">
-      <div className="flex w-full max-w-[600px] flex-col items-center gap-4 text-center">
-        {tag && <span className="inline-flex items-center gap-1.5 rounded-full bg-action-soft px-3 py-1.5 text-2xs font-bold uppercase leading-none tracking-wide text-action">{tag}</span>}
-        <h2 className="text-3xl font-bold leading-7 text-fg">{title}</h2>
-        <p className="max-w-[520px] text-base leading-[21px] text-fg-muted">{description}</p>
+    <div className="flex justify-center pb-ds-4 pt-ds-2">
+      <div className="flex w-full max-w-ds-modal-wide flex-col items-center gap-ds-4 text-center">
+        {tag && <span className="inline-flex items-center gap-ds-2 rounded-ds-pill bg-action-soft px-ds-3 py-ds-2 text-ds-caption font-bold uppercase leading-none tracking-ds-label text-action">{tag}</span>}
+        <h2 className="text-ds-subtitle font-bold leading-ds-subtitle text-fg">{title}</h2>
+        <p className="max-w-ds-modal text-ds-body-s leading-ds-body text-fg-muted">{description}</p>
         {children}
-        {actions && <div className="mt-1 flex flex-wrap justify-center gap-3">{actions}</div>}
+        {actions && <div className="mt-ds-1 flex flex-wrap justify-center gap-ds-3">{actions}</div>}
       </div>
     </div>
   );

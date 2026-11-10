@@ -1,0 +1,60 @@
+/* Tokens de layout, movimiento y capas del DS.
+ * Todo valor visual de ds/ y screens/ sale de aquí o de primitives/semantic: no se admiten valores arbitrarios.
+ * Fuente de cada valor: especificaciones del DS (topbar.json, sidebar.json, modal.json, radii.json, spacing.json, typography.json). */
+:root {
+  /* Dimensiones de layout */
+  --size-control: calc(var(--space-4) + var(--space-6)); /* 40px: alto de fila/control, compuesto con la escala */
+  --size-topbar: var(--topbar-h);        /* topbar.json: 52 */
+  --size-sidebar: 52px;                  /* sidebar.json: colapsado */
+  --size-sidebar-open: 248px;            /* sidebar.json: expandido (hover) */
+  --size-slot: 100px;                    /* topbar.json: slot de compañía */
+  --size-drawer: 400px;                  /* modal.json: drawer */
+  --size-modal: 520px;                   /* modal.json: modal estándar */
+  --size-modal-wide: 600px;              /* modal.json: modal ancho / empty state */
+  --size-readable: 448px;                /* ancho máximo de texto en tarjeta de resumen */
+  --size-menu: 168px;                    /* dropdowns y menús: ancho mínimo */
+  --size-popover: 210px;                 /* popovers de filtro */
+  --size-list: 240px;                    /* altura máxima de listas con scroll */
+  --size-settings-nav: 224px;            /* navegación lateral de ajustes */
+  --size-main: calc(100vh - var(--size-topbar));
+  --size-viewport-inset: calc(100vw - var(--space-7));
+
+  /* Radios adicionales (radii.json) */
+  --radius-chip: 16px;                   /* chips y tabs pill */
+  --radius-sidebar: 30px;
+
+  /* Trazos */
+  --stroke-accent: 3px;                  /* sidebar.json: borde izquierdo del ítem activo */
+
+  /* Tipografía: pares tamaño / interlineado (typography.json) */
+  --fs-section: 24px;
+
+  /* Movimiento */
+  --motion-fast: 200ms;
+  --motion-base: 300ms;
+  --motion-video: 14s;
+
+  /* Capas (de menor a mayor) */
+  --z-base: 1;
+  --z-raised: 2;
+  --z-float: 5;
+  --z-sticky: 10;
+  --z-nav: 20;
+  --z-dropdown: 30;
+  --z-overlay: 50;
+  --z-fab: 160;
+  --z-drawer: 299;
+  --z-toast: 400;
+  --z-menu: 9999;
+
+  /* Opacidades de estado */
+  --opacity-disabled: .5;
+  --opacity-muted: .7;
+
+  /* Superpuestos translúcidos sobre fondos oscuros / media */
+  --color-scrim-soft: rgb(255 255 255 / .3);
+  --color-scrim-strong: rgb(255 255 255 / .9);
+  --color-scrim-opaque: rgb(255 255 255 / .95);
+  --color-nav-hover: rgb(255 255 255 / .1);
+  --color-nav-line: rgb(255 255 255 / .2);
+}

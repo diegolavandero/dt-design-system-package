@@ -19,7 +19,7 @@ const COLUMNS: Column<TutorialStat>[] = [
   { key: 'avance', header: 'Avance', sortValue: (t) => t.avance, render: (t) => <ProgressCell value={t.avance} /> },
 ];
 
-const Empty = () => <p className="py-9 text-center text-sm text-fg-muted">Sin datos para los filtros seleccionados.</p>;
+const Empty = () => <p className="py-ds-7 text-center text-ds-body-s text-fg-muted">Sin datos para los filtros seleccionados.</p>;
 
 export function TutorialPanel() {
   const [filters, setFilters] = useState<Record<string, string>>(EMPTY);
@@ -49,7 +49,7 @@ export function TutorialPanel() {
     <>
       <FilterBar fields={FIELDS} applied={filters} onApply={setFilters} />
 
-      <div className="grid gap-4 min-[901px]:grid-cols-2">
+      <div className="grid gap-ds-4 ds-wide:grid-cols-2">
         <Card>
           <CardTitle title="Tutoriales más completados" subtitle="Cantidad de usuarios que completaron cada tutorial" />
           {top.length ? <BarsChart items={top} labelWidth={185} /> : <Empty />}

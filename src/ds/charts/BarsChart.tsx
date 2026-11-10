@@ -8,16 +8,16 @@ export interface BarItem {
 export function BarsChart({ items, labelWidth = 185 }: { items: BarItem[]; labelWidth?: number }) {
   const max = Math.max(1, ...items.map((i) => i.value));
   return (
-    <ul className="flex flex-col gap-3">
+    <ul className="flex flex-col gap-ds-3">
       {items.map((item, i) => (
-        <li key={item.label} className="flex items-center gap-3 text-xs">
+        <li key={item.label} className="flex items-center gap-ds-3 text-ds-caption">
           <span className="shrink-0 truncate text-right text-fg-secondary" style={{ width: labelWidth }} title={item.label}>
             {item.label}
           </span>
-          <div className="h-3 flex-1 overflow-hidden rounded-full bg-canvas">
-            <div className="h-full rounded-full transition-[width] duration-300" style={{ width: `${(item.value / max) * 100}%`, background: vizColor(i) }} />
+          <div className="h-ds-3 flex-1 overflow-hidden rounded-ds-pill bg-canvas">
+            <div className="h-full rounded-ds-pill transition-all duration-ds-base" style={{ width: `${(item.value / max) * 100}%`, background: vizColor(i) }} />
           </div>
-          <span className="w-5 shrink-0 text-right font-bold text-fg">{item.value}</span>
+          <span className="w-ds-5 shrink-0 text-right font-bold text-fg">{item.value}</span>
         </li>
       ))}
     </ul>

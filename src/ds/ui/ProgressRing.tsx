@@ -14,17 +14,17 @@ export function ProgressRing({ done, total, percent }: ProgressRingProps) {
   return (
     <span
       title={`${done} de ${total} tutoriales completados`}
-      className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line bg-surface-subtle py-[3px] pl-1 pr-2.5"
+      className="inline-flex shrink-0 items-center gap-ds-2 rounded-ds-pill border border-line bg-surface-subtle py-ds-1 pl-ds-1 pr-ds-3"
     >
       <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r={R} fill="none" stroke="var(--color-line)" strokeWidth="3" />
         <circle
           cx="12" cy="12" r={R} fill="none" stroke="var(--color-action)" strokeWidth="3" strokeLinecap="round"
           strokeDasharray={C.toFixed(1)} strokeDashoffset={(C * (1 - pct / 100)).toFixed(1)} transform="rotate(-90 12 12)"
-          className="transition-[stroke-dashoffset] duration-300"
+          className="transition-all duration-ds-base"
         />
       </svg>
-      <span className="whitespace-nowrap text-xs font-bold leading-none text-fg">
+      <span className="whitespace-nowrap text-ds-caption font-bold leading-none text-fg">
         {done}/{total} · {pct}%
       </span>
     </span>

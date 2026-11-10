@@ -12,8 +12,7 @@ interface TabsProps {
   onChange: (index: number) => void;
 }
 
-const GAP = 4;
-const PAD = 4;
+const INSET = 'var(--space-1)';
 
 /** Selector de segmentos del DS: pista n2 + píldora blanca que se desliza. Todas las pestañas miden lo mismo. */
 export function Tabs({ items, value, onChange }: TabsProps) {
@@ -22,11 +21,11 @@ export function Tabs({ items, value, onChange }: TabsProps) {
   const width = Math.max(74, longest * 7 + (hasIcons ? 22 : 0) + 30);
 
   return (
-    <div role="tablist" className="relative inline-flex select-none rounded-2xl bg-canvas" style={{ gap: GAP, padding: PAD }}>
+    <div role="tablist" className="relative inline-flex select-none rounded-ds-chip bg-canvas" style={{ gap: INSET, padding: INSET }}>
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1 h-[26px] rounded-[13px] bg-surface shadow-pill transition-[left] duration-200 ease-[cubic-bezier(.4,0,.2,1)]"
-        style={{ width, left: PAD + value * (width + GAP) }}
+        className="pointer-events-none absolute top-ds-1 h-ds-6 rounded-ds-xl bg-surface shadow-ds-xs transition-all duration-ds-fast ease-in-out"
+        style={{ width, left: `calc(${INSET} + ${value} * (${width}px + ${INSET}))` }}
       />
       {items.map((item, i) => (
         <button
@@ -37,8 +36,8 @@ export function Tabs({ items, value, onChange }: TabsProps) {
           onClick={() => onChange(i)}
           style={{ width }}
           className={cn(
-            'relative z-10 inline-flex h-[26px] shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-[13px] text-xs font-bold leading-none transition-colors',
-            i === value ? 'text-fg' : 'text-fg-secondary hover:bg-[rgba(193,205,225,.45)]',
+            'relative z-ds-sticky inline-flex h-ds-6 shrink-0 items-center justify-center gap-ds-2 whitespace-nowrap rounded-ds-xl text-ds-caption font-bold leading-none transition-colors',
+            i === value ? 'text-fg' : 'text-fg-secondary hover:bg-surface-header',
           )}
         >
           {item.icon && <Icon name={item.icon} size={15} />}

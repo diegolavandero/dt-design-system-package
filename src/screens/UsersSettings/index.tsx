@@ -16,7 +16,7 @@ function BulkButton({ icon, children, onClick }: { icon: IconName; children: str
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex h-7 items-center gap-1.5 whitespace-nowrap rounded border border-action-border-soft bg-surface px-2.5 text-xs font-medium text-action-strong transition-colors hover:border-focus hover:bg-action-soft"
+      className="inline-flex h-ds-7 items-center gap-ds-2 whitespace-nowrap rounded-ds-sm border border-action-border-soft bg-surface px-ds-3 text-ds-caption font-medium text-action-strong transition-colors hover:border-focus hover:bg-action-soft"
     >
       <Icon name={icon} size={14} />
       {children}
@@ -83,37 +83,37 @@ function UsersScreen() {
 
   return (
     <>
-      <div className="sticky top-0 z-50">
+      <div className="sticky top-0 z-ds-overlay">
         <Topbar tenant="ACME CO" />
       </div>
       <SettingsLayout rail={RAIL_ICONS} groups={SETTINGS_GROUPS} activeItem="Usuarios web" version="20.25.10">
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div className="flex flex-wrap items-baseline gap-x-3.5 gap-y-1">
-            <h1 className="text-3xl font-bold leading-none text-fg">Usuarios web</h1>
-            <span className="text-sm text-fg-muted">
+        <div className="flex flex-wrap items-start justify-between gap-ds-3">
+          <div className="flex flex-wrap items-baseline gap-x-ds-4 gap-y-ds-1">
+            <h1 className="text-ds-subtitle font-bold leading-none text-fg">Usuarios web</h1>
+            <span className="text-ds-body-s text-fg-muted">
               Usuarios activos: <b className="text-fg">30</b> · Usuarios bloqueados: <b className="text-fg">8</b>
             </span>
           </div>
-          <div className="flex shrink-0 items-center gap-3">
+          <div className="flex shrink-0 items-center gap-ds-3">
             <Button icon="plan">Bitácora</Button>
             <Button icon="group">Roles de usuario</Button>
             <Button variant="primary" icon="add">Nuevo usuario</Button>
           </div>
         </div>
 
-        <section className="flex flex-col gap-5 rounded-lg border border-line-strong bg-surface p-5">
-          <div className="flex flex-wrap items-center gap-2">
+        <section className="flex flex-col gap-ds-5 rounded-ds-lg border border-line-strong bg-surface p-ds-5">
+          <div className="flex flex-wrap items-center gap-ds-2">
             <TextField placeholder="Nombre" value={draft.name} onChange={(name) => setDraft((d) => ({ ...d, name }))} onEnter={apply} />
             <TextField placeholder="Usuario" value={draft.user} onChange={(user) => setDraft((d) => ({ ...d, user }))} onEnter={apply} />
-            <label className="flex shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap text-sm text-fg">
-              <input type="checkbox" checked={draft.includeInactive} onChange={(e) => setDraft((d) => ({ ...d, includeInactive: e.target.checked }))} className="h-[15px] w-[15px] cursor-pointer accent-focus" />
+            <label className="flex shrink-0 cursor-pointer items-center gap-ds-2 whitespace-nowrap text-ds-body-s text-fg">
+              <input type="checkbox" checked={draft.includeInactive} onChange={(e) => setDraft((d) => ({ ...d, includeInactive: e.target.checked }))} className="h-ds-4 w-ds-4 cursor-pointer accent-focus" />
               Incluir inactivos
             </label>
             <FilterButton onClick={apply} />
             <ResetFiltersButton onClick={reset} />
           </div>
 
-          <div className="overflow-hidden rounded border border-line-strong">
+          <div className="overflow-hidden rounded-ds-sm border border-line-strong">
             <DataTable
               columns={columns}
               rows={visible}

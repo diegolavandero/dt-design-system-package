@@ -28,18 +28,18 @@ function OrdersEmptyState({ hc }: { hc: HelpCenter }) {
       description={`${SECTION.desc} Mira el video, responde 3 preguntas y crea tu primera orden para empezar.`}
       actions={
         <>
-          <Button variant="primary" icon="add" className="h-9 px-5">Crear primera orden</Button>
-          <Button icon="document-import" className="h-9 px-5">Importar órdenes</Button>
+          <Button variant="primary" icon="add" className="h-ds-7 px-ds-5">Crear primera orden</Button>
+          <Button icon="document-import" className="h-ds-7 px-ds-5">Importar órdenes</Button>
         </>
       }
     >
-      <div className="w-full overflow-hidden rounded-xl border border-line shadow-float">
+      <div className="w-full overflow-hidden rounded-ds-xl border border-line shadow-ds-sm">
         <VideoPlayer tag={SECTION.name} duration={SECTION.videoDur} onFirstPlay={hc.markSectionSeen} embedUrl={SECTION.videoEmbed || undefined} />
       </div>
-      <div className="flex w-full items-center justify-between gap-3 rounded-[10px] border border-line bg-surface-subtle px-4 py-3.5 text-left">
+      <div className="flex w-full items-center justify-between gap-ds-3 rounded-ds-xl border border-line bg-surface-subtle px-ds-4 py-ds-4 text-left">
         <div>
-          <p className="text-base font-bold leading-[18px] text-fg">Pon a prueba lo que aprendiste</p>
-          <p className="mt-0.5 text-xs leading-4 text-fg-muted">3 preguntas para completar el aprendizaje de la sección.</p>
+          <p className="text-ds-body-s font-bold leading-ds-body text-fg">Pon a prueba lo que aprendiste</p>
+          <p className="mt-ds-1 text-ds-caption leading-ds-caption text-fg-muted">3 preguntas para completar el aprendizaje de la sección.</p>
         </div>
         <Button className="shrink-0" onClick={hc.startSectionQuiz}>Probar lo aprendido</Button>
       </div>
@@ -73,30 +73,30 @@ export function OrdersPage({ hc, empty, notify }: OrdersPageProps) {
   ];
 
   return (
-    <div className="flex flex-col gap-5 bg-canvas px-6 pb-4 pt-5">
-      <div className="flex items-start justify-between gap-3">
+    <div className="flex flex-col gap-ds-5 bg-canvas px-ds-6 pb-ds-4 pt-ds-5">
+      <div className="flex items-start justify-between gap-ds-3">
         <div>
-          <h1 className="text-3xl font-bold leading-none text-fg">Órdenes/guías</h1>
-          <p className="mt-0.5 flex items-center gap-2 text-base leading-5 text-fg-muted">
+          <h1 className="text-ds-subtitle font-bold leading-none text-fg">Órdenes/guías</h1>
+          <p className="mt-ds-1 flex items-center gap-ds-2 text-ds-body-s leading-ds-body text-fg-muted">
             Revisa el estado de las distintas órdenes y sus clientes.
-            <button type="button" onClick={() => hc.openTutorial(SECTION_TUTORIAL_ID)} title="Ver tutorial de Órdenes" aria-label="Ver tutorial de Órdenes" className="inline-flex shrink-0 text-action transition-opacity hover:opacity-70">
+            <button type="button" onClick={() => hc.openTutorial(SECTION_TUTORIAL_ID)} title="Ver tutorial de Órdenes" aria-label="Ver tutorial de Órdenes" className="inline-flex shrink-0 text-action transition-opacity hover:opacity-ds-muted">
               <Icon name="education" size={18} />
             </button>
           </p>
         </div>
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="flex shrink-0 items-center gap-ds-3">
           <Button icon="download">Exportar a excel</Button>
           <Button variant="primary" icon="add">Nueva orden</Button>
         </div>
       </div>
 
-      <section className="flex flex-col gap-5 rounded-lg border border-line-strong bg-surface p-5">
+      <section className="flex flex-col gap-ds-5 rounded-ds-lg border border-line-strong bg-surface p-ds-5">
         {empty ? (
           <OrdersEmptyState hc={hc} />
         ) : (
           <>
             <FilterBar fields={FIELDS} applied={filters} onApply={setFilters} />
-            <div className="overflow-hidden rounded border border-line-strong">
+            <div className="overflow-hidden rounded-ds-sm border border-line-strong">
               <DataTable
                 columns={columns}
                 rows={rows}

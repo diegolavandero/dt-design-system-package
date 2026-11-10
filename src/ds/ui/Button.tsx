@@ -14,8 +14,8 @@ export function Button({ variant = 'secondary', icon, children, className, type 
     <button
       type={type}
       className={cn(
-        'inline-flex h-8 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-base font-bold leading-none transition-colors',
-        variant === 'primary' ? 'bg-action text-white hover:bg-action-hover' : 'border border-action bg-surface text-action-text hover:bg-action-soft',
+        'inline-flex h-ds-7 shrink-0 items-center gap-ds-2 whitespace-nowrap rounded-ds-pill px-ds-4 text-ds-body-s font-bold leading-none transition-colors',
+        variant === 'primary' ? 'bg-action text-fg-inverse hover:bg-action-hover' : 'border border-action bg-surface text-action-text hover:bg-action-soft',
         className,
       )}
       {...rest}

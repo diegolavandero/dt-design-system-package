@@ -7,12 +7,12 @@ interface PaginationProps {
   onChange: (page: number) => void;
 }
 
-const base = 'inline-flex h-7 min-w-7 items-center justify-center rounded border px-1 text-xs transition-colors';
+const base = 'inline-flex h-ds-7 min-w-ds-7 items-center justify-center rounded-ds-sm border px-ds-1 text-ds-caption transition-colors';
 
 export function Pagination({ page, pages, onChange }: PaginationProps) {
   return (
-    <nav aria-label="Paginación" className="flex items-center justify-end gap-1">
-      <button type="button" aria-label="Página anterior" disabled={page <= 1} onClick={() => onChange(page - 1)} className={cn(base, 'w-7 border-line bg-surface hover:bg-canvas disabled:opacity-40')}>
+    <nav aria-label="Paginación" className="flex items-center justify-end gap-ds-1">
+      <button type="button" aria-label="Página anterior" disabled={page <= 1} onClick={() => onChange(page - 1)} className={cn(base, 'w-ds-7 border-line bg-surface hover:bg-canvas disabled:opacity-ds-disabled')}>
         <Icon name="chevron--left" size={12} color="var(--color-fg-secondary)" />
       </button>
       {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
@@ -26,7 +26,7 @@ export function Pagination({ page, pages, onChange }: PaginationProps) {
           {n}
         </button>
       ))}
-      <button type="button" aria-label="Página siguiente" disabled={page >= pages} onClick={() => onChange(page + 1)} className={cn(base, 'w-7 border-line bg-surface hover:bg-canvas disabled:opacity-40')}>
+      <button type="button" aria-label="Página siguiente" disabled={page >= pages} onClick={() => onChange(page + 1)} className={cn(base, 'w-ds-7 border-line bg-surface hover:bg-canvas disabled:opacity-ds-disabled')}>
         <Icon name="chevron--right" size={12} color="var(--color-fg-secondary)" />
       </button>
     </nav>

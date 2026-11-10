@@ -20,7 +20,7 @@ export function Donut({ segments, centerValue, centerLabel, size = 132 }: DonutP
   let offset = 0;
 
   return (
-    <div className="flex items-center justify-center gap-8 py-1">
+    <div className="flex items-center justify-center gap-ds-7 py-ds-1">
       <div className="relative shrink-0" style={{ width: size, height: size }}>
         <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label={segments.map((s) => `${s.label}: ${s.value}`).join(', ')}>
           <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--color-line)" strokeWidth={STROKE} />
@@ -47,17 +47,17 @@ export function Donut({ segments, centerValue, centerLabel, size = 132 }: DonutP
             })}
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-3xl font-bold leading-none text-fg">{centerValue}</span>
-          <span className="mt-1 text-3xs font-semibold uppercase tracking-wider text-fg-muted">{centerLabel}</span>
+          <span className="text-ds-subtitle font-bold leading-none text-fg">{centerValue}</span>
+          <span className="mt-ds-1 text-ds-caption font-semibold uppercase tracking-ds-label text-fg-muted">{centerLabel}</span>
         </div>
       </div>
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-ds-2">
         {segments.map((s) => (
-          <li key={s.label} className="flex items-center gap-2 text-xs text-fg-secondary">
-            <span className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: s.color }} />
+          <li key={s.label} className="flex items-center gap-ds-2 text-ds-caption text-fg-secondary">
+            <span className="h-ds-3 w-ds-3 shrink-0 rounded-ds-sm" style={{ background: s.color }} />
             <span>{s.label}</span>
-            <span className="ml-3 min-w-4 text-right font-bold text-fg">{s.value}</span>
-            <span className="w-9 text-right text-fg-muted">{total ? Math.round((s.value / total) * 100) : 0}%</span>
+            <span className="ml-ds-3 min-w-ds-4 text-right font-bold text-fg">{s.value}</span>
+            <span className="w-ds-7 text-right text-fg-muted">{total ? Math.round((s.value / total) * 100) : 0}%</span>
           </li>
         ))}
       </ul>

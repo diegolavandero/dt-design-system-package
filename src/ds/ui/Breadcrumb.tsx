@@ -11,7 +11,7 @@ export function Breadcrumb({ items }: { items: Crumb[] }) {
     <nav aria-label="Ruta de navegación">
       {items.map((c, i) => (
         <Fragment key={`${c.label}-${i}`}>
-          {i > 0 && <span aria-hidden="true" className="mx-1 text-line-strong">›</span>}
+          {i > 0 && <span aria-hidden="true" className="mx-ds-1 text-line-strong">›</span>}
           {c.onSelect ? (
             <button type="button" onClick={c.onSelect} className="text-action hover:text-action-strong hover:underline">{c.label}</button>
           ) : (

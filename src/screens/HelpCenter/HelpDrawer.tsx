@@ -14,7 +14,7 @@ const SUPPORT_LINKS = [
 ] as const;
 
 const Label = ({ children, first }: { children: string; first?: boolean }) => (
-  <h3 className={`mb-2.5 text-2xs font-bold uppercase leading-none tracking-wider text-fg-muted ${first ? 'mt-0' : 'mt-[22px]'}`}>{children}</h3>
+  <h3 className={`mb-ds-3 text-ds-caption font-bold uppercase leading-none tracking-ds-label text-fg-muted ${first ? 'mt-0' : 'mt-ds-6'}`}>{children}</h3>
 );
 
 const TutorialBadge = ({ t }: { t: Tutorial }) =>
@@ -42,21 +42,21 @@ function LearningBlock(props: {
   return (
     <>
       <Label first>{props.videoLabel}</Label>
-      <div className="overflow-hidden rounded-[10px] border border-line transition-shadow hover:border-line-strong hover:shadow-float">
+      <div className="overflow-hidden rounded-ds-xl border border-line transition-shadow hover:border-line-strong hover:shadow-ds-sm">
         <VideoPlayer tag={props.tag} duration={props.duration} onFirstPlay={props.onPlay} embedUrl={props.embedUrl} />
-        <div className="px-3.5 pb-3.5 pt-3">
-          <div className="flex items-center justify-between gap-2 text-[15px] font-bold leading-5 text-fg"><span>{props.title}</span>{props.chip}</div>
-          <p className="mt-2.5 text-sm leading-[19px] text-fg-secondary">{props.description}</p>
+        <div className="px-ds-4 pb-ds-4 pt-ds-3">
+          <div className="flex items-center justify-between gap-ds-2 text-ds-body-l font-bold leading-ds-body text-fg"><span>{props.title}</span>{props.chip}</div>
+          <p className="mt-ds-3 text-ds-body-s leading-ds-body text-fg-secondary">{props.description}</p>
         </div>
       </div>
-      <div className="mt-3.5 rounded-[10px] border border-line bg-surface-subtle p-3.5">
+      <div className="mt-ds-4 rounded-ds-xl border border-line bg-surface-subtle p-ds-4">
         <StepList steps={[{ label: props.stepVideo, done: props.seen }, { label: 'Responder el cuestionario (3 preguntas)', done: props.done }]} />
         {props.done ? (
-          <p className="mt-2.5 text-xs font-semibold leading-4 text-success">✓ {props.footDone}</p>
+          <p className="mt-ds-3 text-ds-caption font-semibold leading-ds-caption text-success">✓ {props.footDone}</p>
         ) : (
           <>
             <Button variant="primary" icon="task-complete" className="w-full justify-center" onClick={props.onQuiz}>Poner a prueba</Button>
-            <p className="mt-2.5 text-xs leading-4 text-fg-muted">{props.footTodo}</p>
+            <p className="mt-ds-3 text-ds-caption leading-ds-caption text-fg-muted">{props.footTodo}</p>
           </>
         )}
       </div>
@@ -94,7 +94,7 @@ export function HelpDrawer({ hc }: { hc: HelpCenter }) {
       onEscape={hc.back}
       scrollKey={scrollKey}
       label="Centro de ayuda"
-      title={<><span className="text-xl font-bold text-fg">{title}</span><ProgressRing {...ring} percent={ring.pct} /></>}
+      title={<><span className="text-ds-body-l font-bold text-fg">{title}</span><ProgressRing {...ring} percent={ring.pct} /></>}
       context={crumbs && <Breadcrumb items={crumbs} />}
     >
       {view.kind === 'home' && (
@@ -125,7 +125,7 @@ export function HelpDrawer({ hc }: { hc: HelpCenter }) {
 
       {view.kind === 'catalog' && (
         <>
-          <p className="mb-1.5 mt-0.5 text-sm leading-[19px] text-fg-secondary">Avanza por los niveles a tu ritmo. Cada tutorial incluye un video corto y un cuestionario para reforzar lo aprendido.</p>
+          <p className="mb-ds-2 mt-ds-1 text-ds-body-s leading-ds-body text-fg-secondary">Avanza por los niveles a tu ritmo. Cada tutorial incluye un video corto y un cuestionario para reforzar lo aprendido.</p>
           {hc.catalog.map((lvl) => {
             const web = lvl.tuts.filter((t) => t.group !== 'app');
             const app = lvl.tuts.filter((t) => t.group === 'app');
@@ -135,15 +135,15 @@ export function HelpDrawer({ hc }: { hc: HelpCenter }) {
             );
             return (
               <section key={lvl.level} aria-label={lvl.name}>
-                <div className="mb-2 mt-[22px] flex items-center justify-between gap-2.5 first-of-type:mt-1.5">
-                  <h3 className="text-[15px] font-bold leading-none text-fg">{lvl.name}</h3>
-                  <span className="shrink-0 whitespace-nowrap text-2xs font-semibold leading-none text-fg-muted">{done}/{lvl.tuts.length} completados</span>
+                <div className="mb-ds-2 mt-ds-6 flex items-center justify-between gap-ds-3 first-of-type:mt-ds-2">
+                  <h3 className="text-ds-body-l font-bold leading-none text-fg">{lvl.name}</h3>
+                  <span className="shrink-0 whitespace-nowrap text-ds-caption font-semibold leading-none text-fg-muted">{done}/{lvl.tuts.length} completados</span>
                 </div>
                 {web.map(row)}
                 {app.length > 0 && (
                   <>
-                    <div className="mb-1.5 mt-3.5 flex items-center gap-2 px-0.5">
-                      <span className="whitespace-nowrap text-3xs font-bold uppercase leading-none tracking-wider text-fg-muted">App móvil</span>
+                    <div className="mb-ds-2 mt-ds-4 flex items-center gap-ds-2 px-ds-1">
+                      <span className="whitespace-nowrap text-ds-caption font-bold uppercase leading-none tracking-ds-label text-fg-muted">App móvil</span>
                       <span className="h-px flex-1 bg-line" />
                     </div>
                     {app.map(row)}

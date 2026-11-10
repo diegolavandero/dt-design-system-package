@@ -42,11 +42,11 @@ function HelpButton({ items }: { items: HelpMenuItem[] }) {
   return (
     <div ref={ref} className="relative flex">
       <button type="button" aria-label="Ayuda" aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)} className="flex text-fg-inverse">
-        <Icon name="help" size={18} color="#fff" />
+        <Icon name="help" size={18} color="var(--color-fg-inverse)" />
       </button>
       {open && (
-        <div role="menu" className="absolute -right-2 top-[calc(100%+14px)] z-[9999] min-w-[210px] overflow-hidden rounded-lg border border-line bg-surface shadow-[0_4px_16px_rgba(19,32,69,.14)]">
-          <div className="px-4 pb-1 pt-2 text-3xs font-bold uppercase tracking-wider text-fg-muted">Ayuda</div>
+        <div role="menu" className="absolute -right-ds-2 top-full mt-ds-3 z-ds-menu min-w-ds-popover overflow-hidden rounded-ds-lg border border-line bg-surface shadow-ds-md">
+          <div className="px-ds-4 pb-ds-1 pt-ds-2 text-ds-caption font-bold uppercase tracking-ds-label text-fg-muted">Ayuda</div>
           <div className="h-px bg-line" />
           {items.map((it) => (
             <button
@@ -57,7 +57,7 @@ function HelpButton({ items }: { items: HelpMenuItem[] }) {
                 setOpen(false);
                 it.onSelect?.();
               }}
-              className="flex w-full items-center gap-2.5 px-4 py-2.5 text-left text-sm font-medium text-fg hover:bg-surface-subtle"
+              className="flex w-full items-center gap-ds-3 px-ds-4 py-ds-3 text-left text-ds-body-s font-medium text-fg hover:bg-surface-subtle"
             >
               <Icon name={it.icon} size={16} color="var(--color-fg-muted)" />
               {it.label}
@@ -72,22 +72,22 @@ function HelpButton({ items }: { items: HelpMenuItem[] }) {
 /** Barra superior del DS. El logo es un wordmark de texto: el asset SVG original no existe en el repo del DS. */
 export function Topbar({ tenant = 'beetrack', extra, helpMenu }: TopbarProps) {
   return (
-    <header className="flex h-[52px] items-center bg-nav pl-[22px]">
-      <span className="text-lg font-bold tracking-tight text-fg-inverse">LastMile</span>
-      <nav aria-label="Acciones globales" className="ml-auto flex items-center gap-7 pr-7">
+    <header className="flex h-ds-topbar items-center bg-nav pl-ds-6">
+      <span className="text-ds-body-l font-bold tracking-ds-title text-fg-inverse">LastMile</span>
+      <nav aria-label="Acciones globales" className="ml-auto flex items-center gap-ds-7 pr-ds-7">
         {extra}
         {ACTIONS.map((a) =>
           a.icon === 'help' && helpMenu ? (
             <HelpButton key={a.icon} items={helpMenu} />
           ) : (
             <button key={a.icon} type="button" aria-label={a.label} className="relative flex text-fg-inverse">
-              <Icon name={a.icon} size={18} color="#fff" />
-              {a.badge && <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-danger ring-2 ring-nav" />}
+              <Icon name={a.icon} size={18} color="var(--color-fg-inverse)" />
+              {a.badge && <span className="absolute -right-ds-1 -top-ds-1 h-ds-2 w-ds-2 rounded-ds-pill bg-danger ring-2 ring-nav" />}
             </button>
           ),
         )}
       </nav>
-      <div className="flex h-[52px] w-[98px] items-center justify-center rounded-tl-[20px] bg-surface text-sm font-bold text-fg">{tenant}</div>
+      <div className="flex h-ds-topbar w-ds-slot items-center justify-center rounded-ds-slot bg-surface text-ds-body-s font-bold text-fg">{tenant}</div>
     </header>
   );
 }

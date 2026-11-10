@@ -30,7 +30,7 @@ function Select({ field, value, onChange }: { field: FilterField; value: string;
   }, [open]);
 
   return (
-    <div ref={ref} className="relative min-w-[168px] flex-1" onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}>
+    <div ref={ref} className="relative min-w-ds-menu flex-1" onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}>
       <button
         type="button"
         aria-haspopup="listbox"
@@ -38,7 +38,7 @@ function Select({ field, value, onChange }: { field: FilterField; value: string;
         aria-controls={listId}
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          'flex h-10 w-full items-center justify-between gap-2 rounded-md border bg-surface px-3 text-sm',
+          'flex h-ds-control w-full items-center justify-between gap-ds-2 rounded-ds-md border bg-surface px-ds-3 text-ds-body-s',
           open ? 'border-action' : 'border-line-strong hover:border-fg-subtle',
           value ? 'text-fg' : 'text-fg-secondary',
         )}
@@ -49,7 +49,7 @@ function Select({ field, value, onChange }: { field: FilterField; value: string;
         </svg>
       </button>
       {open && (
-        <ul id={listId} role="listbox" className="absolute left-0 top-11 z-20 max-h-60 min-w-full overflow-auto rounded-md border border-line bg-surface py-1 shadow-pop">
+        <ul id={listId} role="listbox" className="absolute left-0 top-ds-8 z-ds-nav max-h-ds-list min-w-full overflow-auto rounded-ds-md border border-line bg-surface py-ds-1 shadow-ds-md">
           {[{ label: field.placeholder, val: '' }, ...(field.options ?? []).map((o) => ({ label: o, val: o }))].map(({ label, val }) => (
             <li
               key={label}
@@ -59,7 +59,7 @@ function Select({ field, value, onChange }: { field: FilterField; value: string;
                 onChange(val);
                 setOpen(false);
               }}
-              className={cn('cursor-pointer whitespace-nowrap px-3 py-1.5 text-sm hover:bg-action-soft', val === value ? 'font-bold text-action' : 'text-fg', !val && 'text-fg-muted')}
+              className={cn('cursor-pointer whitespace-nowrap px-ds-3 py-ds-2 text-ds-body-s hover:bg-action-soft', val === value ? 'font-bold text-action' : 'text-fg', !val && 'text-fg-muted')}
             >
               {label}
             </li>
@@ -81,7 +81,7 @@ export function FilterBar({ fields, applied, onApply }: FilterBarProps) {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-wrap items-center gap-ds-2">
       {fields.map((f) => {
         const value = draft[f.key] ?? '';
         const set = (v: string) => setDraft((d) => ({ ...d, [f.key]: v }));

@@ -12,7 +12,7 @@ export function Avatar({ name, color, size = 28 }: AvatarProps) {
   return (
     <span
       aria-hidden="true"
-      className="flex shrink-0 items-center justify-center rounded-full font-bold leading-none text-fg-inverse"
+      className="flex shrink-0 items-center justify-center rounded-ds-pill font-bold leading-none text-fg-inverse"
       style={{ width: size, height: size, background: color, fontSize: size * 0.4 }}
     >
       {initials(name)}

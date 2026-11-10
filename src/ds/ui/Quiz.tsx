@@ -63,24 +63,24 @@ export function Quiz({ open, title, questions, done, onComplete, onClose }: Quiz
   return (
     <Modal open={open} onClose={() => onClose(completed)} title={completed ? 'Completado' : title}>
       {completed ? (
-        <div className="px-2 pb-2 pt-4 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-success-bg">
+        <div className="px-ds-2 pb-ds-2 pt-ds-4 text-center">
+          <div className="mx-auto mb-ds-4 flex h-ds-10 w-ds-10 items-center justify-center rounded-ds-pill bg-success-bg">
             <Icon name="checkmark-filled" size={32} color="var(--color-success)" />
           </div>
-          <h3 className="mb-1.5 text-2xl font-bold leading-[26px] text-fg">{done.title}</h3>
-          <p className="mb-5 text-base text-fg-muted">{done.text}</p>
+          <h3 className="mb-ds-2 text-ds-subtitle font-bold leading-ds-subtitle text-fg">{done.title}</h3>
+          <p className="mb-ds-5 text-ds-body-s text-fg-muted">{done.text}</p>
           <Button variant="primary" className="mx-auto" onClick={() => onClose(true)}>{done.action}</Button>
         </div>
       ) : (
         <>
-          <div className="mb-3.5 flex items-center justify-between">
-            <span className="whitespace-nowrap text-xs font-semibold text-fg-muted">Pregunta {index + 1} de {questions.length}</span>
-            <span className="ml-3.5 h-1 flex-1 overflow-hidden rounded-sm bg-line" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round((index / questions.length) * 100)}>
-              <i className="block h-full bg-action transition-[width] duration-200" style={{ width: `${(index / questions.length) * 100}%` }} />
+          <div className="mb-ds-4 flex items-center justify-between">
+            <span className="whitespace-nowrap text-ds-caption font-semibold text-fg-muted">Pregunta {index + 1} de {questions.length}</span>
+            <span className="ml-ds-4 h-ds-1 flex-1 overflow-hidden rounded-ds-sm bg-line" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round((index / questions.length) * 100)}>
+              <i className="block h-full bg-action transition-all duration-ds-fast" style={{ width: `${(index / questions.length) * 100}%` }} />
             </span>
           </div>
-          <h3 className="mb-3.5 text-lg font-bold leading-[22px] text-fg">{item.q}</h3>
-          <div role="radiogroup" aria-label={item.q} className="flex flex-col gap-2">
+          <h3 className="mb-ds-4 text-ds-body-l font-bold leading-ds-body text-fg">{item.q}</h3>
+          <div role="radiogroup" aria-label={item.q} className="flex flex-col gap-ds-2">
             {item.opts.map((o, i) => {
               const state = phase === 'checked' ? (i === item.correct ? 'correct' : i === picked ? 'wrong' : 'idle') : i === picked ? 'selected' : 'idle';
               return (
@@ -92,7 +92,7 @@ export function Quiz({ open, title, questions, done, onComplete, onClose }: Quiz
                   disabled={phase === 'checked'}
                   onClick={() => setPicked(i)}
                   className={cn(
-                    'flex items-center gap-2.5 rounded-lg border px-3.5 py-3 text-left text-base text-fg transition-colors',
+                    'flex items-center gap-ds-3 rounded-ds-lg border px-ds-4 py-ds-3 text-left text-ds-body-s text-fg transition-colors',
                     state === 'idle' && 'border-line hover:border-focus hover:bg-action-soft',
                     state === 'selected' && 'border-action bg-action-soft',
                     state === 'correct' && 'border-success bg-success-bg',
@@ -101,28 +101,28 @@ export function Quiz({ open, title, questions, done, onComplete, onClose }: Quiz
                 >
                   <span
                     className={cn(
-                      'flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border-2',
+                      'flex h-ds-5 w-ds-5 shrink-0 items-center justify-center rounded-ds-pill border-2',
                       state === 'idle' && 'border-line-strong',
                       state === 'selected' && 'border-action',
                       state === 'correct' && 'border-success',
                       state === 'wrong' && 'border-danger-fg',
                     )}
                   >
-                    {state === 'selected' && <i className="h-[9px] w-[9px] rounded-full bg-action" />}
+                    {state === 'selected' && <i className="h-ds-2 w-ds-2 rounded-ds-pill bg-action" />}
                   </span>
                   {o}
                 </button>
               );
             })}
           </div>
-          <p role="status" className={cn('mb-1 mt-1.5 min-h-[18px] text-sm font-semibold', correct ? 'text-success' : 'text-danger-fg')}>
+          <p role="status" className={cn('mb-ds-1 mt-ds-2 min-h-ds-5 text-ds-body-s font-semibold', correct ? 'text-success' : 'text-danger-fg')}>
             {phase === 'checked' ? (correct ? '¡Correcto!' : 'No exactamente. Repasa este punto.') : ''}
           </p>
-          <div className="mt-3 flex justify-end">
+          <div className="mt-ds-3 flex justify-end">
             {phase === 'checked' ? (
               correct ? <Button variant="primary" onClick={next}>{last ? 'Finalizar' : 'Siguiente'}</Button> : <Button variant="primary" onClick={retry}>Intentar de nuevo</Button>
             ) : (
-              <Button variant="primary" disabled={picked === null} onClick={verify} className="disabled:pointer-events-none disabled:opacity-50">Verificar respuesta</Button>
+              <Button variant="primary" disabled={picked === null} onClick={verify} className="disabled:pointer-events-none disabled:opacity-ds-disabled">Verificar respuesta</Button>
             )}
           </div>
         </>

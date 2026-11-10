@@ -41,13 +41,13 @@ function Toast({ item, onDismiss }: { item: ToastItem; onDismiss: (id: number) =
   }, [item.id, onDismiss]);
 
   return (
-    <div role="status" className={`pointer-events-auto flex animate-[toast-in_.2s_ease_forwards] items-start gap-3 rounded-md border-l-[3px] bg-surface px-3.5 py-3 shadow-[0_2px_14px_rgba(0,0,0,.13),0_0_0_1px_rgba(0,0,0,.06)] ${BORDER[item.type]}`}>
+    <div role="status" className={`pointer-events-auto flex animate-ds-toast items-start gap-ds-3 rounded-ds-md border-l-ds-accent bg-surface px-ds-4 py-ds-3 shadow-ds-md ${BORDER[item.type]}`}>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={STROKE[item.type]} strokeWidth="2" className="mt-px shrink-0" aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICON[item.type] }} />
       <div className="min-w-0 flex-1">
-        <div className="mb-0.5 text-sm font-semibold text-fg">{item.title}</div>
-        {item.text && <div className="text-xs leading-[1.45] text-fg-muted">{item.text}</div>}
+        <div className="mb-ds-1 text-ds-body-s font-semibold text-fg">{item.title}</div>
+        {item.text && <div className="text-ds-caption leading-ds-caption text-fg-muted">{item.text}</div>}
       </div>
-      <button type="button" aria-label="Cerrar" onClick={() => onDismiss(item.id)} className="-mt-0.5 ml-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-[3px] text-fg-subtle hover:bg-canvas hover:text-fg">
+      <button type="button" aria-label="Cerrar" onClick={() => onDismiss(item.id)} className="-mt-ds-1 ml-ds-1 flex h-ds-5 w-ds-5 shrink-0 items-center justify-center rounded-ds-sm text-fg-subtle hover:bg-canvas hover:text-fg">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg>
       </button>
     </div>
@@ -65,7 +65,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={value}>
       {children}
-      <div className="pointer-events-none fixed right-4 top-4 z-[9999] flex w-[360px] max-w-[calc(100vw-32px)] flex-col gap-2" aria-live="polite">
+      <div className="pointer-events-none fixed right-ds-4 top-ds-4 z-ds-menu flex w-ds-drawer max-w-ds-viewport-inset flex-col gap-ds-2" aria-live="polite">
         {items.map((it) => (
           <Toast key={it.id} item={it} onDismiss={dismiss} />
         ))}

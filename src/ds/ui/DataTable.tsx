@@ -53,7 +53,7 @@ function Checkbox({ checked, indeterminate, onChange, label }: { checked: boolea
       aria-label={label}
       checked={checked}
       onChange={(e) => onChange(e.target.checked)}
-      className="h-3.5 w-3.5 cursor-pointer accent-focus"
+      className="h-ds-4 w-ds-4 cursor-pointer accent-focus"
     />
   );
 }
@@ -77,7 +77,7 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
     setSort((s) => (s?.key !== key ? { key, dir: 'asc' } : s.dir === 'asc' ? { key, dir: 'desc' } : null));
 
   if (rows.length === 0) {
-    return <p className="px-4 py-10 text-center text-sm text-fg-muted">{emptyMessage}</p>;
+    return <p className="px-ds-4 py-ds-8 text-center text-ds-body-s text-fg-muted">{emptyMessage}</p>;
   }
 
   const ids = rows.map(rowKey);
@@ -94,8 +94,8 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
     selection.onChange(next);
   };
 
-  const stickyHead = 'sticky right-0 z-[2] w-[82px] min-w-[82px] bg-surface-header px-1 text-center shadow-[-6px_0_12px_-6px_rgba(0,0,0,.14)]';
-  const stickyCell = 'sticky right-0 z-[1] w-[82px] min-w-[82px] bg-surface px-1 text-center shadow-[-6px_0_12px_-6px_rgba(0,0,0,.10)]';
+  const stickyHead = 'sticky right-0 z-ds-raised w-ds-10 min-w-ds-10 bg-surface-header px-ds-1 text-center shadow-ds-sm';
+  const stickyCell = 'sticky right-0 z-ds-base w-ds-10 min-w-ds-10 bg-surface px-ds-1 text-center shadow-ds-xs';
 
   return (
     <div className="relative">
@@ -103,18 +103,18 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
         <div
           role="toolbar"
           aria-label="Acciones masivas"
-          className="absolute inset-x-0 top-0 z-[5] flex h-[39px] items-center gap-3 border-b border-action-border-soft bg-action-soft pl-[52px] pr-4 animate-[bulk-in_.22s_ease]"
+          className="absolute inset-x-0 top-0 z-ds-float flex h-ds-7 items-center gap-ds-3 border-b border-action-border-soft bg-action-soft pl-ds-9 pr-ds-4 animate-ds-bulk"
         >
-          <span className="whitespace-nowrap text-sm font-semibold text-action-strong">{selectedCount} seleccionados</span>
-          <div className="flex items-center gap-1.5">{bulkActions}</div>
+          <span className="whitespace-nowrap text-ds-body-s font-semibold text-action-strong">{selectedCount} seleccionados</span>
+          <div className="flex items-center gap-ds-2">{bulkActions}</div>
         </div>
       )}
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-sm">
+        <table className="w-full border-collapse text-ds-body-s">
           <thead>
             <tr>
               {selection && (
-                <th scope="col" className="w-10 border-b border-line-strong bg-surface-header py-2.5 text-center">
+                <th scope="col" className="w-ds-control border-b border-line-strong bg-surface-header py-ds-3 text-center">
                   <Checkbox label="Seleccionar todo" checked={allSelected} indeterminate={selectedCount > 0 && !allSelected} onChange={setAll} />
                 </th>
               )}
@@ -125,11 +125,11 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
                     key={c.key}
                     scope="col"
                     aria-sort={active ? (active === 'asc' ? 'ascending' : 'descending') : undefined}
-                    className="whitespace-nowrap border-b border-line-strong bg-surface-header px-4 py-2.5 text-left text-sm font-bold text-fg"
+                    className="whitespace-nowrap border-b border-line-strong bg-surface-header px-ds-4 py-ds-3 text-left text-ds-body-s font-bold text-fg"
                   >
-                    <span className={cn('block transition-[opacity,transform] duration-200', bulkActive && 'translate-x-6 opacity-0')}>
+                    <span className={cn('block transition-all duration-ds-fast', bulkActive && 'translate-x-ds-6 opacity-0')}>
                       {c.sortValue ? (
-                        <button type="button" onClick={() => toggleSort(c.key)} className="inline-flex items-center gap-1.5 font-bold">
+                        <button type="button" onClick={() => toggleSort(c.key)} className="inline-flex items-center gap-ds-2 font-bold">
                           {c.header}
                           <SortIcon state={active} />
                         </button>
@@ -141,7 +141,7 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
                 );
               })}
               {rowActions && (
-                <th scope="col" className={cn(stickyHead, 'border-b border-line-strong py-2.5 text-sm font-bold')}>
+                <th scope="col" className={cn(stickyHead, 'border-b border-line-strong py-ds-3 text-ds-body-s font-bold')}>
                   Acciones
                 </th>
               )}
@@ -154,12 +154,12 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
               return (
                 <tr key={id} className={cn('group border-b border-line last:border-b-0', isSel ? 'bg-action-soft' : 'hover:bg-surface-subtle')}>
                   {selection && (
-                    <td className={cn('w-10 py-2.5 text-center', isSel && 'shadow-[inset_3px_0_0_var(--color-success)]')}>
+                    <td className={cn('w-ds-control py-ds-3 text-center', isSel && 'shadow-ds-inset-success')}>
                       <Checkbox label="Seleccionar fila" checked={isSel} onChange={(v) => setOne(id, v)} />
                     </td>
                   )}
                   {columns.map((c) => (
-                    <td key={c.key} className="whitespace-nowrap px-4 py-2.5 align-middle text-fg">
+                    <td key={c.key} className="whitespace-nowrap px-ds-4 py-ds-3 align-middle text-fg">
                       {c.render(row)}
                     </td>
                   ))}
@@ -178,7 +178,7 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
 
 export function AvatarCell({ name, color }: { name: string; color: string }) {
   return (
-    <span className="inline-flex items-center gap-2">
+    <span className="inline-flex items-center gap-ds-2">
       <Avatar name={name} color={color} />
       {name}
     </span>
@@ -187,11 +187,11 @@ export function AvatarCell({ name, color }: { name: string; color: string }) {
 
 export function ProgressCell({ value }: { value: number }) {
   return (
-    <span className="inline-flex items-center gap-2">
-      <span className="h-[5px] w-[72px] overflow-hidden rounded-full bg-surface-header" role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}>
-        <span className="block h-full rounded-full bg-action" style={{ width: `${value}%` }} />
+    <span className="inline-flex items-center gap-ds-2">
+      <span className="h-ds-1 w-ds-10 overflow-hidden rounded-ds-pill bg-surface-header" role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}>
+        <span className="block h-full rounded-ds-pill bg-action" style={{ width: `${value}%` }} />
       </span>
-      <span className="w-9 text-xs text-fg-secondary">{value}%</span>
+      <span className="w-ds-7 text-ds-caption text-fg-secondary">{value}%</span>
     </span>
   );
 }

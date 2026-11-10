@@ -52,14 +52,14 @@ export function ResumenPanel() {
     <>
       <FilterBar fields={FIELDS} applied={filters} onApply={setFilters} />
 
-      <div className="grid grid-cols-2 gap-3 min-[901px]:grid-cols-4">
+      <div className="grid grid-cols-2 gap-ds-3 ds-wide:grid-cols-4">
         <KpiCard icon="education" tone="info" label="Usuarios en capacitación" value={total} />
         <KpiCard icon="activity" tone="success" label="Usuarios activos" value={active} />
         <KpiCard icon="task-complete" tone="success" label="Completaron el programa" value={users.filter((u) => u.avance >= 100).length} />
         <KpiCard icon="time" tone="warning" label="Sin iniciar el programa" value={users.filter((u) => u.avance === 0).length} />
       </div>
 
-      <div className="grid gap-4 min-[901px]:grid-cols-2">
+      <div className="grid gap-ds-4 ds-wide:grid-cols-2">
         <Card>
           <CardTitle title="Estado de onboarding" />
           <Donut

@@ -13,10 +13,10 @@ interface VideoPlayerProps {
 }
 
 const Play = () => (
-  <svg viewBox="0 0 24 24" className="ml-[3px] h-[22px] w-[22px] fill-action" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+  <svg viewBox="0 0 24 24" className="ml-ds-1 h-ds-6 w-ds-6 fill-action" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
 );
 const Pause = () => (
-  <svg viewBox="0 0 24 24" className="h-[22px] w-[22px] fill-action" aria-hidden="true"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z" /></svg>
+  <svg viewBox="0 0 24 24" className="h-ds-6 w-ds-6 fill-action" aria-hidden="true"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z" /></svg>
 );
 
 /** Reproductor de video con estados idle / reproduciendo / pausado. Simula el avance mientras no haya un video real. */
@@ -43,22 +43,22 @@ export function VideoPlayer({ tag, duration, onFirstPlay, embedUrl, className }:
       type="button"
       onClick={toggle}
       aria-label={state === 'playing' ? `Pausar video: ${tag}` : `Reproducir video: ${tag}`}
-      className={cn('group relative flex aspect-video w-full items-center justify-center bg-gradient-to-br from-[#1B2C5C] to-action', className)}
+      className={cn('group relative flex aspect-video w-full items-center justify-center bg-gradient-to-br from-nav to-action', className)}
     >
-      <span className="absolute left-2.5 top-2.5 rounded-md bg-white/90 px-[9px] py-[5px] text-3xs font-bold uppercase leading-none tracking-wide text-action-strong">{tag}</span>
+      <span className="absolute left-ds-3 top-ds-3 rounded-ds-md bg-scrim-strong px-ds-2 py-ds-1 text-ds-caption font-bold uppercase leading-none tracking-ds-label text-action-strong">{tag}</span>
       <span
         className={cn(
-          'flex h-[52px] w-[52px] items-center justify-center rounded-full bg-white/95 shadow-[0_4px_14px_rgba(0,0,0,.25)] transition-opacity duration-200',
+          'flex h-ds-topbar w-ds-sidebar items-center justify-center rounded-ds-pill bg-scrim-opaque shadow-ds-md transition-opacity duration-ds-fast',
           state === 'playing' && 'opacity-0 group-hover:opacity-100',
         )}
       >
         {state === 'playing' ? <Pause /> : <Play />}
       </span>
-      <span className="absolute bottom-2.5 right-2.5 rounded bg-indigo/80 px-[7px] py-1 text-2xs font-medium leading-none text-fg-inverse">{duration}</span>
+      <span className="absolute bottom-ds-3 right-ds-3 rounded-ds-sm bg-indigo/80 px-ds-2 py-ds-1 text-ds-caption font-medium leading-none text-fg-inverse">{duration}</span>
       {state !== 'idle' && (
-        <span className="absolute inset-x-0 bottom-0 h-1 bg-white/30">
+        <span className="absolute inset-x-0 bottom-0 h-ds-1 bg-scrim-soft">
           <i
-            className="block h-full w-0 bg-white [animation:vfprog_14s_linear_forwards]"
+            className="block h-full w-0 bg-surface animate-ds-progress"
             style={{ animationPlayState: state === 'paused' ? 'paused' : 'running' }}
           />
         </span>

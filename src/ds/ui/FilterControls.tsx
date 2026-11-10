@@ -7,7 +7,7 @@ export function FilterButton({ onClick }: { onClick: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex h-8 min-w-16 shrink-0 items-center justify-center rounded-full border border-action bg-surface px-4 text-base font-bold text-action-text transition-colors hover:bg-action-soft active:bg-action-soft-hover"
+      className="inline-flex h-ds-7 min-w-ds-10 shrink-0 items-center justify-center rounded-ds-pill border border-action bg-surface px-ds-4 text-ds-body-s font-bold text-action-text transition-colors hover:bg-action-soft active:bg-action-soft-hover"
     >
       Filtrar
     </button>
@@ -22,7 +22,7 @@ export function ResetFiltersButton({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       title="Limpiar filtros"
       aria-label="Limpiar filtros"
-      className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-danger transition-colors hover:bg-danger-bg"
+      className="inline-flex h-ds-7 w-ds-7 shrink-0 items-center justify-center rounded-ds-pill text-danger transition-colors hover:bg-danger-bg"
     >
       <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor">
         <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" fill="none" stroke="currentColor" />
@@ -49,7 +49,7 @@ export function TextField({ value, placeholder, onChange, onEnter, className }: 
       aria-label={placeholder}
       onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
       onKeyDown={(e) => e.key === 'Enter' && onEnter?.()}
-      className={cn('h-10 min-w-[168px] flex-1 rounded-md border border-line-strong bg-surface px-3 text-sm text-fg outline-none placeholder:text-fg-muted hover:border-fg-subtle focus:border-action', className)}
+      className={cn('h-ds-control min-w-ds-menu flex-1 rounded-ds-md border border-line-strong bg-surface px-ds-3 text-ds-body-s text-fg outline-none placeholder:text-fg-muted hover:border-fg-subtle focus:border-action', className)}
     />
   );
 }
@@ -62,7 +62,7 @@ export function DateField({ value, placeholder, onChange }: { value: string; pla
       aria-label={placeholder}
       title={placeholder}
       onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
-      className={cn('h-10 min-w-[168px] flex-1 rounded-md border border-line-strong bg-surface px-3 text-sm outline-none hover:border-fg-subtle focus:border-action', value ? 'text-fg' : 'text-fg-muted')}
+      className={cn('h-ds-control min-w-ds-menu flex-1 rounded-ds-md border border-line-strong bg-surface px-ds-3 text-ds-body-s outline-none hover:border-fg-subtle focus:border-action', value ? 'text-fg' : 'text-fg-muted')}
     />
   );
 }
