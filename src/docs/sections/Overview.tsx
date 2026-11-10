@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card, CardHeader, CopyCode, Cm, Kw, Str, Tg, SectionHeader } from '../ui';
+import { useAuth } from '../auth';
 import changelog from '../content/sections/changelog.json';
 
 interface Overview {
@@ -41,6 +42,7 @@ function latestEntries(): Entry[] {
 const pill = 'inline-flex items-center gap-[5px] rounded-full px-[9px] py-0.5 text-[11px] font-semibold';
 
 export default function Overview({ data, onNavigate }: { data: Overview; onNavigate: (id: string) => void }) {
+  const { online } = useAuth();
   const d = data.dashboard;
   const warn = d?.a11yWarnings.filter((w) => w.severity === 'warning').length ?? 0;
   const info = d?.a11yWarnings.filter((w) => w.severity === 'info').length ?? 0;
@@ -63,7 +65,7 @@ export default function Overview({ data, onNavigate }: { data: Overview; onNavig
           {d?.stats.map((s) => (
             <div key={s.label} className="rounded-lg border border-n-3 bg-white px-5 py-[18px]">
               <div className="mb-1.5 text-[10px] font-medium uppercase tracking-[.07em] text-n-5">{s.label}</div>
-              <div className="text-[32px] font-bold leading-none text-n-7">{s.value}</div>
+              <div className="text-[32px] font-bold leading-none text-n-7">{s.label === 'Users on DS' && online != null ? online : s.value}</div>
               <div className="mt-[5px] text-[11px] text-n-5">{s.trend}</div>
             </div>
           ))}
