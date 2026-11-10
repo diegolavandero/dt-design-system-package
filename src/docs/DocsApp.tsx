@@ -5,6 +5,9 @@ import { I18nProvider, useI18n } from './i18n';
 import { Card, SectionHeader } from './ui';
 import Overview from './sections/Overview';
 import { Colors, Iconography, Radii, Shadows, Spacing, Typography } from './sections/Foundations';
+import { Inputs } from './sections/Components4';
+import { Tooltip } from './sections/Components3';
+import { Changelog, Charts, DataViz, Figma, Logos, ServiceUnits } from './sections/Data';
 import { Alerts, EmptyState, ImageUploader } from './sections/Components2';
 import { Brand, Voice, Buttons, Badges, Chips } from './sections/Components1';
 import './docs.css';
@@ -13,7 +16,7 @@ import './docs.css';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const RENDERERS: Record<string, ComponentType<any>> = {
   overview: Overview, colors: Colors, typography: Typography, spacing: Spacing, radii: Radii, shadows: Shadows, iconography: Iconography,
-  alerts: Alerts, imageUploader: ImageUploader, emptyState: EmptyState, brand: Brand, voice: Voice, buttons: Buttons, badges: Badges, chips: Chips,
+  alerts: Alerts, imageUploader: ImageUploader, emptyState: EmptyState, changelog: Changelog, charts: Charts, dataviz: DataViz, serviceunits: ServiceUnits, logos: Logos, figma: Figma, tooltip: Tooltip, inputs: Inputs, brand: Brand, voice: Voice, buttons: Buttons, badges: Badges, chips: Chips,
 };
 
 const loaders = import.meta.glob('./content/sections/**/*.json', { import: 'default' }) as Record<string, () => Promise<unknown>>;
