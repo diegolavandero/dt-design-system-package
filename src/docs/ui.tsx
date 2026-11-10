@@ -27,7 +27,7 @@ export function CardHeader({ title, meta, children }: { title?: ReactNode; meta?
   );
 }
 
-export function CopyCode({ text, children }: { text: string; children: ReactNode }) {
+export function CopyCode({ text, children, flat }: { text: string; children: ReactNode; flat?: boolean }) {
   const { t } = useI18n();
   const [done, setDone] = useState(false);
   const copy = () => {
@@ -36,7 +36,7 @@ export function CopyCode({ text, children }: { text: string; children: ReactNode
     setTimeout(() => setDone(false), 1500);
   };
   return (
-    <div className="relative overflow-x-auto rounded-md bg-[var(--doc-code-bg)] p-3.5 text-xs leading-[1.6] text-[var(--doc-code-fg)]">
+    <div className={cn('relative overflow-x-auto bg-[var(--doc-code-bg)] p-3.5 text-xs leading-[1.6] text-[var(--doc-code-fg)]', !flat && 'rounded-md')}>
       <button type="button" onClick={copy} className="absolute right-2 top-2 cursor-pointer rounded border border-white/10 bg-white/10 px-[9px] py-[3px] text-[10px] font-semibold text-white hover:bg-white/15">
         {done ? 'Copied!' : t('ui.copy', 'Copy')}
       </button>
@@ -74,3 +74,79 @@ export function CopySwatch({ value, className, style, children, title }: { value
     </div>
   );
 }
+
+/* ───────────── Piezas compartidas de los renderers de componentes ───────────── */
+
+/** `.code` suelto (codeBlock del original). */
+export function CodeBlock({ code, className, flat }: { code: string; className?: string; flat?: boolean }) {
+  return (
+    <div className={cn(flat ? '' : 'mb-3.5', className)}>
+      <CopyCode text={code}>{code}</CopyCode>
+    </div>
+  );
+}
+
+/** Tarjeta «How to call in pages» (usageCard). */
+export function UsageCard({ snippet }: { snippet?: string }) {
+  const { t } = useI18n();
+  if (!snippet) return null;
+  return (
+    <Card flush className="!mb-6">
+      <div className="flex items-center gap-2 border-b border-n-3 bg-[var(--doc-card-header)] px-4 py-2.5">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="var(--b6)"><path d="M10,6L8.59,7.41,13.17,12H4v2h9.17L8.59,18.59,10,20l7-7Zm12,8,7,7-1.41,1.41L22.83,18H32V16H22.83l4.76-4.59L26,10Z" /></svg>
+        <span className="text-xs font-bold text-n-7">{t('ui.howToCall', 'How to call in pages')}</span>
+      </div>
+      <div className="relative overflow-x-auto bg-[var(--doc-code-bg)] p-3.5 text-xs leading-[1.6] text-[var(--doc-code-fg)]">
+        <UsageCopy text={snippet} />
+        <pre>{snippet}</pre>
+      </div>
+    </Card>
+  );
+}
+function UsageCopy({ text }: { text: string }) {
+  const { t } = useI18n();
+  const [done, setDone] = useState(false);
+  return (
+    <button type="button" onClick={() => { navigator.clipboard?.writeText(text.trim()).catch(() => undefined); setDone(true); setTimeout(() => setDone(false), 1500); }} className="absolute right-2 top-2 cursor-pointer rounded border border-white/10 bg-white/10 px-[9px] py-[3px] text-[10px] font-semibold text-white hover:bg-white/15">
+      {done ? 'Copied!' : t('ui.copy', 'Copy')}
+    </button>
+  );
+}
+
+/** Tarjeta con pestañas (tabCard). */
+export function TabCard({ tabs }: { tabs: Array<{ label: ReactNode; content: ReactNode }> }) {
+  const [on, setOn] = useState(0);
+  return (
+    <Card flush>
+      <div className="flex border-b border-n-3 bg-[var(--doc-card-header)]">
+        {tabs.map((t, i) => (
+          <div key={i} onClick={() => setOn(i)} className={cn('cursor-pointer border-b-2 px-3.5 py-[9px] text-xs', i === on ? 'border-b-5 bg-white font-bold text-n-7' : 'border-transparent font-medium text-n-5')}>{t.label}</div>
+        ))}
+      </div>
+      <div>{tabs[on]?.content}</div>
+    </Card>
+  );
+}
+
+/** Banner `.bn` (in | ok | wr | er). */
+const BN = { in: 'bg-b-1 border-b-6', ok: 'bg-g-1 border-g-6', wr: 'bg-o-1 border-o-5', er: 'bg-r-1 border-r-6' } as const;
+export function Banner({ kind = 'in', children, className, noIcon }: { kind?: keyof typeof BN; children: ReactNode; className?: string; noIcon?: boolean }) {
+  return (
+    <div className={cn('mb-[7px] flex items-start gap-[9px] rounded border-l-[3px] px-3 py-[9px] text-xs leading-[1.4] text-n-7 last:mb-0', BN[kind], className)}>
+      {!noIcon && <svg className="mt-px shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--b6)" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>}
+      <span>{children}</span>
+    </div>
+  );
+}
+
+/** `.ttbl`: tabla de tokens. */
+export function TTable({ head, children }: { head: ReactNode[]; children: ReactNode }) {
+  return (
+    <table className="w-full border-collapse text-xs [&_tbody_tr:last-child_td]:border-0">
+      <thead><tr>{head.map((h, i) => <th key={i} className="border-b border-n-4 bg-n-2 px-2.5 py-2 text-left text-[11px] font-bold text-n-7">{h}</th>)}</tr></thead>
+      <tbody>{children}</tbody>
+    </table>
+  );
+}
+export const TCode = ({ children }: { children: ReactNode }) => <code className="rounded-[3px] bg-n-2 px-[5px] py-px font-doc text-[11px] font-medium">{children}</code>;
+export const Td = ({ children, className = '' }: { children?: ReactNode; className?: string }) => <td className={cn('border-b border-n-3 px-2.5 py-2 align-middle', className)}>{children}</td>;

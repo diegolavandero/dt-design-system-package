@@ -5,12 +5,15 @@ import { I18nProvider, useI18n } from './i18n';
 import { Card, SectionHeader } from './ui';
 import Overview from './sections/Overview';
 import { Colors, Iconography, Radii, Shadows, Spacing, Typography } from './sections/Foundations';
+import { Alerts, EmptyState, ImageUploader } from './sections/Components2';
+import { Brand, Voice, Buttons, Badges, Chips } from './sections/Components1';
 import './docs.css';
 
 /* Registro renderer → componente. Las secciones sin componente muestran el aviso de «pendiente de portar». */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const RENDERERS: Record<string, ComponentType<any>> = {
   overview: Overview, colors: Colors, typography: Typography, spacing: Spacing, radii: Radii, shadows: Shadows, iconography: Iconography,
+  alerts: Alerts, imageUploader: ImageUploader, emptyState: EmptyState, brand: Brand, voice: Voice, buttons: Buttons, badges: Badges, chips: Chips,
 };
 
 const loaders = import.meta.glob('./content/sections/**/*.json', { import: 'default' }) as Record<string, () => Promise<unknown>>;
