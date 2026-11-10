@@ -10,10 +10,11 @@ const ROUTES: Record<string, ComponentType> = {
   usuarios: UsersSettings,
   ayuda: HelpCenter,
   docs: Docs,
+  overview: Docs,
 };
 
 export default function App() {
-  const route = useHashRoute('monitoreo');
-  const Page = ROUTES[route] ?? TutorialMonitoring;
+  const route = useHashRoute('docs');
+  const Page = ROUTES[route] ?? Docs;
   return <Page />;
 }
