@@ -56,3 +56,49 @@ export function SettingsSidebar({ product, activeItem, children }: { product: Pa
 }
 
 export const cx = cn;
+
+/* ── Topbar: ayuda (dropdown fijo) y chip Capacitaciones ── */
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+
+export function TopbarHelp({ withCapacitaciones = true }: { withCapacitaciones?: boolean }) {
+  const [pos, setPos] = useState<{ top: number; right: number } | null>(null);
+  const ref = useRef<HTMLSpanElement>(null);
+  const dd = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!pos) return;
+    const h = (e: MouseEvent) => { if (!dd.current?.contains(e.target as Node) && !ref.current?.contains(e.target as Node)) setPos(null); };
+    const t = setTimeout(() => document.addEventListener('click', h), 0);
+    return () => { clearTimeout(t); document.removeEventListener('click', h); };
+  }, [pos]);
+  const item = (icon: string, label: string) => (
+    <div key={label} className="flex cursor-pointer items-center gap-2.5 px-4 py-2.5 hover:bg-n-1">
+      <span className="flex shrink-0"><Icon name={icon} size={16} color="var(--n5)" /></span><span className="text-[13px] font-medium text-n-7">{label}</span>
+    </div>
+  );
+  return (
+    <div className="relative flex items-center">
+      <span ref={ref} title="Ayuda" className="flex cursor-pointer items-center"
+        onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); setPos(pos ? null : { top: r.bottom + 8, right: window.innerWidth - r.right + 8 }); }}>
+        <Icon name="help" size={18} color="#fff" />
+      </span>
+      {pos && createPortal(
+        <div ref={dd} className="docs-root fixed z-[9999] min-w-[210px] overflow-hidden rounded-lg border border-n-3 bg-white shadow-[0_4px_16px_rgba(19,32,69,.14)]" style={{ top: pos.top, right: pos.right }}>
+          <div className="px-4 pb-1 pt-2 text-[10px] font-bold uppercase tracking-[.07em] text-n-5">Ayuda</div>
+          <div className="h-px bg-n-3" />
+          {item('help', 'Help Center')}{item('code', 'API Documentation')}{withCapacitaciones && item('education', 'Capacitaciones')}
+        </div>, document.body)}
+    </div>
+  );
+}
+
+export function CapChip({ total = 49, pct = 13, onClick }: { total?: number; pct?: number; onClick?: () => void }) {
+  return (
+    <button type="button" title="Capacitaciones" onClick={onClick} className="inline-flex h-[30px] shrink-0 cursor-pointer items-center gap-[7px] rounded-full border border-white/20 bg-white/10 px-[13px] text-xs font-bold leading-none text-white hover:bg-white/20">
+      <span className="flex shrink-0"><Icon name="education" size={16} color="#fff" /></span><span>{total} tutoriales · {pct}%</span>
+    </button>
+  );
+}
+
+/** Icono de campana con punto de alerta (`.bell`). */
+export const Bell = ({ children }: { children: ReactNode }) => <div className="relative flex items-center after:absolute after:-right-0.5 after:-top-0.5 after:h-[7px] after:w-[7px] after:rounded-full after:border-2 after:border-indigo after:bg-r-5 after:content-['']">{children}</div>;
