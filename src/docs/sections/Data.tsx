@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Card, CopyCode, SectionHeader, UsageCard, CopySwatch, isLight } from '../ui';
+import { Card, SectionHeader, UsageCard, CopySwatch, isLight } from '../ui';
 import { Btn } from './Components2';
 import { cn } from '@/ds/lib/cn';
 

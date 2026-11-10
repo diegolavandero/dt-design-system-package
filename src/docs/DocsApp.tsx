@@ -9,6 +9,7 @@ import { Colors, Iconography, Radii, Shadows, Spacing, Typography } from './sect
 import { Filters } from './sections/Components10';
 import { TablePage } from './sections/Pages1';
 import { FormPage } from './sections/Pages2';
+import { MapPins } from './sections/MapPins';
 import { Topbar as TopbarSection } from './sections/Components9';
 import { Sidebar as SidebarSection } from './sections/Components8';
 import { TableSection } from './sections/Components7';
@@ -25,7 +26,7 @@ import './docs.css';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const RENDERERS: Record<string, ComponentType<any>> = {
   overview: Overview, colors: Colors, typography: Typography, spacing: Spacing, radii: Radii, shadows: Shadows, iconography: Iconography,
-  alerts: Alerts, imageUploader: ImageUploader, emptyState: EmptyState, changelog: Changelog, charts: Charts, dataviz: DataViz, serviceunits: ServiceUnits, logos: Logos, figma: Figma, tooltip: Tooltip, inputs: Inputs, selection: Selection, modal: Modal, table: TableSection, sidebar: SidebarSection, topbar: TopbarSection, filters: Filters, tablepage: TablePage, formpage: FormPage, brand: Brand, voice: Voice, buttons: Buttons, badges: Badges, chips: Chips,
+  alerts: Alerts, imageUploader: ImageUploader, emptyState: EmptyState, changelog: Changelog, charts: Charts, dataviz: DataViz, serviceunits: ServiceUnits, logos: Logos, figma: Figma, tooltip: Tooltip, inputs: Inputs, selection: Selection, modal: Modal, table: TableSection, sidebar: SidebarSection, topbar: TopbarSection, filters: Filters, tablepage: TablePage, formpage: FormPage, mappins: MapPins, brand: Brand, voice: Voice, buttons: Buttons, badges: Badges, chips: Chips,
 };
 
 const loaders = import.meta.glob('./content/sections/**/*.json', { import: 'default' }) as Record<string, () => Promise<unknown>>;

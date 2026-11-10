@@ -1,6 +1,5 @@
 import { useState, type ReactNode } from 'react';
 import { SectionHeader } from '../ui';
-import { Icon } from '../icons';
 import { useI18n } from '../i18n';
 import { Switch } from './Components3';
 import { SettingsSidebar, type SbItem } from './shared';

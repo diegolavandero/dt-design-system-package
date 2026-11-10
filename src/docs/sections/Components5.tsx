@@ -100,15 +100,6 @@ function TabRows({ size }: { size: 'dense' | 'wide' }) {
     </div>
   ))}</>;
 }
-function TabPill({ size, st, badge }: { size: 'dense' | 'wide'; st: string; badge: boolean }) {
-  const w = size === 'dense' ? 74 : 98;
-  const style = st === 'selected' ? { background: '#fff', boxShadow: '0 1px 3px rgba(19,32,69,.1)' } : st === 'hover' ? { background: '#E1E6ED' } : st === 'focused' ? { background: '#fff', border: '1.5px solid #4B82FA', boxSizing: 'border-box' as const } : {};
-  return (
-    <div className="relative flex h-6 items-center justify-center rounded-xl text-xs font-bold leading-none text-n-7" style={{ width: w, ...style }}>
-      Section{badge && <span className="absolute -right-[5px] -top-2 z-[2] box-border flex h-4 items-center justify-center rounded-lg bg-r-6 px-1 text-[9px] font-bold leading-none text-white" style={{ minWidth: size === 'dense' ? 20 : 17 }}>3</span>}
-    </div>
-  );
-}
 const TOK: Array<[string, string, string]> = [['Container bg', '--n2', '#F0F2F5'], ['Container radius', '—', '16px (pill)'], ['Container padding', '—', '4px'], ['Dense tab width', '—', '74px'], ['Wide tab width', '—', '98px'], ['Tab height', '—', '24px'], ['Tab radius', '—', '12px'], ['Selected bg', '—', '#ffffff'], ['Hover bg', '--n3', '#E1E6ED'], ['Focused border', '--b5', '#4B82FA'], ['Badge bg', '--r6', '#DE350B'], ['Tab font', '—', '700 12px DM Sans']];
 const FU_CODE = `<!-- File uploader (no toggle) -->
 <div class="fu-wrap">

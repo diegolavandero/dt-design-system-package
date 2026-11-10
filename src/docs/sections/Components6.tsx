@@ -120,7 +120,7 @@ function BgTablePage() {
   );
 }
 
-function ModalBody({ p, mobile, shadow }: { p: NonNullable<ModalData['preview']>; mobile?: boolean; shadow?: string }) {
+function ModalBody({ p, mobile }: { p: NonNullable<ModalData['preview']>; mobile?: boolean }) {
   return (
     <>
       <div className="mb-1.5 flex items-start">
