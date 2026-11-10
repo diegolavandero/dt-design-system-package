@@ -135,7 +135,7 @@ function StateGrid({ type, filled }: { type: 'select' | 'multi'; filled: boolean
 const FragmentRow = ({ children }: { children: ReactNode }) => <>{children}</>;
 
 /* ───────────── Dropdowns interactivos ───────────── */
-function useOutside(open: boolean, close: () => void) {
+export function useOutside(open: boolean, close: () => void) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!open) return;
@@ -314,7 +314,7 @@ function Accept({ ready, onClick, className }: { ready: boolean; onClick?: () =>
   return <button type="button" disabled={!ready} onClick={onClick} className={cn('cursor-pointer rounded-[20px] border-0 text-sm font-bold text-white', ready ? 'bg-b-6' : 'bg-n-4', className)}>Aceptar</button>;
 }
 /** Calendario simple (popover). */
-function CalPopover({ init, onAccept }: { init: { m: number; y: number; sel?: string; start?: string; end?: string }; onAccept: (label: string) => void }) {
+export function CalPopover({ init, onAccept }: { init: { m: number; y: number; sel?: string; start?: string; end?: string }; onAccept: (label: string) => void }) {
   const c = useCal(init, 'single');
   const label = c.ms.view === 'month' ? String(c.ms.y) : `${MONTHS[c.ms.m - 1]} ${c.ms.y}`;
   return (

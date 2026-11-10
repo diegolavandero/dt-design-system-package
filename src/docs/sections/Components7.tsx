@@ -1,5 +1,6 @@
 import { createPortal } from 'react-dom';
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+export const BigBadgeCtx = createContext(false);
 import { Card, SectionHeader, TCode, Td, TTable, UsageCard } from '../ui';
 import { Icon } from '../icons';
 import { cn } from '@/ds/lib/cn';
@@ -77,6 +78,7 @@ const Two = ({ a, b, bc = 'text-n-5', first }: { a: string; b: string; bc?: stri
 function Td2({ cell, onSel }: { cell: Cell; onSel: (el: HTMLInputElement) => void }) {
   if (cell === null || cell === undefined) return <td className={TD} />;
   if (typeof cell !== 'object') return <td className={TD}>{String(cell)}</td>;
+  const big = useContext(BigBadgeCtx);
   const v = cell.value;
   switch (cell.type) {
     case 'checkbox': return <td className={cn(TD, '!min-w-[40px] !max-w-[40px] !w-[40px] !px-0 text-center')}><div className="flex items-center justify-center"><input type="checkbox" defaultChecked={!!v} onClick={(e) => onSel(e.currentTarget)} className="h-3.5 w-3.5 cursor-pointer accent-b-5" /></div></td>;
@@ -91,7 +93,7 @@ function Td2({ cell, onSel }: { cell: Cell; onSel: (el: HTMLInputElement) => voi
     case 'text-icon-error': return <td className={TD}><div className="flex items-center gap-1.5"><Icon name="close-filled" size={14} color="var(--r6)" /><span className="text-[13px] leading-[1.3] text-n-7">{v}</span></div><span className="mt-0.5 block text-[11px] leading-[1.3] text-r-6">{cell.error}</span></td>;
     case 'sub-header': return <td className={TD}><Two a={v ?? ''} b={cell.sub ?? cell.label ?? ''} first /></td>;
     case 'link': return <td className={cn(TD, 'cursor-pointer font-semibold text-b-7')}>{v}</td>;
-    case 'badge': return <td className={TD}><span className={cn('inline-flex h-[18px] items-center whitespace-nowrap rounded-[3px] px-1.5 text-[10px] font-semibold leading-none', MB[cell.variant] ?? 'bg-n-2 text-n-6')}>{v}</span></td>;
+    case 'badge': return <td className={TD}>{big ? <BadgeT label={v ?? ''} type={cell.variant || 'neutral'} /> : <span className={cn('inline-flex h-[18px] items-center whitespace-nowrap rounded-[3px] px-1.5 text-[10px] font-semibold leading-none', MB[cell.variant] ?? 'bg-n-2 text-n-6')}>{v}</span>}</td>;
     case 'number': return <td className={cn(TD, 'text-right tabular-nums')}>{String(v ?? '')}</td>;
     case 'text-secondary': return <td className={cn(TD, 'text-n-5')}>{v}</td>;
     case 'rating': return <td className={TD}><Stars value={v} /></td>;
@@ -108,7 +110,7 @@ function Td2({ cell, onSel }: { cell: Cell; onSel: (el: HTMLInputElement) => voi
 }
 
 const TH = 'whitespace-nowrap border-b border-n-4 bg-n-3 px-4 py-2.5 text-left text-[13px] font-bold text-n-7 min-w-[110px]';
-function DemoTable({ def }: { def: Def }) {
+export function DemoTable({ def }: { def: Def }) {
   const cols = def.columns ?? [], rows = def.rows ?? [];
   const isBulk = cols.some((c) => c.type === 'checkbox') && cols.some((c) => c.type === 'actions');
   const [sel, setSel] = useState<Set<number>>(new Set());
