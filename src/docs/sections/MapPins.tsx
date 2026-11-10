@@ -12,13 +12,13 @@ const ATTR = '© <a href="https://carto.com/">CARTO</a>';
 
 /* ── Pins SVG (para L.divIcon) ── */
 const PB = 'M16.5 1.5C24.78 1.5 31.5 8.22 31.5 16.5C31.5 21.44 29.11 25.82 25.43 28.55C22.61 30.67 18.58 34.04 17.66 39.48C17.56 40.05 17.08 40.5 16.5 40.5C15.92 40.5 15.44 40.05 15.34 39.48C14.42 34.04 10.39 30.67 7.56 28.55C3.88 25.82 1.5 21.44 1.5 16.5C1.5 8.22 8.22 1.5 16.5 1.5Z';
-const pinSvg = (fill: string, inner: string, sz: number) => {
+export const pinSvg = (fill: string, inner: string, sz: number) => {
   const h = Math.round((sz * 49) / 33);
   return `<div style="line-height:0;filter:drop-shadow(0 2px 3px rgba(19,32,69,.3))"><svg width="${sz}" height="${h}" viewBox="0 0 33 49"><path d="${PB}" fill="${fill}" stroke="#fff" stroke-width="2"/>${inner}</svg></div>`;
 };
-const orderPin = (n: number, color: string) => pinSvg(color, `<circle cx="16.5" cy="16.5" r="10.5" fill="#fff"/><text x="16.5" y="16.5" text-anchor="middle" dominant-baseline="central" font-family="DM Sans,sans-serif" font-weight="700" font-size="11" fill="#39414D">${n}</text>`, 30);
-const depotPin = () => pinSvg('#132045', '<path d="M24 18.17V16.5L22.75 10.67H9.83L9 16.5V18.17H9.83V23.17H18.17V18.17H21.5V23.17H23.17V18.17H24ZM16.5 21.5H11.5V18.17H16.5V21.5Z" fill="#fff"/>', 34);
-const mkIcon = (html: string, sz: number) => {
+export const orderPin = (n: number, color: string) => pinSvg(color, `<circle cx="16.5" cy="16.5" r="10.5" fill="#fff"/><text x="16.5" y="16.5" text-anchor="middle" dominant-baseline="central" font-family="DM Sans,sans-serif" font-weight="700" font-size="11" fill="#39414D">${n}</text>`, 30);
+export const depotPin = () => pinSvg('#132045', '<path d="M24 18.17V16.5L22.75 10.67H9.83L9 16.5V18.17H9.83V23.17H18.17V18.17H21.5V23.17H23.17V18.17H24ZM16.5 21.5H11.5V18.17H16.5V21.5Z" fill="#fff"/>', 34);
+export const mkIcon = (html: string, sz: number) => {
   const h = Math.round((sz * 49) / 33);
   return L.divIcon({ html, className: '', iconSize: [sz, h], iconAnchor: [Math.round(sz / 2), Math.round((h * 40.5) / 49)] });
 };
