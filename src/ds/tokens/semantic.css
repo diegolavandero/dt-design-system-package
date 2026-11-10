@@ -1,0 +1,42 @@
+/* Capa semántica del DS. Los componentes consumen SOLO estos tokens (vía clases Tailwind),
+ * nunca los primitivos (--n*, --b*…). Para tematizar (dark, otro producto) se redefine aquí. */
+:root {
+  /* Texto */
+  --color-fg: var(--n7);
+  --color-fg-secondary: var(--n6);
+  --color-fg-muted: var(--n5);
+  --color-fg-subtle: var(--n4-5);
+  --color-fg-inverse: var(--white);
+
+  /* Superficies */
+  --color-canvas: var(--n2);          /* fondo de página */
+  --color-surface: var(--white);      /* tarjetas, paneles */
+  --color-surface-subtle: var(--n1);  /* cabeceras de tarjeta, hover de fila */
+  --color-surface-header: var(--n3);  /* cabecera de tabla, pistas de progreso */
+
+  /* Bordes */
+  --color-line: var(--n3);
+  --color-line-strong: var(--n4);
+
+  /* Acción primaria */
+  --color-action: var(--b6);
+  --color-action-hover: var(--b7);
+  --color-action-text: var(--b5);     /* texto/ícono de botón outline */
+  --color-action-strong: var(--b7);   /* texto sobre fondo suave */
+  --color-action-soft: var(--b1);
+  --color-action-soft-hover: var(--b2);
+  --color-action-border-soft: var(--b3);
+  --color-action-selected: rgb(75 130 250 / .08);
+  --color-action-hover-soft: rgb(75 130 250 / .04);
+  --color-focus: var(--b5);
+
+  /* Estado: fondo / borde / texto */
+  --color-success-bg: var(--g1);  --color-success-border: var(--g3);  --color-success-fg: var(--g7);  --color-success: var(--g6);
+  --color-danger-bg: var(--r1);   --color-danger-border: var(--r3);   --color-danger-fg: var(--r6);   --color-danger: var(--r5);
+  --color-warning-bg: var(--o1);  --color-warning-border: var(--o3);  --color-warning-fg: var(--o7);  --color-warning: var(--o5);
+  --color-info-bg: var(--b1);     --color-info-border: var(--b3);     --color-info-fg: var(--b6);     --color-info: var(--b6);
+
+  /* Navegación */
+  --color-nav: var(--indigo);
+  --color-nav-selected: var(--b7);
+}

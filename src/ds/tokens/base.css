@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+  html,
+  body {
+    @apply bg-canvas font-sans text-base leading-normal text-fg;
+  }
+  button,
+  input,
+  select {
+    font-family: inherit;
+  }
+}
+
+@layer utilities {
+  /* Scrollbar de tabla: visible solo al pasar el cursor (patrón del DS) */
+  .scroll-hover::-webkit-scrollbar { height: 5px; }
+  .scroll-hover::-webkit-scrollbar-thumb { background: transparent; border-radius: 3px; }
+  .scroll-hover::-webkit-scrollbar-track { background: transparent; }
+  .scroll-hover:hover::-webkit-scrollbar-thumb { background: var(--color-line-strong); }
+  .scroll-hover:hover::-webkit-scrollbar-track { background: var(--color-surface-subtle); }
+}
+
+@keyframes bulk-in {
+  from { opacity: 0; transform: translateX(-28px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+@keyframes vfprog { to { width: 100%; } }
