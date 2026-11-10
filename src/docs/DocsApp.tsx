@@ -3,7 +3,7 @@ import { cn } from '@/ds/lib/cn';
 import { NAV, type NavItem } from './nav';
 import { I18nProvider, useI18n } from './i18n';
 import { Card, SectionHeader } from './ui';
-import { AuthGate, useAuth } from './auth';
+import { AuthGate } from './auth';
 import Overview from './sections/Overview';
 import { Colors, Iconography, Radii, Shadows, Spacing, Typography } from './sections/Foundations';
 import { Filters } from './sections/Components10';
@@ -97,7 +97,6 @@ function Search({ onPick }: { onPick: (id: string) => void }) {
 
 function Topbar({ onPick }: { onPick: (id: string) => void }) {
   const { lang, setLang } = useI18n();
-  const { email, signOut } = useAuth();
   return (
     <header className="sticky top-0 z-[100] flex h-[52px] items-center gap-4 bg-indigo px-[22px]">
       <div className="flex shrink-0 items-center"><img src={LOGO} height={18} alt="DispatchTrack" style={{ height: 18 }} /></div>
@@ -112,12 +111,6 @@ function Topbar({ onPick }: { onPick: (id: string) => void }) {
           <button key={l} type="button" aria-pressed={lang === l} onClick={() => setLang(l)}
             className={cn('cursor-pointer border-0 px-2.5 text-[11px] font-semibold tracking-[.04em]', lang === l ? 'bg-white/[.18] text-white' : 'bg-transparent text-white/70 hover:bg-white/[.08] hover:text-white')}>{l.toUpperCase()}</button>
         ))}
-      </div>
-      <div className="ml-1 flex items-center gap-2 border-l border-white/15 pl-3 max-[940px]:hidden">
-        <span className="max-w-[160px] truncate text-[11px] text-white/60">{email}</span>
-        <button type="button" onClick={signOut} title="Sign out" className="inline-flex h-7 cursor-pointer items-center gap-[5px] rounded-md border border-white/[.18] bg-transparent px-2.5 text-[11px] font-semibold text-white/80 hover:bg-white/[.08] hover:text-white">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" /></svg>Sign out
-        </button>
       </div>
     </header>
   );
