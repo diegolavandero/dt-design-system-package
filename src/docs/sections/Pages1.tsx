@@ -30,8 +30,9 @@ const NAV: SbItem[] = [
   { icon: 'store', label: 'Retiro en tienda' }, { icon: 'document-import', label: 'Importar' }, { divider: true }, { icon: 'settings', label: 'Ajustes' },
 ];
 /** Sidebar colapsada (52px) que se expande al hover; plana con borde derecho. */
-export function PageSidebar({ activeNav = 'document-multiple', isAdmin }: { activeNav?: string; isAdmin?: boolean }) {
-  const items = isAdmin ? [...NAV, { icon: 'education', label: 'Monitoreo de tutoriales' }] : NAV;
+export function PageSidebar({ activeNav = 'document-multiple', isAdmin, nav }: { activeNav?: string; isAdmin?: boolean; nav?: SbItem[] }) {
+  const base = nav ?? NAV;
+  const items = isAdmin ? [...base, { icon: 'education', label: 'Monitoreo de tutoriales' }] : base;
   return (
     <div className="group/sb w-[52px] shrink-0 cursor-default overflow-hidden border-r border-n-3 bg-white py-2 transition-[width] duration-[250ms] ease-[cubic-bezier(.4,0,.2,1)] hover:w-60">
       {items.map((it, i) => {
