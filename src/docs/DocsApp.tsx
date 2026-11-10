@@ -10,6 +10,8 @@ import { Filters } from './sections/Components10';
 import { TablePage } from './sections/Pages1';
 import { FormPage } from './sections/Pages2';
 import { MapPins } from './sections/MapPins';
+import { Backlog, Drafts } from './sections/Pages3';
+import { useDrafts } from './drafts-store';
 import { Topbar as TopbarSection } from './sections/Components9';
 import { Sidebar as SidebarSection } from './sections/Components8';
 import { TableSection } from './sections/Components7';
@@ -26,7 +28,7 @@ import './docs.css';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const RENDERERS: Record<string, ComponentType<any>> = {
   overview: Overview, colors: Colors, typography: Typography, spacing: Spacing, radii: Radii, shadows: Shadows, iconography: Iconography,
-  alerts: Alerts, imageUploader: ImageUploader, emptyState: EmptyState, changelog: Changelog, charts: Charts, dataviz: DataViz, serviceunits: ServiceUnits, logos: Logos, figma: Figma, tooltip: Tooltip, inputs: Inputs, selection: Selection, modal: Modal, table: TableSection, sidebar: SidebarSection, topbar: TopbarSection, filters: Filters, tablepage: TablePage, formpage: FormPage, mappins: MapPins, brand: Brand, voice: Voice, buttons: Buttons, badges: Badges, chips: Chips,
+  alerts: Alerts, imageUploader: ImageUploader, emptyState: EmptyState, changelog: Changelog, charts: Charts, dataviz: DataViz, serviceunits: ServiceUnits, logos: Logos, figma: Figma, tooltip: Tooltip, inputs: Inputs, selection: Selection, modal: Modal, table: TableSection, sidebar: SidebarSection, topbar: TopbarSection, filters: Filters, tablepage: TablePage, formpage: FormPage, mappins: MapPins, backlog: Backlog, drafts: Drafts, brand: Brand, voice: Voice, buttons: Buttons, badges: Badges, chips: Chips,
 };
 
 const loaders = import.meta.glob('./content/sections/**/*.json', { import: 'default' }) as Record<string, () => Promise<unknown>>;
@@ -135,6 +137,7 @@ const STATUS: Record<string, { key: string; label: string; cls: string }> = {
 
 function Sidebar({ activeId, tab, onTab, onNavigate }: { activeId: string; tab: 'desktop' | 'mobile'; onTab: (t: 'desktop' | 'mobile') => void; onNavigate: (id: string) => void }) {
   const { t } = useI18n();
+  const pending = useDrafts().drafts.filter((d) => d.status === 'pending').length;
   return (
     <aside className="sidebar-scroll sticky top-[52px] max-h-[calc(100vh-52px)] w-64 shrink-0 self-start overflow-y-auto border-r border-n-3 bg-white py-3.5 max-[940px]:static max-[940px]:max-h-none max-[940px]:w-full max-[940px]:border-b max-[940px]:border-r-0">
       <div role="tablist" className="sticky top-0 z-[6] flex gap-1 border-b border-n-3 bg-white px-3 pb-2 pt-2.5">
@@ -156,6 +159,7 @@ function Sidebar({ activeId, tab, onTab, onNavigate }: { activeId: string; tab: 
                 className={cn('flex items-center gap-2 border-l-[3px] px-5 py-1.5 text-[13px] font-medium text-n-7 hover:bg-n-1 hover:no-underline', active ? 'border-b-5 bg-b-1 font-bold hover:bg-b-1' : 'border-transparent')}>
                 <NavIcon item={item} className={cn('h-3.5 w-3.5 shrink-0', active ? 'text-b-6' : 'text-n-5')} />
                 <span className="min-w-0 truncate">{t(item.i18n, item.label)}</span>
+                {item.id === 'drafts' && pending > 0 && <span className="ml-auto rounded-full bg-o-5 px-1.5 text-[9px] font-bold leading-4 text-white">{pending}</span>}
                 {st && (
                   <span className={cn('ml-auto inline-flex h-4 shrink-0 items-center gap-[3px] rounded-full px-[5px] text-[9px] font-bold leading-none tracking-[.02em]', st.cls)}>
                     <svg width="7" height="7" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="3" /></svg>{st.label}
