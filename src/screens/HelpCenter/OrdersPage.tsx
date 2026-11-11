@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import {
-  Badge, Button, DataTable, EmptyState, FilterBar, Icon, LinkText, Pagination, RowMenu, VideoPlayer,
+  Badge, Button, DataTable, EmptyState, FilterBar, Icon, IconButton, LinkText, Pagination, RowMenu, VideoPlayer,
   type Column, type FilterField,
 } from '@/ds';
 import { ORDERS, SECTION, SECTION_TUTORIAL_ID, type Order } from './data';
@@ -79,9 +79,7 @@ export function OrdersPage({ hc, empty, notify }: OrdersPageProps) {
           <h1 className="text-ds-subtitle font-bold leading-none text-fg">Órdenes/guías</h1>
           <p className="mt-ds-1 flex items-center gap-ds-2 text-ds-body-s leading-ds-body text-fg-muted">
             Revisa el estado de las distintas órdenes y sus clientes.
-            <button type="button" onClick={() => hc.openTutorial(SECTION_TUTORIAL_ID)} title="Ver tutorial de Órdenes" aria-label="Ver tutorial de Órdenes" className="inline-flex shrink-0 text-action transition-opacity hover:opacity-ds-muted">
-              <Icon name="education" size={18} />
-            </button>
+            <IconButton icon="education" label="Ver tutorial de Órdenes" onClick={() => hc.openTutorial(SECTION_TUTORIAL_ID)} />
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-ds-3">

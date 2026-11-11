@@ -1,6 +1,6 @@
 import {
-  ArticleBody, ArticleCard, ArticleFeedback, ArticleHeader, Badge, Breadcrumb, Button, Drawer, Icon, LinkList, ListRow,
-  ProgressRing, RelatedItem, RelatedList, StepIcon, StepList, VideoPlayer, type Crumb,
+  ArticleBody, ArticleCard, ArticleFeedback, ArticleHeader, Badge, Breadcrumb, Button, Drawer, LinkList, ListRow,
+  ProgressRing, RelatedItem, RelatedList, StatusIcon, StepList, VideoPlayer, type Crumb, type StatusIconState,
 } from '@/ds';
 import type { Tutorial, TutorialStatus } from './catalog';
 import { ARTICLES, SECTION, authorColor, tutorialArticleBlocks, tutorialArticles, tutorialDescription } from './data';
@@ -20,18 +20,8 @@ const Label = ({ children, first }: { children: string; first?: boolean }) => (
 const TutorialBadge = ({ t }: { t: Tutorial }) =>
   t.status === 'completado' || t.done ? <Badge variant="success">Completado</Badge> : t.status === 'en-progreso' || t.videoSeen ? <Badge variant="info">En progreso</Badge> : <Badge variant="neutral">Pendiente</Badge>;
 
-function StatusIndicator({ status }: { status: TutorialStatus }) {
-  if (status === 'completado') return <Icon name="checkmark-filled" size={18} color="var(--color-success)" />;
-  if (status === 'en-progreso') {
-    return (
-      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-        <circle cx="8" cy="8" r="6" fill="none" stroke="var(--color-line)" strokeWidth="2" />
-        <circle cx="8" cy="8" r="6" fill="none" stroke="var(--color-action)" strokeWidth="2" strokeLinecap="round" strokeDasharray="37.7" strokeDashoffset="18.85" transform="rotate(-90 8 8)" />
-      </svg>
-    );
-  }
-  return <StepIcon done={false} />;
-}
+const STATE: Record<TutorialStatus, StatusIconState> = { pendiente: 'pending', 'en-progreso': 'progress', completado: 'done' };
+const StatusIndicator = ({ status }: { status: TutorialStatus }) => <StatusIcon state={STATE[status]} />;
 
 /** Bloque «video + progreso + cuestionario» compartido por la ayuda de sección y los tutoriales. */
 function LearningBlock(props: {
