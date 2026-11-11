@@ -52,7 +52,7 @@ function Screen() {
         onClose={() => hc.setAnnounce(false)}
        
         title={NEW_FEATURE.name}
-        header={<Badge variant="info">Nueva función</Badge>}
+        header={<div className="flex flex-col items-start gap-ds-2"><Badge variant="info">Nueva función</Badge><h2 className="text-ds-subtitle font-bold leading-ds-subtitle text-fg">{NEW_FEATURE.name}</h2></div>}
         footer={
           <>
             <Button icon="task-complete" onClick={() => { hc.setAnnounce(false); hc.startFeatureQuiz(); }}>Prueba tus conocimientos</Button>
@@ -60,7 +60,6 @@ function Screen() {
           </>
         }
       >
-        <h3 className="mb-ds-4 mt-ds-1 text-ds-subtitle font-bold leading-ds-subtitle text-fg">{NEW_FEATURE.name}</h3>
         <div className="overflow-hidden rounded-ds-xl border border-line"><VideoPlayer tag={NEW_FEATURE.name} duration={NEW_FEATURE.videoDur} /></div>
         <p className="mb-ds-1 mt-ds-4 text-ds-body-s leading-ds-body text-fg-muted">{NEW_FEATURE.desc}</p>
       </Modal>
