@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { cn } from '@/ds/lib/cn';
-import { DateField, FilterButton, ResetFiltersButton, TextField } from './FilterControls';
+import { DatePicker } from './DatePicker';
+import { FilterButton, ResetFiltersButton, TextField } from './FilterControls';
 
 export interface FilterField {
   key: string;
@@ -38,18 +39,18 @@ function Select({ field, value, onChange }: { field: FilterField; value: string;
         aria-controls={listId}
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          'flex h-ds-control w-full items-center justify-between gap-ds-2 rounded-ds-md border bg-surface px-ds-3 text-ds-body-s',
-          open ? 'border-action' : 'border-line-strong hover:border-fg-subtle',
+          'box-border flex h-ds-7 w-full items-center justify-between gap-ds-2 rounded-ds-md border px-ds-3 text-ds-body-s leading-ds-body',
+          open ? 'border-2 border-action bg-surface' : cn('hover:bg-canvas', value ? 'border-fg-muted bg-surface' : 'border-line bg-surface'),
           value ? 'text-fg' : 'text-fg-secondary',
         )}
       >
         <span className="truncate">{value || field.placeholder}</span>
         <svg width="10" height="10" viewBox="0 0 32 32" aria-hidden="true" className={cn('shrink-0 transition-transform', open && 'rotate-180')}>
-          <path d="M16 22L6 12l1.4-1.4L16 19.2l8.6-8.6L26 12z" fill="var(--color-fg-secondary)" />
+          <path d="M16 22L6 12l1.4-1.4L16 19.2l8.6-8.6L26 12z" fill="var(--color-fg-muted)" />
         </svg>
       </button>
       {open && (
-        <ul id={listId} role="listbox" className="absolute left-0 top-ds-8 z-ds-nav max-h-ds-list min-w-full overflow-auto rounded-ds-md border border-line bg-surface py-ds-1 shadow-ds-md">
+        <ul id={listId} role="listbox" className="absolute left-0 top-full z-ds-dropdown mt-ds-1 max-h-ds-list min-w-full overflow-auto rounded-ds-md border border-line bg-surface py-ds-1 shadow-ds-md">
           {[{ label: field.placeholder, val: '' }, ...(field.options ?? []).map((o) => ({ label: o, val: o }))].map(({ label, val }) => (
             <li
               key={label}
@@ -59,7 +60,7 @@ function Select({ field, value, onChange }: { field: FilterField; value: string;
                 onChange(val);
                 setOpen(false);
               }}
-              className={cn('cursor-pointer whitespace-nowrap px-ds-3 py-ds-2 text-ds-body-s hover:bg-action-soft', val === value ? 'font-bold text-action' : 'text-fg', !val && 'text-fg-muted')}
+              className={cn('flex h-ds-cell cursor-pointer items-center whitespace-nowrap px-ds-3 text-ds-body-s leading-ds-body hover:bg-action-soft hover:text-action-strong', val === value ? 'font-bold text-action' : 'text-fg', !val && 'text-fg-muted')}
             >
               {label}
             </li>
@@ -86,7 +87,7 @@ export function FilterBar({ fields, applied, onApply }: FilterBarProps) {
         const value = draft[f.key] ?? '';
         const set = (v: string) => setDraft((d) => ({ ...d, [f.key]: v }));
         if (f.type === 'text') return <TextField key={f.key} placeholder={f.placeholder} value={value} onChange={set} onEnter={() => onApply(draft)} />;
-        if (f.type === 'date') return <DateField key={f.key} placeholder={f.placeholder} value={value} onChange={set} />;
+        if (f.type === 'date') return <DatePicker key={f.key} placeholder={f.placeholder} value={value} onChange={set} />;
         return <Select key={f.key} field={f} value={value} onChange={set} />;
       })}
       <FilterButton onClick={() => onApply(draft)} />

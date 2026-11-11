@@ -5,7 +5,7 @@ const semantic = (name) => `var(--color-${name})`;
 /** Dimensiones nombradas (layout.css) que se suman a la escala `ds-1…ds-10` en width/height/min/max. */
 const sizes = () => ({
   ...Object.fromEntries([...Array(10)].map((_, i) => [`ds-${i + 1}`, `var(--space-${i + 1})`])),
-  'ds-topbar': 'var(--size-topbar)', 'ds-control': 'var(--size-control)', 'ds-nav-bar': 'var(--size-nav-bar)', 'ds-nav-icon': 'var(--size-nav-icon)', 'ds-logo': 'var(--size-logo)', 'ds-sidebar': 'var(--size-sidebar)', 'ds-sidebar-open': 'var(--size-sidebar-open)', 'ds-slot': 'var(--size-slot)',
+  'ds-topbar': 'var(--size-topbar)', 'ds-control': 'var(--size-control)', 'ds-badge': 'var(--size-badge)', 'ds-actions': 'var(--size-actions)', 'ds-col-min': 'var(--size-col-min)', 'ds-cell': 'var(--size-cell)', 'ds-calendar': 'var(--size-calendar)', 'ds-nav-bar': 'var(--size-nav-bar)', 'ds-nav-icon': 'var(--size-nav-icon)', 'ds-logo': 'var(--size-logo)', 'ds-sidebar': 'var(--size-sidebar)', 'ds-sidebar-open': 'var(--size-sidebar-open)', 'ds-slot': 'var(--size-slot)',
   'ds-drawer': 'var(--size-drawer)', 'ds-modal': 'var(--size-modal)', 'ds-modal-wide': 'var(--size-modal-wide)', 'ds-readable': 'var(--size-readable)',
   'ds-menu': 'var(--size-menu)', 'ds-popover': 'var(--size-popover)', 'ds-list': 'var(--size-list)', 'ds-settings-nav': 'var(--size-settings-nav)',
   'ds-main': 'var(--size-main)', 'ds-viewport-inset': 'var(--size-viewport-inset)',
@@ -62,7 +62,7 @@ module.exports = {
         'ds-base': 'var(--z-base)', 'ds-raised': 'var(--z-raised)', 'ds-float': 'var(--z-float)', 'ds-sticky': 'var(--z-sticky)', 'ds-nav': 'var(--z-nav)',
         'ds-dropdown': 'var(--z-dropdown)', 'ds-overlay': 'var(--z-overlay)', 'ds-fab': 'var(--z-fab)', 'ds-drawer': 'var(--z-drawer)', 'ds-toast': 'var(--z-toast)', 'ds-menu': 'var(--z-menu)',
       },
-      transitionDuration: { 'ds-fast': 'var(--motion-fast)', 'ds-base': 'var(--motion-base)' },
+      transitionDuration: { 'ds-chart': 'var(--motion-chart)', 'ds-fast': 'var(--motion-fast)', 'ds-base': 'var(--motion-base)' },
       opacity: { 'ds-disabled': 'var(--opacity-disabled)', 'ds-muted': 'var(--opacity-muted)' },
       screens: { 'ds-wide': '901px' },
       width: sizes(), minWidth: sizes(), maxWidth: sizes(), height: sizes(), minHeight: sizes(), maxHeight: sizes(),
@@ -75,6 +75,7 @@ module.exports = {
       },
       animation: {
         'ds-toast': 'toast-in var(--motion-fast) ease forwards',
+        'ds-rise': 'ds-rise var(--motion-base) ease-out both',
         'ds-bulk': 'bulk-in var(--motion-fast) ease',
         'ds-progress': 'vfprog var(--motion-video) linear forwards',
       },

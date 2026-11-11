@@ -1,13 +1,13 @@
 import type { ChangeEvent } from 'react';
 import { cn } from '@/ds/lib/cn';
 
-/** Botón «Filtrar» del DS (píldora outline). */
+/** Botón «Filtrar» del DS (píldora outline de 32px). */
 export function FilterButton({ onClick }: { onClick: () => void }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex h-ds-7 min-w-ds-10 shrink-0 items-center justify-center rounded-ds-pill border border-action bg-surface px-ds-4 text-ds-body-s font-bold text-action-text transition-colors hover:bg-action-soft active:bg-action-soft-hover"
+      className="inline-flex h-ds-7 min-w-ds-10 shrink-0 items-center justify-center whitespace-nowrap rounded-ds-pill border border-action bg-surface px-ds-4 text-ds-body-s font-bold leading-ds-body text-action-text transition-colors hover:bg-action-soft active:bg-action-soft-hover"
     >
       Filtrar
     </button>
@@ -49,20 +49,7 @@ export function TextField({ value, placeholder, onChange, onEnter, className }: 
       aria-label={placeholder}
       onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
       onKeyDown={(e) => e.key === 'Enter' && onEnter?.()}
-      className={cn('h-ds-control min-w-ds-menu flex-1 rounded-ds-md border border-line-strong bg-surface px-ds-3 text-ds-body-s text-fg outline-none placeholder:text-fg-muted hover:border-fg-subtle focus:border-action', className)}
-    />
-  );
-}
-
-export function DateField({ value, placeholder, onChange }: { value: string; placeholder: string; onChange: (value: string) => void }) {
-  return (
-    <input
-      type="date"
-      value={value}
-      aria-label={placeholder}
-      title={placeholder}
-      onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
-      className={cn('h-ds-control min-w-ds-menu flex-1 rounded-ds-md border border-line-strong bg-surface px-ds-3 text-ds-body-s outline-none hover:border-fg-subtle focus:border-action', value ? 'text-fg' : 'text-fg-muted')}
+      className={cn('box-border h-ds-7 min-w-ds-menu flex-1 rounded-ds-md border bg-surface px-ds-3 text-ds-body-s leading-ds-body text-fg outline-none placeholder:text-fg-secondary hover:bg-canvas focus:border-2 focus:border-action focus:bg-action-soft', value ? 'border-fg-muted' : 'border-line', className)}
     />
   );
 }

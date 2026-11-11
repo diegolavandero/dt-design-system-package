@@ -1,6 +1,8 @@
 /** API pública del design system. Las pantallas importan SOLO desde '@/ds'. */
 export * from './icons/Icon';
 export * from './lib/cn';
+export * from './lib/AnimatedNumber';
+export * from './lib/useAnimatedNumber';
 export * from './lib/vizPalette';
 export * from './lib/useHashRoute';
 
@@ -16,6 +18,7 @@ export * from './ui/Drawer';
 export * from './ui/EmptyState';
 export * from './ui/FilterBar';
 export * from './ui/FilterControls';
+export * from './ui/DatePicker';
 export * from './ui/KpiCard';
 export * from './ui/ListRow';
 export * from './ui/Modal';

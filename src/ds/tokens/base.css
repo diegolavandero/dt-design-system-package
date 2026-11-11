@@ -36,3 +36,5 @@
   * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 @keyframes vfprog { to { width: 100%; } }
+
+@keyframes ds-rise { from { opacity: 0; transform: translateY(var(--space-2)); } to { opacity: 1; transform: none; } }

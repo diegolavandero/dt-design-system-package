@@ -8,6 +8,12 @@
   --size-nav-icon: calc(var(--size-sidebar) - var(--size-nav-bar)); /* 46px: columna del ícono */
   --size-logo: 18px;        /* alto del logo en Topbar desktop (spec Topbar) */
   --radius-nav: var(--space-6); /* esquina inferior derecha del sidebar expandido */
+  /* Medidas de componentes tomadas de la spec del DS (Table, Filters, Calendar) */
+  --size-badge: 22px;
+  --size-actions: 82px;   /* columna fija de acciones */
+  --size-col-min: 110px;  /* ancho mínimo de columna */
+  --size-cell: 36px;      /* opción de lista y día del calendario */
+  --size-calendar: 300px;
   --size-topbar: var(--topbar-h);        /* topbar.json: 52 */
   --size-sidebar: 52px;                  /* sidebar.json: colapsado */
   --size-sidebar-open: 240px;            /* sidebar.json: expandido (hover) */
@@ -36,6 +42,8 @@
   /* Movimiento */
   --motion-fast: 200ms;
   --motion-base: 300ms;
+  --motion-chart: 1000ms; /* entrada de gráficos: relleno de donut, barras y conteo de números */
+  --motion-stagger: 80ms;
   --motion-video: 14s;
 
   /* Capas (de menor a mayor) */

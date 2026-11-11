@@ -53,10 +53,10 @@ export function ResumenPanel() {
       <FilterBar fields={FIELDS} applied={filters} onApply={setFilters} />
 
       <div className="grid grid-cols-2 gap-ds-3 ds-wide:grid-cols-4">
-        <KpiCard icon="education" tone="info" label="Usuarios en capacitación" value={total} />
-        <KpiCard icon="activity" tone="success" label="Usuarios activos" value={active} />
-        <KpiCard icon="task-complete" tone="success" label="Completaron el programa" value={users.filter((u) => u.avance >= 100).length} />
-        <KpiCard icon="time" tone="warning" label="Sin iniciar el programa" value={users.filter((u) => u.avance === 0).length} />
+        <KpiCard icon="education" tone="info" label="Usuarios en capacitación" value={total} index={0} />
+        <KpiCard icon="activity" tone="success" label="Usuarios activos" value={active} index={1} />
+        <KpiCard icon="task-complete" tone="success" label="Completaron el programa" value={users.filter((u) => u.avance >= 100).length} index={2} />
+        <KpiCard icon="time" tone="warning" label="Sin iniciar el programa" value={users.filter((u) => u.avance === 0).length} index={3} />
       </div>
 
       <div className="grid gap-ds-4 ds-wide:grid-cols-2">

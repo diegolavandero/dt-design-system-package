@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { cn } from '@/ds/lib/cn';
 import { Avatar } from './Avatar';
+import { useEntered } from '@/ds/lib/useAnimatedNumber';
 
 export interface Column<T> {
   key: string;
@@ -53,7 +54,7 @@ function Checkbox({ checked, indeterminate, onChange, label }: { checked: boolea
       aria-label={label}
       checked={checked}
       onChange={(e) => onChange(e.target.checked)}
-      className="h-ds-4 w-ds-4 cursor-pointer accent-focus"
+      className="h-ds-4 w-ds-4 cursor-pointer accent-action"
     />
   );
 }
@@ -94,8 +95,8 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
     selection.onChange(next);
   };
 
-  const stickyHead = 'sticky right-0 z-ds-raised w-ds-10 min-w-ds-10 bg-surface-header px-ds-1 text-center shadow-ds-sm';
-  const stickyCell = 'sticky right-0 z-ds-base w-ds-10 min-w-ds-10 bg-surface px-ds-1 text-center shadow-ds-xs';
+  const stickyHead = 'sticky right-0 z-ds-raised w-ds-actions min-w-ds-actions max-w-ds-actions border-l border-line-strong bg-surface-header px-ds-1 text-center shadow-ds-sm';
+  const stickyCell = 'sticky right-0 z-ds-base w-ds-actions min-w-ds-actions max-w-ds-actions border-l border-line bg-surface px-ds-1 text-center shadow-ds-xs';
 
   return (
     <div className="relative">
@@ -110,12 +111,12 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
         </div>
       )}
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-ds-body-s">
+        <table className="w-auto min-w-full border-collapse text-ds-body-s text-fg">
           <thead>
             <tr>
               {selection && (
-                <th scope="col" className="w-ds-control border-b border-line-strong bg-surface-header py-ds-3 text-center">
-                  <Checkbox label="Seleccionar todo" checked={allSelected} indeterminate={selectedCount > 0 && !allSelected} onChange={setAll} />
+                <th scope="col" className="w-ds-control min-w-ds-control max-w-ds-control border-b border-line-strong bg-surface-header px-0 py-ds-2 text-center">
+                  <span className="flex items-center justify-center"><Checkbox label="Seleccionar todo" checked={allSelected} indeterminate={selectedCount > 0 && !allSelected} onChange={setAll} /></span>
                 </th>
               )}
               {columns.map((c) => {
@@ -125,7 +126,7 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
                     key={c.key}
                     scope="col"
                     aria-sort={active ? (active === 'asc' ? 'ascending' : 'descending') : undefined}
-                    className="whitespace-nowrap border-b border-line-strong bg-surface-header px-ds-4 py-ds-3 text-left text-ds-body-s font-bold text-fg"
+                    className="min-w-ds-col-min whitespace-nowrap border-b border-line-strong bg-surface-header px-ds-4 py-ds-2 text-left text-ds-body-s font-bold text-fg"
                   >
                     <span className={cn('block transition-all duration-ds-fast', bulkActive && 'translate-x-ds-6 opacity-0')}>
                       {c.sortValue ? (
@@ -141,7 +142,7 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
                 );
               })}
               {rowActions && (
-                <th scope="col" className={cn(stickyHead, 'border-b border-line-strong py-ds-3 text-ds-body-s font-bold')}>
+                <th scope="col" className={cn(stickyHead, 'border-b border-line-strong py-ds-2 text-ds-body-s font-bold')}>
                   Acciones
                 </th>
               )}
@@ -152,18 +153,18 @@ export function DataTable<T>({ columns, rows, rowKey, emptyMessage, selection, b
               const id = rowKey(row);
               const isSel = !!selection?.selected.has(id);
               return (
-                <tr key={id} className={cn('group border-b border-line last:border-b-0', isSel ? 'bg-action-soft' : 'hover:bg-surface-subtle')}>
+                <tr key={id} className={cn('group border-b border-line last:border-b-0', isSel ? 'bg-action-soft' : 'hover:bg-canvas')}>
                   {selection && (
-                    <td className={cn('w-ds-control py-ds-3 text-center', isSel && 'shadow-ds-inset-success')}>
-                      <Checkbox label="Seleccionar fila" checked={isSel} onChange={(v) => setOne(id, v)} />
+                    <td className={cn('w-ds-control min-w-ds-control max-w-ds-control px-0 py-ds-2 text-center', isSel && 'shadow-ds-inset-success')}>
+                      <span className="flex items-center justify-center"><Checkbox label="Seleccionar fila" checked={isSel} onChange={(v) => setOne(id, v)} /></span>
                     </td>
                   )}
                   {columns.map((c) => (
-                    <td key={c.key} className="whitespace-nowrap px-ds-4 py-ds-3 align-middle text-fg">
+                    <td key={c.key} className="min-w-ds-col-min whitespace-nowrap px-ds-4 py-ds-2 align-middle text-fg">
                       {c.render(row)}
                     </td>
                   ))}
-                  {rowActions && <td className={cn(stickyCell, isSel && '!bg-action-soft')}>{rowActions(row)}</td>}
+                  {rowActions && <td className={cn(stickyCell, 'py-ds-2', isSel && '!bg-action-soft')}>{rowActions(row)}</td>}
                 </tr>
               );
             })}
@@ -186,10 +187,11 @@ export function AvatarCell({ name, color }: { name: string; color: string }) {
 }
 
 export function ProgressCell({ value }: { value: number }) {
+  const entered = useEntered();
   return (
     <span className="inline-flex items-center gap-ds-2">
       <span className="h-ds-1 w-ds-10 overflow-hidden rounded-ds-pill bg-surface-header" role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}>
-        <span className="block h-full rounded-ds-pill bg-action" style={{ width: `${value}%` }} />
+        <span className="block h-full rounded-ds-pill bg-action transition-all duration-ds-chart ease-out" style={{ width: entered ? `${value}%` : '0%' }} />
       </span>
       <span className="w-ds-7 text-ds-caption text-fg-secondary">{value}%</span>
     </span>
