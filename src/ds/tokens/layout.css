@@ -64,6 +64,7 @@
   --opacity-muted: .7;
 
   /* Superpuestos translúcidos sobre fondos oscuros / media */
+  --color-scrim-dark: color-mix(in srgb, var(--indigo) 72%, transparent);
   --color-scrim-soft: rgb(255 255 255 / .3);
   --color-scrim-strong: rgb(255 255 255 / .9);
   --color-scrim-opaque: rgb(255 255 255 / .95);

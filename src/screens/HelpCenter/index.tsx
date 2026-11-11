@@ -1,26 +1,21 @@
 import { useState } from 'react';
-import { AppShell, Badge, Button, Icon, Modal, ProgressChip, Quiz, Tabs, ToastProvider, VideoPlayer, useToast } from '@/ds';
+import { AppShell, Badge, Button, Icon, Modal, ProgressChip, Quiz, ToastProvider, VideoPlayer, useDemoControls, useToast } from '@/ds';
 import { HelpDrawer } from './HelpDrawer';
 import { OrdersPage } from './OrdersPage';
 import { NEW_FEATURE } from './data';
 import { useHelpCenter } from './useHelpCenter';
 
-/** Controles solo de prototipo: alternan estados y disparan eventos de demostración. */
-function DemoToggle({ empty, setEmpty, onAnnounce, onAddTutorial }: { empty: boolean; setEmpty: (v: boolean) => void; onAnnounce: () => void; onAddTutorial: () => void }) {
-  return (
-    <div className="fixed bottom-ds-4 left-ds-4 z-ds-fab flex items-center gap-ds-3 rounded-ds-pill border border-dashed border-line-strong bg-surface py-ds-1 pl-ds-4 pr-ds-2 text-ds-caption font-semibold text-fg-muted shadow-ds-sm">
-      <span>Demo:</span>
-      <Tabs items={[{ label: 'Con datos' }, { label: 'Nuevo usuario' }]} value={empty ? 1 : 0} onChange={(i) => setEmpty(i === 1)} />
-      <Button onClick={onAnnounce}>Anuncio función nueva</Button>
-      <Button onClick={onAddTutorial} icon="add">Tutorial nuevo</Button>
-    </div>
-  );
-}
-
 function Screen() {
   const hc = useHelpCenter();
   const notify = useToast();
   const [empty, setEmpty] = useState(false);
+
+  /** Variantes de demo: las dispara la página que aloja el prototipo, no el diseño. */
+  useDemoControls(({ control, value }) => {
+    if (control === 'state') setEmpty(value === 'new-user');
+    if (control === 'announce') hc.setAnnounce(true);
+    if (control === 'add-tutorial') hc.addTutorial();
+  });
 
   return (
     <>
@@ -70,8 +65,7 @@ function Screen() {
         <p className="mb-ds-1 mt-ds-4 text-ds-body-s leading-ds-body text-fg-muted">{NEW_FEATURE.desc}</p>
       </Modal>
 
-      <DemoToggle empty={empty} setEmpty={setEmpty} onAnnounce={() => hc.setAnnounce(true)} onAddTutorial={hc.addTutorial} />
-    </>
+          </>
   );
 }
 

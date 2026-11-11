@@ -40,7 +40,7 @@ module.exports = {
         warning: { DEFAULT: semantic('warning'), bg: semantic('warning-bg'), border: semantic('warning-border'), fg: semantic('warning-fg') },
         info: { DEFAULT: semantic('info'), bg: semantic('info-bg'), border: semantic('info-border'), fg: semantic('info-fg') },
         nav: { DEFAULT: semantic('nav'), selected: semantic('nav-selected'), hover: semantic('nav-hover'), line: semantic('nav-line') },
-        scrim: { soft: semantic('scrim-soft'), strong: semantic('scrim-strong'), opaque: semantic('scrim-opaque') },
+        scrim: { dark: semantic('scrim-dark'), soft: semantic('scrim-soft'), strong: semantic('scrim-strong'), opaque: semantic('scrim-opaque') },
       },
       fontFamily: { sans: ['var(--font-sans)'], doc: ['var(--font-doc)'] },
       // Escala tipográfica del DS (reemplaza a la de Tailwind a propósito: el producto trabaja en 11–24 px).

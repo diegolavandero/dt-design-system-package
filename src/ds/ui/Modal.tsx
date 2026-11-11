@@ -39,7 +39,7 @@ export function Modal({ open, onClose, title, header, size = 'md', children, foo
 
   return createPortal(
     <div className="fixed inset-0 z-ds-toast flex items-center justify-center p-ds-4">
-      <div className="absolute inset-0 bg-indigo/45" onClick={onClose} aria-hidden="true" />
+      <div className="absolute inset-0 bg-scrim-dark" onClick={onClose} aria-hidden="true" />
       <div
         ref={ref}
         role="dialog"

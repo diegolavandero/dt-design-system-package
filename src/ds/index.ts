@@ -5,6 +5,7 @@ export * from './lib/AnimatedNumber';
 export * from './lib/useAnimatedNumber';
 export * from './lib/vizPalette';
 export * from './lib/useHashRoute';
+export * from './lib/useDemoControls';
 
 export * from './ui/Article';
 export * from './ui/Avatar';

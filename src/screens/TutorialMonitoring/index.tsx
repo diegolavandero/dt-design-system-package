@@ -1,4 +1,4 @@
-import { AppShell, Icon, Tabs, type TabItem } from '@/ds';
+import { AppShell, Icon, Tabs, useDemoControls, type TabItem } from '@/ds';
 import { useState } from 'react';
 import { ResumenPanel } from './ResumenPanel';
 import { TutorialPanel } from './TutorialPanel';
@@ -55,28 +55,15 @@ function Monitoring({ isAdmin }: { isAdmin: boolean }) {
   );
 }
 
-/** Interruptor de demo: alterna entre vista administrador y usuario sin acceso. */
-function DemoToggle({ isAdmin, onChange }: { isAdmin: boolean; onChange: (v: boolean) => void }) {
-  return (
-    <div className="fixed bottom-ds-3 left-ds-10 z-ds-dropdown flex items-center gap-ds-2 rounded-ds-pill border border-line bg-surface px-ds-3 py-ds-2 text-ds-caption shadow-ds-sm">
-      <span className="text-fg-muted">Ver como:</span>
-      {([true, false] as const).map((v) => (
-        <button key={String(v)} type="button" onClick={() => onChange(v)} aria-pressed={isAdmin === v} className={isAdmin === v ? 'font-bold text-action' : 'text-fg-secondary hover:text-fg'}>
-          {v ? 'Administrador' : 'Usuario'}
-        </button>
-      ))}
-    </div>
-  );
-}
-
 export default function TutorialMonitoring() {
   const [isAdmin, setIsAdmin] = useState(true);
+  /** Variante de demo: la dispara la página que aloja el prototipo, no el diseño. */
+  useDemoControls(({ control, value }) => { if (control === 'role') setIsAdmin(value !== 'user'); });
   return (
     <>
       <AppShell selected="Monitoreo de tutoriales" showMonitoring={isAdmin}>
         <Monitoring isAdmin={isAdmin} />
       </AppShell>
-      <DemoToggle isAdmin={isAdmin} onChange={setIsAdmin} />
     </>
   );
 }
