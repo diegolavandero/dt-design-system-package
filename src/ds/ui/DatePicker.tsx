@@ -4,6 +4,8 @@ import { cn } from '@/ds/lib/cn';
 const MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 const MONTHS_SHORT = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 const WEEKDAYS = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+/** Claves únicas por día (martes y miércoles comparten inicial en español) para la capa de idioma. */
+const WEEKDAY_KEYS = ['L', 'M1', 'M2', 'J', 'V', 'S', 'D'];
 const pad = (n: number) => String(n).padStart(2, '0');
 const iso = (y: number, m: number, d: number) => `${y}-${pad(m)}-${pad(d)}`;
 const toLabel = (v: string) => v.split('-').reverse().join('/');
@@ -85,7 +87,7 @@ export function DatePicker({ value, placeholder, onChange }: DatePickerProps) {
               </div>
             ) : (
               <div className="grid grid-cols-7 gap-px">
-                {WEEKDAYS.map((d, i) => <div key={i} className="pb-ds-1 text-center text-ds-caption font-semibold text-fg-muted">{d}</div>)}
+                {WEEKDAYS.map((d, i) => <div key={i} data-i18n={`wd:${WEEKDAY_KEYS[i]}`} className="pb-ds-1 text-center text-ds-caption font-semibold text-fg-muted">{d}</div>)}
                 {Array.from({ length: first }, (_, i) => <div key={`e${i}`} />)}
                 {Array.from({ length: days }, (_, i) => {
                   const d = iso(year, month, i + 1);

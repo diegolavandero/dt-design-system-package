@@ -5,6 +5,9 @@ import './ds/tokens/semantic.css';
 import './ds/tokens/layout.css';
 import './ds/tokens/base.css';
 import App from './App';
+import { installLocale } from './i18n';
+
+installLocale();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

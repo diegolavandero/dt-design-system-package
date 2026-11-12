@@ -83,7 +83,7 @@ export function OrdersPage({ hc, empty, notify }: OrdersPageProps) {
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-ds-3">
-          <Button icon="download">Exportar a excel</Button>
+          <Button icon="download">Exportar a Excel</Button>
           <Button variant="primary" icon="add">Nueva orden</Button>
         </div>
       </div>
