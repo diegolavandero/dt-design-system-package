@@ -121,7 +121,7 @@ export const EN: Record<string, string> = {
   'Reportería': 'Reporting',
 
   /* ── Centro de ayuda: página de órdenes ── */
-  'Órdenes/guías': 'Orders/waybills',
+  'Órdenes/guías': 'Orders',
   'Revisa el estado de las distintas órdenes y sus clientes.': 'Review the status of your orders and their customers.',
   'Nueva orden': 'New order',
   'Tipo de fecha': 'Date type',
@@ -167,7 +167,7 @@ export const EN: Record<string, string> = {
   'Centro de ayuda': 'Help center',
   'Video de la sección': 'Section video',
   'Video del tutorial': 'Tutorial video',
-  'Cómo trabajar con Órdenes/guías': 'How to work with Orders/waybills',
+  'Cómo trabajar con Órdenes/guías': 'How to work with Orders',
   'Aprende cómo ingresar al módulo de Órdenes, revisar una orden en detalle y entender su historial paso a paso.':
     'Learn how to open the Orders module, review an order in detail and understand its history step by step.',
   'Ver el video de la sección': 'Watch the section video',
@@ -202,7 +202,7 @@ export const EN: Record<string, string> = {
   'Prueba tus conocimientos': 'Test your knowledge',
   'Ir a': 'Go to',
   'Ahora puedes guardar tus combinaciones de filtros más usadas en Órdenes/guías y volver a aplicarlas con un clic. Crea una vista, ponle nombre y reutilízala sin repetir la búsqueda cada vez.':
-    'You can now save your most-used filter combinations in Orders/waybills and reapply them with one click. Create a view, name it and reuse it without repeating the search every time.',
+    'You can now save your most-used filter combinations in Orders and reapply them with one click. Create a view, name it and reuse it without repeating the search every time.',
 
   /* ── Quiz ── */
   Pregunta: 'Question',
@@ -238,7 +238,7 @@ export const EN: Record<string, string> = {
   'Para eliminar órdenes en lote': 'To delete orders in bulk',
   'Para cambiar el idioma de la app': 'To change the app language',
   '¿Dónde aplicas un filtro guardado?': 'Where do you apply a saved filter?',
-  'En la barra de filtros de Órdenes/guías': 'In the Orders/waybills filter bar',
+  'En la barra de filtros de Órdenes/guías': 'In the Orders filter bar',
   'Solo desde la app móvil': 'Only from the mobile app',
   '¿Qué deberías hacer al terminar este tutorial?': 'What should you do after finishing this tutorial?',
   'Aplicar lo aprendido en tu operación': 'Apply what you learned in your operation',
@@ -266,9 +266,9 @@ export const EN: Record<string, string> = {
   'En esta vista puedes revisar todo lo que ocurrió con una orden desde que se creó: cambios de estado, reasignaciones, ediciones y eventos de entrega, registrados por los usuarios web y por la app móvil.':
     'In this view you can review everything that happened to an order since it was created: status changes, reassignments, edits and delivery events, recorded by web users and by the mobile app.',
   'Acceder al historial': 'Open the history',
-  'En la tabla de <b>Órdenes/guías</b>, ubica la orden que quieres revisar.': 'In the <b>Orders/waybills</b> table, find the order you want to review.',
+  'En la tabla de <b>Órdenes/guías</b>, ubica la orden que quieres revisar.': 'In the <b>Orders</b> table, find the order you want to review.',
   'Abre el menú de acciones (⋮) al final de la fila y selecciona <b>Trazabilidad</b>.': 'Open the actions menu (⋮) at the end of the row and select <b>Traceability</b>.',
-  'Tabla de Órdenes/guías → menú de acciones → Trazabilidad': 'Orders/waybills table → actions menu → Traceability',
+  'Tabla de Órdenes/guías → menú de acciones → Trazabilidad': 'Orders table → actions menu → Traceability',
   'Vista del historial': 'History view',
   'El historial se muestra como una línea de tiempo con los colores del semáforo según el tipo de evento:': 'The history is shown as a timeline with traffic-light colors depending on the event type:',
   '<b>Verde</b>: la orden avanzó (creada, asignada o entregada).': '<b>Green</b>: the order moved forward (created, assigned or delivered).',
