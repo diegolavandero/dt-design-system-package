@@ -10,7 +10,7 @@ export default function UnifiedRouting() {
   const p = usePlanner();
   const [layout, setLayout] = useState<'split' | 'table' | 'map'>('split');
   return (
-    <ToastProvider>
+    <ToastProvider closeLabel="Close">
       <AppShell selected="Rutas" topbar={{ tenant: 'ACME CO' }}>
         <div className="flex h-full min-h-0 flex-col bg-surface">
           {p.step < 3 ? (

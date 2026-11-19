@@ -29,6 +29,7 @@ export * from './ui/ProgressRing';
 export * from './ui/IconButton';
 export * from './ui/StatusIcon';
 export * from './ui/Quiz';
+export * from './ui/Select';
 export * from './ui/RowMenu';
 export * from './ui/StepList';
 export * from './ui/Tabs';

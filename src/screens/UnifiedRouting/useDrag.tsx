@@ -11,8 +11,8 @@ export interface DragPayload {
   /** Ruta de origen (vehicleId) o «unassigned». */
   from: string;
 }
-/** `route:VEH01` · `unassigned` · `card:VEH01:3` (insertar antes o después de la tarjeta 3). */
-export type DropTarget = { kind: 'route'; vehicleId: string } | { kind: 'unassigned' } | { kind: 'slot'; vehicleId: string; index: number };
+/** `route:VEH01` · `unassigned` · `selected` · `card:VEH01:3` (insertar antes o después de la tarjeta 3). */
+export type DropTarget = { kind: 'route'; vehicleId: string } | { kind: 'unassigned' } | { kind: 'selected' } | { kind: 'slot'; vehicleId: string; index: number };
 
 interface DragState {
   payload: DragPayload;
@@ -41,6 +41,7 @@ function targetAt(x: number, y: number): { t: DropTarget | null; key: string | n
   const [kind, a, b] = raw.split(':');
   if (kind === 'route') return { t: { kind: 'route', vehicleId: a }, key: raw, blocked };
   if (kind === 'unassigned') return { t: { kind: 'unassigned' }, key: raw, blocked };
+  if (kind === 'selected') return { t: { kind: 'selected' }, key: raw, blocked };
   if (kind === 'card') {
     const r = el.getBoundingClientRect();
     const index = Number(b) + (y > r.top + r.height / 2 ? 1 : 0);
@@ -114,7 +115,7 @@ export function DragProvider({ children, onDrop }: { children: ReactNode; onDrop
             <span className="inline-block h-ds-3 w-ds-3 shrink-0 rounded-ds-pill" style={{ background: `var(${drag.payload.color})` }} />
             <span className="whitespace-nowrap">{drag.payload.label}</span>
             <span className={drag.blocked ? 'whitespace-nowrap text-danger-fg' : 'whitespace-nowrap text-action-text'}>
-              {drag.blocked ? '· Route is locked' : drag.over ? '· Release to move here' : '· Drop on a route or between stops'}
+              {drag.blocked ? '· Route is locked' : drag.over ? '· Release to move here' : '· Drop on a route, Selected or between stops'}
             </span>
             <RtIcon name="move" size={14} color="var(--color-fg-muted)" />
           </div>,

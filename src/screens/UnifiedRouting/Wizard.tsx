@@ -1,8 +1,9 @@
 import { useMemo, useState, type ReactNode } from 'react';
-import { Badge, DataTable, FilterBar, cn, useToast, type Column } from '@/ds';
-import { ORDERS, PARAMETERS, VEHICLES, fmtTime, type Order, type Vehicle } from './data';
+import { Badge, DataTable, FilterBar, Select, cn, useToast, type Column } from '@/ds';
+import { ORDERS, PARAMETERS, VEHICLES, fmtMoney, fmtNum, fmtTime, sumAmount, sumOrderCap, sumVehicleCap, type Order, type Vehicle } from './data';
 import { RouteMap, type MapPin, type MapVehicle } from './RouteMap';
-import { Checkbox, Hint, LabeledSelect, Pill, RtIcon, Sep } from './parts';
+import { Bullet, Checkbox, Hint, Pill, RtIcon, Sep } from './parts';
+import { ViewMenu } from './ViewMenu';
 import type { Planner } from './usePlanner';
 
 const STEPS = [
@@ -12,25 +13,87 @@ const STEPS = [
 ];
 
 /* ── Riel izquierdo: pasos del asistente ── */
-function StepCard({ n, title, state, onClick }: { n: number; title: string; state: 'active' | 'done' | 'todo'; onClick?: () => void }) {
+function StepCard({ n, title, state, onClick, summary }: { n: number; title: string; state: 'active' | 'done' | 'todo'; onClick?: () => void; summary?: ReactNode }) {
   const body = (
-    <span className={cn('flex w-full items-center gap-ds-2 rounded-ds-lg px-ds-3 py-ds-3 text-left transition-colors', state === 'active' ? 'bg-action-soft' : 'bg-surface-subtle', state === 'done' && 'hover:bg-action-soft')}>
-      {state === 'done' ? (
-        <RtIcon name="checkmark-filled" size={22} color="var(--color-action)" />
-      ) : (
-        <span className={cn('flex h-ds-6 w-ds-6 shrink-0 items-center justify-center rounded-ds-pill text-ds-caption font-bold text-fg-inverse', state === 'active' ? 'bg-action' : 'bg-line-strong')}>{n}</span>
-      )}
-      <span className={cn('min-w-0 flex-1 whitespace-nowrap text-ds-body-s font-bold', state === 'todo' ? 'text-fg-subtle' : 'text-action-text')}>{title}</span>
-      {state === 'active' && <RtIcon name="arrow-right" size={18} color="var(--color-fg)" />}
+    <span className={cn('flex w-full flex-col rounded-ds-lg px-ds-3 py-ds-3 text-left transition-colors', state === 'active' ? 'bg-action-soft' : 'bg-surface-subtle', state === 'done' && 'group-hover:bg-action-soft')}>
+      <span className="flex w-full items-center gap-ds-2">
+        {state === 'done' ? (
+          <RtIcon name="checkmark-filled" size={24} color="var(--color-action)" />
+        ) : (
+          <span className={cn('flex h-ds-6 w-ds-6 shrink-0 items-center justify-center rounded-ds-pill text-ds-caption font-bold', state === 'active' ? 'bg-action text-fg-inverse' : 'bg-line-strong text-fg-secondary')}>{n}</span>
+        )}
+        <span className={cn('min-w-0 flex-1 whitespace-nowrap text-ds-body-s font-bold', state === 'todo' ? 'text-fg-secondary' : 'text-action-strong')}>{title}</span>
+        {state === 'active' && <RtIcon name="arrow-right" size={18} color="var(--color-fg)" />}
+      </span>
+      {summary && <span className="mt-ds-1 block text-ds-caption leading-ds-caption text-fg">{summary}</span>}
     </span>
   );
   if (state !== 'done') return <div aria-current={state === 'active' ? 'step' : undefined}>{body}</div>;
   return (
-    <Hint text={`Go back to “${title}”. Your choices are kept.`} side="right">
-      <button type="button" onClick={onClick} className="w-full">
+    <Hint text={`Go back to “${title}”. Your choices are kept.`} side="right" block>
+      <button type="button" onClick={onClick} className="group w-full rounded-ds-lg text-left">
         {body}
       </button>
     </Hint>
+  );
+}
+
+/** Línea de resumen en caption con viñetas; un valor en rojo avisa que las órdenes superan la capacidad de los vehículos. */
+function SummaryLine({ items }: { items: ReactNode[] }) {
+  return (
+    <span className="flex flex-wrap items-center gap-x-ds-2">
+      {items.map((it, i) => (
+        <span key={i} className="inline-flex items-center gap-ds-2 whitespace-nowrap">
+          {i > 0 && <Bullet />}
+          {it}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function CapValue({ n, used, max }: { n: number; used: number; max?: number }) {
+  const over = max !== undefined && used > max;
+  const text = <>Cap {n}: {fmtNum(used)}</>;
+  if (!over) return text;
+  return (
+    <Hint text={`Warning: the selected orders need ${fmtNum(used)} of capacity ${n} but the selected vehicles carry ${fmtNum(max)}. Some orders will stay unassigned.`}>
+      <span tabIndex={0} className="cursor-help font-semibold text-danger-fg underline decoration-dotted underline-offset-2">
+        {text}
+      </span>
+    </Hint>
+  );
+}
+
+function OrdersSummary({ p }: { p: Planner }) {
+  const cap = sumOrderCap(p.selOrders);
+  const veh = p.selVehicles.size ? sumVehicleCap(p.selVehicles) : undefined;
+  return (
+    <>
+      <SummaryLine items={[<>Orders: {p.selOrders.size}</>, <>Amount: {fmtMoney(sumAmount(p.selOrders))}</>]} />
+      <SummaryLine items={[<CapValue n={1} used={cap[0]} max={veh?.[0]} />, <CapValue n={2} used={cap[1]} max={veh?.[1]} />]} />
+    </>
+  );
+}
+
+function VehiclesSummary({ p }: { p: Planner }) {
+  const veh = sumVehicleCap(p.selVehicles);
+  const need = sumOrderCap(p.selOrders);
+  const cap = (i: number) =>
+    need[i] > veh[i] ? (
+      <Hint text={`Warning: the selected orders need ${fmtNum(need[i])} of capacity ${i + 1} but these vehicles carry ${fmtNum(veh[i])}. Some orders will stay unassigned.`}>
+        <span tabIndex={0} className="cursor-help font-semibold text-danger-fg underline decoration-dotted underline-offset-2">
+          Cap {i + 1}: {fmtNum(veh[i])}
+        </span>
+      </Hint>
+    ) : (
+      <>Cap {i + 1}: {fmtNum(veh[i])}</>
+    );
+  return (
+    <>
+      <SummaryLine items={[<>Vehicles: {p.selVehicles.size}</>]} />
+      <SummaryLine items={[cap(0), cap(1)]} />
+    </>
   );
 }
 
@@ -95,47 +158,43 @@ function applyOrderFilters(rows: Order[], f: Record<string, string>) {
 
 /* ── Paso 2: vehículos ── */
 const VEHICLE_COLUMNS: Column<Vehicle>[] = [
-  { key: 'id', header: 'Vehicle', sortValue: (v) => v.id, render: (v) => <span className={cn('font-semibold', v.available ? 'text-fg' : 'text-fg-subtle')}>{v.id}</span> },
-  { key: 'plate', header: 'Plate', render: (v) => <span className={v.available ? '' : 'text-fg-subtle'}>{v.plate}</span> },
-  { key: 'driver', header: 'Driver', sortValue: (v) => v.driver, render: (v) => <span className={v.available ? '' : 'text-fg-subtle'}>{v.driver}</span> },
+  { key: 'id', header: 'Vehicle', sortValue: (v) => v.id, render: (v) => <span className={cn('font-semibold', v.available ? 'text-fg' : 'text-fg-secondary')}>{v.id}</span> },
+  { key: 'plate', header: 'Plate', render: (v) => <span className={v.available ? '' : 'text-fg-secondary'}>{v.plate}</span> },
+  { key: 'driver', header: 'Driver', sortValue: (v) => v.driver, render: (v) => <span className={v.available ? '' : 'text-fg-secondary'}>{v.driver}</span> },
   { key: 'origin', header: 'Origin DC', render: (v) => (v.available ? v.originDc : <span className="font-semibold text-danger-fg">No DC assigned</span>) },
   { key: 'dest', header: 'Destination DC', render: (v) => (v.available ? v.destDc : <span className="font-semibold text-danger-fg">No DC assigned</span>) },
-  { key: 'cap', header: 'Capacity (units · kg · m³)', render: (v) => <span className={v.available ? 'text-fg-secondary' : 'text-fg-subtle'}>{v.cap.join(' · ')}</span> },
+  { key: 'cap', header: 'Capacity (units · kg · m³)', render: (v) => <span className={v.available ? 'text-fg-secondary' : 'text-fg-secondary'}>{v.cap.join(' · ')}</span> },
   { key: 'status', header: 'Status', render: (v) => (v.available ? <Badge variant="success">Available</Badge> : <Badge variant="neutral">Can’t be planned</Badge>) },
 ];
 
 export function WizardHeader({ p, layout, setLayout }: { p: Planner; layout: 'split' | 'table' | 'map'; setLayout: (l: 'split' | 'table' | 'map') => void }) {
-  const [open, setOpen] = useState(false);
   const canNext = p.step === 0 ? p.selOrders.size > 0 : p.step === 1 ? p.selVehicles.size > 0 : true;
   const nextHint = p.step === 0 ? (canNext ? 'Continue to vehicles.' : 'Select at least one order to continue.') : p.step === 1 ? (canNext ? 'Continue to parameters.' : 'Select at least one vehicle to continue.') : 'Create routes by matching each driver with the nearest group of orders.';
   return (
     <div className="flex items-center gap-ds-4 px-ds-6 pb-ds-4 pt-ds-5">
       <h1 className="min-w-0 flex-1 text-ds-subtitle font-bold tracking-ds-title text-fg">Route planner</h1>
-      {p.step < 2 && (
-        <div className="relative">
-          <Pill trailing="chevron--down" onClick={() => setOpen((o) => !o)} hint="Choose how the table and map share the screen.">
-            View
+      <div className="flex items-center gap-ds-2">
+        {p.step < 2 && (
+          <ViewMenu
+            value={layout}
+            onChange={setLayout}
+            hint="Choose how the table and the map share the screen."
+            options={[
+              { id: 'split', label: 'Table and map' },
+              { id: 'table', label: 'Table' },
+              { id: 'map', label: 'Map' },
+            ]}
+          />
+        )}
+        {p.step > 0 && (
+          <Pill icon="arrow-left" onClick={() => p.setStep((p.step - 1) as 0 | 1)} hint="Go back one step. Your choices are kept.">
+            Back
           </Pill>
-          {open && (
-            <div className="absolute right-0 top-full z-ds-menu mt-ds-2 min-w-ds-menu rounded-ds-md border border-line bg-surface py-ds-1 shadow-ds-md" role="menu">
-              {(['split', 'table', 'map'] as const).map((l) => (
-                <button key={l} type="button" role="menuitemradio" aria-checked={layout === l} onClick={() => { setLayout(l); setOpen(false); }} className={cn('flex h-ds-cell w-full items-center gap-ds-2 px-ds-3 text-ds-body-s hover:bg-action-soft', layout === l ? 'font-bold text-action' : 'text-fg')}>
-                  <RtIcon name={l === 'map' ? 'map' : l === 'table' ? 'data-table' : 'grid'} size={16} />
-                  {l === 'split' ? 'Table and map' : l === 'table' ? 'Table only' : 'Map only'}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-      {p.step > 0 && (
-        <Pill icon="arrow-left" onClick={() => p.setStep((p.step - 1) as 0 | 1)} hint="Go back one step. Your choices are kept.">
-          Back
+        )}
+        <Pill variant="primary" disabled={!canNext} onClick={() => (p.step === 2 ? p.plan() : p.setStep((p.step + 1) as 1 | 2))} hint={nextHint}>
+          {p.step === 2 ? 'Plan routes' : 'Next'}
         </Pill>
-      )}
-      <Pill variant="primary" disabled={!canNext} onClick={() => (p.step === 2 ? p.plan() : p.setStep((p.step + 1) as 1 | 2))} hint={nextHint}>
-        {p.step === 2 ? 'Plan routes' : 'Next'}
-      </Pill>
+      </div>
     </div>
   );
 }
@@ -258,15 +317,6 @@ export function Wizard({ p, layout }: { p: Planner; layout: 'split' | 'table' | 
       <div className="flex min-h-0 flex-1 flex-col">
         {layout !== 'map' && (
           <div className={cn('flex flex-col', layout === 'split' ? 'rt-split-table' : 'min-h-0 flex-1')}>
-            <div className="flex flex-wrap items-center gap-ds-3 px-ds-5 pb-ds-3 text-ds-body-s text-fg-secondary">
-              <span className="text-ds-body-l font-bold text-fg">Selected vehicles ({p.selVehicles.size}/{available})</span>
-              <Sep />
-              <span><b className="text-fg">{available}</b> available</span>
-              <Sep />
-              <Hint text="Vehicles without a distribution center can’t be planned. Assign one in Fleet.">
-                <span className="inline-flex items-center gap-ds-1"><b className="text-danger-fg">{VEHICLES.length - available}</b> without DC <RtIcon name="information" size={14} color="var(--color-action-text)" /></span>
-              </Hint>
-            </div>
             <div className="scroll-hover min-h-0 flex-1 overflow-auto border-t border-line">
               <DataTable columns={VEHICLE_COLUMNS} rows={VEHICLES} rowKey={(v) => v.id} emptyMessage="No vehicles." selection={vehiclesSel} />
             </div>
@@ -285,33 +335,43 @@ export function Wizard({ p, layout }: { p: Planner; layout: 'split' | 'table' | 
     <div className="flex min-h-0 flex-1 border-t border-line">
       <aside className="rt-rail scroll-hover flex shrink-0 flex-col gap-ds-2 overflow-y-auto border-r border-line bg-surface p-ds-4">
         {STEPS.map((s, i) => (
-          <StepCard key={s.title} n={i + 1} title={s.title} state={i === step ? 'active' : i < step ? 'done' : 'todo'} onClick={() => p.setStep(i as 0 | 1)} />
+          <StepCard
+            key={s.title}
+            n={i + 1}
+            title={s.title}
+            state={i === step ? 'active' : i < step ? 'done' : 'todo'}
+            onClick={() => p.setStep(i as 0 | 1)}
+            summary={i === 0 && step >= 1 ? <OrdersSummary p={p} /> : i === 1 && step >= 1 && p.selVehicles.size > 0 ? <VehiclesSummary p={p} /> : undefined}
+          />
         ))}
         {step === 0 && <UploadBlock count={ORDERS.length} />}
-        {step === 1 && (
-          <div className="mt-ds-4 flex flex-col gap-ds-2 rounded-ds-lg border border-line p-ds-4 text-ds-body-s text-fg-secondary">
-            <span className="font-bold text-fg">{p.selOrders.size} orders to plan</span>
-            <span>Pick enough vehicles to cover them. The planner matches each driver with the closest orders.</span>
-          </div>
-        )}
         {step === 2 && (
           <div className="mt-ds-4 flex flex-col gap-ds-4">
             <h3 className="text-ds-body-l font-bold text-fg">Configuration</h3>
-            <LabeledSelect label="Planning parameter" value={p.paramId} options={PARAMETERS.map((x) => ({ id: x.id, label: x.label }))} onChange={p.setParamId} hint={param.note} />
-            <div className="flex flex-col gap-ds-2 rounded-ds-lg bg-surface-subtle p-ds-4 text-ds-body-s text-fg-secondary">
-              <span className="flex justify-between"><span>Orders</span><b className="text-fg">{p.selOrders.size}</b></span>
-              <span className="flex justify-between"><span>Vehicles</span><b className="text-fg">{p.selVehicles.size}</b></span>
-              <span className="flex justify-between"><span>Max. stops per vehicle</span><b className="text-fg">{param.maxStops}</b></span>
-            </div>
+            <Select label="Planning parameter" value={p.paramId} options={PARAMETERS.map((x) => ({ value: x.id, label: x.label }))} onChange={p.setParamId} helper={param.note} />
           </div>
         )}
       </aside>
       <section className="flex min-w-0 flex-1 flex-col bg-surface">
         <div className="flex items-center gap-ds-3 px-ds-5 pb-ds-3 pt-ds-4">
           <span className="h-ds-3 w-ds-3 shrink-0 rounded-ds-pill bg-action" aria-hidden="true" />
-          <h2 className="shrink-0 text-ds-body-l font-bold text-fg">{STEPS[step].title}</h2>
+          <h2 className="shrink-0 whitespace-nowrap text-ds-body-l font-bold text-fg">
+            {STEPS[step].title}
+            {step === 0 && ` (${p.selOrders.size}/${ORDERS.length})`}
+            {step === 1 && ` (${p.selVehicles.size}/${available})`}
+          </h2>
           <Sep />
-          <p className="min-w-0 flex-1 truncate text-ds-body-s text-fg">{STEPS[step].hint}</p>
+          {step === 1 && (
+            <>
+              <span className="shrink-0 whitespace-nowrap text-ds-body-s text-fg"><b>{available}</b> available</span>
+              <Sep />
+              <Hint text="Vehicles without a distribution center can’t be planned. Assign one in Fleet.">
+                <span tabIndex={0} className="inline-flex shrink-0 items-center gap-ds-1 whitespace-nowrap text-ds-body-s text-fg"><b className="text-danger-fg">{VEHICLES.length - available}</b> without DC <RtIcon name="information" size={14} color="var(--color-action-text)" /></span>
+              </Hint>
+              <Sep />
+            </>
+          )}
+          <p className="min-w-0 flex-1 truncate text-ds-body-s text-fg" title={STEPS[step].hint}>{STEPS[step].hint}</p>
           {step === 0 && (
             <Checkbox
               label="Select every order in the table"
@@ -320,7 +380,6 @@ export function Wizard({ p, layout }: { p: Planner; layout: 'split' | 'table' | 
               onChange={(on) => p.setSelOrders(on ? new Set([...p.selOrders, ...rows.map((r) => r.id)]) : new Set([...p.selOrders].filter((id) => !rows.some((r) => r.id === id))))}
             />
           )}
-          {step === 0 && <span className="shrink-0 text-ds-body-s font-semibold text-fg">{p.selOrders.size} of {ORDERS.length} selected</span>}
         </div>
         {content}
       </section>

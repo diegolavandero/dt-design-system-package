@@ -73,6 +73,7 @@
   --o5: #FFAB00;               /* warning */
   --o6: #FF9A1F;
   --o7: #FF8B00;
+  --o8: #974F0C;               /* warning-text: 5,8:1 sobre o1 (o7 daba 2,2:1) */
 
   /* ===== SEMANTIC — COLOR ===== */
   --primary-background: var(--b6);

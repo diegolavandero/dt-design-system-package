@@ -93,6 +93,14 @@ export function usePlanner() {
   }), []);
   const clearLassoSelection = useCallback(() => setSelection((s) => new Map([...s].filter(([, src]) => src !== 'lasso'))), []);
 
+  /** Foto del plan para «Deshacer»: las listas son inmutables, así que basta con guardar las referencias. */
+  const snapshot = useCallback(() => ({ routes, unassigned, selection }), [routes, unassigned, selection]);
+  const restore = useCallback((s: { routes: Route[]; unassigned: string[]; selection: Map<string, SelSource> }) => {
+    setRoutes(s.routes);
+    setUnassigned(s.unassigned);
+    setSelection(s.selection);
+  }, []);
+
   const restart = useCallback(() => {
     setRoutes([]);
     setUnassigned([]);
@@ -105,7 +113,7 @@ export function usePlanner() {
   return {
     step, setStep, selOrders, setSelOrders, selVehicles, setSelVehicles, paramId, setParamId,
     routes, unassigned, selection, planned, colorOf, routeOf,
-    plan, move, patchRoute, confirmAll, select, unselect, clearLassoSelection, restart,
+    plan, move, patchRoute, confirmAll, select, unselect, clearLassoSelection, restart, snapshot, restore,
   };
 }
 

@@ -321,3 +321,9 @@ export const fmtDuration = (m: number) => `${Math.floor(m / 60)}h ${String(Math.
 export const fmtMoney = (n: number) => `$${n.toLocaleString('en-US')}`;
 export const fmtKm = (n: number) => `${n.toFixed(1)} km`;
 export const fmtNum = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
+
+/* ── Totales para los resúmenes de pasos y tarjetas ── */
+type Cap3 = [number, number, number];
+export const sumOrderCap = (ids: Iterable<string>): Cap3 => [...ids].reduce((a, id) => a.map((v, i) => v + ORDER_BY_ID.get(id)!.cap[i]) as Cap3, [0, 0, 0] as Cap3);
+export const sumVehicleCap = (ids: Iterable<string>): Cap3 => [...ids].reduce((a, id) => a.map((v, i) => v + VEHICLE_BY_ID.get(id)!.cap[i]) as Cap3, [0, 0, 0] as Cap3);
+export const sumAmount = (ids: Iterable<string>) => [...ids].reduce((a, id) => a + ORDER_BY_ID.get(id)!.amount, 0);

@@ -1,3 +1,4 @@
+import { cn } from '@/ds/lib/cn';
 import { ICON_PATHS, type IconName } from './paths';
 
 interface IconProps {
@@ -17,7 +18,7 @@ export function Icon({ name, size = 16, color = 'currentColor', className }: Ico
       fill={color}
       aria-hidden="true"
       focusable="false"
-      className={className}
+      className={cn('shrink-0', className)}
       dangerouslySetInnerHTML={{ __html: ICON_PATHS[name] }}
     />
   );

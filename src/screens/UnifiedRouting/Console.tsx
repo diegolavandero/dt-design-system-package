@@ -3,6 +3,7 @@ import { Avatar, Badge, DataTable, FilterBar, Modal, TextField, cn, useToast, ty
 import { ORDER_BY_ID, VEHICLES, VEHICLE_BY_ID, fmtDuration, fmtKm, fmtMoney, fmtNum, fmtTime, routeStats, type Order } from './data';
 import { RouteMap, type MapLine, type MapPin } from './RouteMap';
 import { Bullet, Checkbox, Dot, Hint, IconAction, MenuItem, Pill, RtIcon, Sep } from './parts';
+import { ViewMenu } from './ViewMenu';
 import { DragProvider, useDrag, useDropZone, type DragPayload, type DropTarget } from './useDrag';
 import type { Planner, Route } from './usePlanner';
 
@@ -16,7 +17,6 @@ const sumCap = (ids: string[]) => ids.reduce((a, id) => a.map((v, i) => v + orde
 /* ─────────────── Encabezado ─────────────── */
 function ConsoleHeader({ p, view, setView, onConfirm, openUnassigned }: { p: Planner; view: 'map' | 'table'; setView: (v: 'map' | 'table') => void; onConfirm: () => void; openUnassigned: () => void }) {
   const toast = useToast();
-  const [viewOpen, setViewOpen] = useState(false);
   const [name, setName] = useState(PLAN.name);
   const [editing, setEditing] = useState(false);
   const allConfirmed = p.routes.length > 0 && p.routes.every((r) => r.confirmed);
@@ -32,8 +32,8 @@ function ConsoleHeader({ p, view, setView, onConfirm, openUnassigned }: { p: Pla
   const fleet = VEHICLES.filter((v) => v.available).length;
 
   return (
-    <div className="px-ds-6 pt-ds-5">
-      <div className="flex items-center gap-ds-4">
+    <div>
+      <div className="flex items-center gap-ds-4 border-b border-line px-ds-6 pb-ds-4 pt-ds-5">
         <h1 className="shrink-0 text-ds-subtitle font-bold tracking-ds-title text-fg">Planning console</h1>
         <Sep />
         {editing ? (
@@ -53,33 +53,22 @@ function ConsoleHeader({ p, view, setView, onConfirm, openUnassigned }: { p: Pla
             toast('success', 'Plan ID copied');
           }}
         />
-        <div className="ml-auto flex items-center gap-ds-3">
-          <div className="relative">
-            <Pill trailing="chevron--down" onClick={() => setViewOpen((o) => !o)} hint="Switch between the map and a table of the current list.">
-              View
-            </Pill>
-            {viewOpen && (
-              <div className="absolute right-0 top-full z-ds-menu mt-ds-2 rounded-ds-lg border border-line bg-surface p-ds-5 shadow-ds-md">
-                <p className="mb-ds-3 text-ds-body-l font-bold text-fg">View</p>
-                <div className="flex gap-ds-4">
-                  {(['map', 'table'] as const).map((v) => (
-                    <button key={v} type="button" onClick={() => { setView(v); setViewOpen(false); }} className="flex flex-col gap-ds-2 text-left">
-                      <span className="text-ds-body-s text-fg-secondary">{v === 'map' ? 'Map' : 'Table'}</span>
-                      <span className={cn('flex h-ds-10 w-ds-10 items-center justify-center rounded-ds-md border-2 bg-surface-subtle', view === v ? 'border-action' : 'border-line hover:border-line-strong')}>
-                        <RtIcon name={v === 'map' ? 'map' : 'data-table'} size={28} color={view === v ? 'var(--color-action)' : 'var(--color-fg-subtle)'} />
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+        <div className="ml-auto flex items-center gap-ds-2">
+          <ViewMenu
+            value={view}
+            onChange={(v) => setView(v === 'table' ? 'table' : 'map')}
+            hint="Switch between the map and a table of the current list."
+            options={[
+              { id: 'map', label: 'Map' },
+              { id: 'table', label: 'Table' },
+            ]}
+          />
           <Pill variant="primary" disabled={allConfirmed || !p.routes.length} onClick={onConfirm} hint={allConfirmed ? 'All routes are confirmed. Edit a route to confirm it again.' : 'Confirm every route and notify the drivers.'}>
             {allConfirmed ? 'Routes confirmed' : 'Confirm routes'}
           </Pill>
         </div>
       </div>
-      <div className="mt-ds-4 flex items-center gap-ds-3 border-b border-line pb-ds-3 text-ds-body-s text-fg">
+      <div className="flex items-center gap-ds-3 border-b border-line px-ds-6 py-ds-3 text-ds-body-s text-fg">
         <span>Vehicles: {p.routes.length}/{fleet}</span>
         <Bullet />
         <span className="inline-flex items-center gap-ds-1">
@@ -104,7 +93,7 @@ function ConsoleHeader({ p, view, setView, onConfirm, openUnassigned }: { p: Pla
         <span>Total cost: {fmtMoney(totals.cost)}</span>
         <Hint text="3 planners are working on this plan.">
           <span className="ml-auto flex items-center">
-            {[['Kristen Muñoz', 'var(--b6)'], ['Marcela Ortiz', 'var(--o6)'], ['Diego Lavandero', 'var(--p6)']].map(([n, c], i) => (
+            {[['Kristen Muñoz', 'var(--b7)'], ['Marcela Ortiz', 'var(--g7)'], ['Diego Lavandero', 'var(--p7)']].map(([n, c], i) => (
               <span key={n} className={cn('rounded-ds-pill ring-2 ring-surface', i > 0 && '-ml-ds-2')}>
                 <Avatar name={n} color={c} size={26} />
               </span>
@@ -133,13 +122,13 @@ function RailCard({ title, dot, children, open, onOpen, actions, drop, selected 
     >
       <div className="flex items-center gap-ds-2">
         {dot}
-        <span className={cn('min-w-0 flex-1 truncate text-ds-body-l font-bold', selected ? 'text-action-text' : 'text-fg')}>{title}</span>
+        <span className={cn('min-w-0 flex-1 truncate text-ds-body-l font-bold', selected ? 'text-action-strong' : 'text-fg')}>{title}</span>
         <span className="flex items-center gap-ds-1" onClick={(e) => e.stopPropagation()}>
           {actions}
           <IconAction icon={open ? 'arrow-left' : 'arrow-right'} label={open ? 'Close details' : 'Open details'} hint={open ? 'Close the detail panel.' : 'Open the detail panel with every order.'} onClick={onOpen} />
         </span>
       </div>
-      {children && <div className="mt-ds-1 text-ds-body-s leading-ds-body text-fg">{children}</div>}
+      {children && <div className="mt-ds-1 text-ds-caption leading-ds-caption text-fg">{children}</div>}
     </div>
   );
 }
@@ -174,7 +163,7 @@ function RouteCard({ r, p, open, onOpen }: { r: Route; p: Planner; open: boolean
       <Items items={[<>Stops: {s.stops}</>, <>Duration: {fmtDuration(s.minutes)}</>]} />
       <Items items={[<>Cap 1: {fmtNum(s.cap[0])}/{v.cap[0]}</>, <>Dist: {fmtKm(s.dist)}</>]} />
       <span className="block">Amount: {fmtMoney(s.amount)}</span>
-      {drop.over && <span className={cn('mt-ds-1 block text-ds-caption font-semibold', r.locked ? 'text-danger-fg' : 'text-action-text')}>{r.locked ? 'Locked route — unlock it to add orders' : 'Release to add the order here'}</span>}
+      {drop.over && <span className={cn('mt-ds-1 block text-ds-caption font-semibold', r.locked ? 'text-danger-fg' : 'text-action-strong')}>{r.locked ? 'Locked route — unlock it to add orders' : 'Release to add the order here'}</span>}
     </RailCard>
   );
 }
@@ -184,6 +173,7 @@ function Rail({ p, panel, setPanel, showUnassigned, setShowUnassigned }: { p: Pl
   const [searching, setSearching] = useState(false);
   const [menu, setMenu] = useState(false);
   const dropU = useDropZone('unassigned');
+  const dropS = useDropZone('selected');
   const uCap = sumCap(p.unassigned);
   const sel = [...p.selection.keys()];
   const sCap = sumCap(sel);
@@ -206,10 +196,12 @@ function Rail({ p, panel, setPanel, showUnassigned, setShowUnassigned }: { p: Pl
       >
         <Items items={[<>Orders: {p.unassigned.length}</>, <>Amount: {fmtMoney(p.unassigned.reduce((a, id) => a + order(id).amount, 0))}</>]} />
         <Items items={[<>Cap 1: {fmtNum(uCap[0])}</>, <>Cap 2: {fmtNum(uCap[1])}</>, <>Cap 3: {fmtNum(uCap[2])}</>]} />
-        {dropU.over && <span className="mt-ds-1 block text-ds-caption font-semibold text-action-text">Release to unassign the order</span>}
+        {dropU.over && <span className="mt-ds-1 block text-ds-caption font-semibold text-action-strong">Release to unassign the order</span>}
       </RailCard>
-      <RailCard title="Selected" selected dot={<Dot ring color="var(--color-action-text)" />} open={panel?.kind === 'selected'} onOpen={() => toggle({ kind: 'selected' })}>
-        <Items items={sel.length ? [<>Orders: {sel.length}</>, <>Cap 1: {fmtNum(sCap[0])}</>] : [<>Orders: 0</>]} />
+      <RailCard title="Selected" selected dot={<Dot ring color="var(--color-action-text)" />} open={panel?.kind === 'selected'} onOpen={() => toggle({ kind: 'selected' })} drop={dropS}>
+        <Items items={[<>Orders: {sel.length}</>, <>Amount: {fmtMoney(sel.reduce((a, id) => a + order(id).amount, 0))}</>]} />
+        <Items items={[<>Cap 1: {fmtNum(sCap[0])}</>, <>Cap 2: {fmtNum(sCap[1])}</>, <>Cap 3: {fmtNum(sCap[2])}</>]} />
+        {dropS.over && <span className="mt-ds-1 block text-ds-caption font-semibold text-action-strong">Release to add the order to Selected</span>}
       </RailCard>
 
       <div className="mt-ds-3 flex items-center gap-ds-1">
@@ -284,7 +276,7 @@ function OrderCard({ id, idx, color, routeId, timing, checked, onCheck, locked, 
             <span className="mt-ds-1 flex flex-wrap items-center gap-ds-2">
               S: {fmtTime(timing.arrive)} <span>E: {fmtTime(timing.leave)}</span> <Bullet />
               <Hint text={timing.late ? 'Arrival falls outside the customer’s time window.' : 'Customer’s time window.'}>
-                <span className={cn('underline', timing.late ? 'text-danger-fg' : 'text-action-text')}>W: {fmtTime(o.winStart)} – {fmtTime(o.winEnd)}</span>
+                <span className={cn('underline', timing.late ? 'text-danger-fg' : 'text-action-strong')}>W: {fmtTime(o.winStart)} – {fmtTime(o.winEnd)}</span>
               </Hint>
             </span>
           ) : (
@@ -475,7 +467,7 @@ function UnassignedPanel({ p, onClose, onAssign }: { p: Planner; onClose: () => 
       />
       <div data-autoscroll className="scroll-hover mt-ds-3 flex min-h-0 flex-1 flex-col gap-ds-2 overflow-y-auto px-ds-4 pb-ds-4">
         {p.unassigned.filter(match(q)).map((id) => (
-          <OrderCard key={id} id={id} color={UNASSIGNED_COLOR} routeId="unassigned" checked={ck.checked.has(id)} onCheck={(on) => ck.set(id, on)} tag={p.selection.has(id) ? <span className="font-semibold text-action-text">In your selection</span> : undefined} />
+          <OrderCard key={id} id={id} color={UNASSIGNED_COLOR} routeId="unassigned" checked={ck.checked.has(id)} onCheck={(on) => ck.set(id, on)} tag={p.selection.has(id) ? <span className="font-semibold text-action-strong">In your selection</span> : undefined} />
         ))}
         {!p.unassigned.length && <p className="py-ds-6 text-center text-ds-body-s text-fg-muted">Every order is on a route.</p>}
       </div>
@@ -485,10 +477,14 @@ function UnassignedPanel({ p, onClose, onAssign }: { p: Planner; onClose: () => 
 
 function SelectedPanel({ p, onClose, onAssign }: { p: Planner; onClose: () => void; onAssign: (ids: string[]) => void }) {
   const ids = [...p.selection.keys()];
+  const drop = useDropZone('selected');
+  const cap = sumCap(ids);
   return (
-    <PanelShell dot={<Dot ring color="var(--color-action-text)" />} title="Selected orders" subtitle={`${ids.length} orders`} onClose={onClose}>
-      <div className="flex items-center gap-ds-2 border-b border-line px-ds-4 py-ds-3">
-        <p className="min-w-0 flex-1 text-ds-caption text-fg-muted">Orders you picked with the lasso or from other lists. They stay on their routes until you assign or deselect them.</p>
+    <PanelShell dot={<Dot ring color="var(--color-action-text)" />} title="Selected orders" onClose={onClose} drop={drop}>
+      <div className="flex flex-col gap-ds-2 border-b border-line px-ds-4 py-ds-4">
+        <Stat icon="route" items={[<>Orders: {ids.length}</>, <>Amount: {fmtMoney(ids.reduce((a, id) => a + order(id).amount, 0))}</>]} />
+        <Stat icon="truck" items={[<>Cap 1: {fmtNum(cap[0])}</>, <>Cap 2: {fmtNum(cap[1])}</>, <>Cap 3: {fmtNum(cap[2])}</>]} />
+        <p className="text-ds-caption text-fg-muted">Orders you picked with the lasso, dragged here or added from a list. They stay on their routes until you assign or deselect them.</p>
       </div>
       <div className="flex items-center justify-end gap-ds-2 px-ds-4 pt-ds-3">
         <Pill disabled={!ids.length} onClick={() => p.unselect(ids)} hint="Empty the Selected list. Orders stay where they are.">
@@ -594,7 +590,7 @@ function TableView({ p, panel, setPanel, onAssign, onClose }: { p: Planner; pane
       <div className="scroll-hover min-h-0 flex-1 overflow-auto border-t border-line">
         <DataTable columns={columns} rows={rows} rowKey={(o) => o.id} emptyMessage={mode === 'selected' ? 'Nothing selected yet.' : mode === 'route' ? 'This route has no orders.' : 'Every order is on a route.'} selection={{ selected: checked, onChange: setChecked }} />
       </div>
-      <div className="flex items-center justify-end gap-ds-3 border-t border-line px-ds-5 py-ds-3">
+      <div className="flex items-center justify-end gap-ds-2 border-t border-line px-ds-5 py-ds-3">
         <span className="mr-auto text-ds-body-s text-fg-secondary">{n ? `${n} of ${rows.length} checked` : `${rows.length} orders`}</span>
         <Pill onClick={onClose} hint="Close the table and go back to the map.">Close</Pill>
         {mode === 'route' && (
@@ -1009,23 +1005,45 @@ function ConsoleBody({ p }: { p: Planner }) {
 export function Console({ p }: { p: Planner }) {
   const toast = useToast();
   const onDrop = (payload: DragPayload, t: DropTarget) => {
+    const before = p.snapshot();
     const n = payload.ids.length;
+    const what = n === 1 ? `Order ${payload.label}` : `${n} orders`;
+    // Aviso con «Undo» abajo al centro (como «Deshacer envío» de Gmail): 10 s, se puede cerrar, y un movimiento nuevo reemplaza al aviso anterior.
+    const notify = (title: string) =>
+      toast('info', title, undefined, {
+        action: {
+          label: 'Undo',
+          onClick: () => {
+            p.restore(before);
+            toast('neutral', 'Move undone', undefined, { position: 'bottom-center', replaceKey: 'undo' });
+          },
+        },
+        duration: 10000,
+        position: 'bottom-center',
+        replaceKey: 'undo',
+      });
+    if (t.kind === 'selected') {
+      if (payload.ids.every((id) => p.selection.has(id))) return;
+      p.select(payload.ids, 'manual');
+      notify(`${what} moved to Selected`);
+      return;
+    }
     if (t.kind === 'unassigned') {
       if (payload.from === 'unassigned') return;
       p.move(payload.ids, { kind: 'unassigned' });
-      toast('info', `${payload.label} unassigned`, `${payload.from} was renumbered.`);
+      notify(`${what} moved to Unassigned`);
       return;
     }
     const vid = t.vehicleId;
     if (p.routes.find((r) => r.vehicleId === vid)?.locked) return;
     if (t.kind === 'slot') {
       p.move(payload.ids, { kind: 'route', vehicleId: vid, index: t.index });
-      if (payload.from !== vid) toast('success', `${payload.label} moved to ${vid}`, `Inserted as stop ${t.index + 1}.`);
+      notify(payload.from === vid ? `${what} reordered in ${vid}` : `${what} moved to ${vid}`);
       return;
     }
     if (payload.from === vid) return;
     p.move(payload.ids, { kind: 'route', vehicleId: vid });
-    toast('success', `${n === 1 ? payload.label : `${n} orders`} moved to ${vid}`, 'Added where it adds the least distance.');
+    notify(`${what} moved to ${vid}`);
   };
   return (
     <DragProvider onDrop={onDrop}>

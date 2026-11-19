@@ -2,14 +2,25 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info' | 'neutral';
 
-interface ToastItem {
+export interface ToastOptions {
+  /** Acción en línea (p. ej. «Deshacer»). Al pulsarla el aviso se cierra. */
+  action?: { label: string; onClick: () => void };
+  /** Milisegundos antes de cerrarse solo (por defecto 4000). El temporizador se pausa con el cursor o el foco encima. */
+  duration?: number;
+  /** `top-right` (por defecto) o `bottom-center`. */
+  position?: 'top-right' | 'bottom-center';
+  /** Un aviso nuevo con la misma clave reemplaza al anterior (como «Deshacer envío» de Gmail). */
+  replaceKey?: string;
+}
+
+interface ToastItem extends ToastOptions {
   id: number;
   type: ToastType;
   title: string;
   text?: string;
 }
 
-type Notify = (type: ToastType, title: string, text?: string) => void;
+type Notify = (type: ToastType, title: string, text?: string, options?: ToastOptions) => void;
 
 const ToastContext = createContext<Notify>(() => undefined);
 export const useToast = () => useContext(ToastContext);
@@ -34,40 +45,76 @@ const ICON: Record<ToastType, string> = {
 
 const DURATION = 4000;
 
-function Toast({ item, onDismiss }: { item: ToastItem; onDismiss: (id: number) => void }) {
+function Toast({ item, onDismiss, closeLabel }: { item: ToastItem; onDismiss: (id: number) => void; closeLabel: string }) {
+  const [paused, setPaused] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => onDismiss(item.id), DURATION);
+    if (paused) return;
+    const t = setTimeout(() => onDismiss(item.id), item.duration ?? DURATION);
     return () => clearTimeout(t);
-  }, [item.id, onDismiss]);
+  }, [item.id, item.duration, paused, onDismiss]);
 
   return (
-    <div role="status" className={`pointer-events-auto flex animate-ds-toast items-start gap-ds-3 rounded-ds-md border-l-ds-accent bg-surface px-ds-4 py-ds-3 shadow-ds-md ${BORDER[item.type]}`}>
+    <div
+      role="status"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+      className={`pointer-events-auto flex animate-ds-toast items-start gap-ds-3 rounded-ds-md border-l-ds-accent bg-surface px-ds-4 py-ds-3 shadow-ds-md ${BORDER[item.type]}`}
+    >
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={STROKE[item.type]} strokeWidth="2" className="mt-px shrink-0" aria-hidden="true" dangerouslySetInnerHTML={{ __html: ICON[item.type] }} />
       <div className="min-w-0 flex-1">
-        <div className="mb-ds-1 text-ds-body-s font-semibold text-fg">{item.title}</div>
-        {item.text && <div className="text-ds-caption leading-ds-caption text-fg-muted">{item.text}</div>}
+        <div className="text-ds-body-s font-semibold text-fg">{item.title}</div>
+        {item.text && <div className="mt-ds-1 text-ds-caption leading-ds-caption text-fg-muted">{item.text}</div>}
       </div>
-      <button type="button" aria-label="Cerrar" onClick={() => onDismiss(item.id)} className="-mt-ds-1 ml-ds-1 flex h-ds-5 w-ds-5 shrink-0 items-center justify-center rounded-ds-sm text-fg-subtle hover:bg-canvas hover:text-fg">
+      {item.action && (
+        <button
+          type="button"
+          onClick={() => {
+            item.action!.onClick();
+            onDismiss(item.id);
+          }}
+          className="shrink-0 rounded-ds-sm px-ds-1 text-ds-body-s font-bold text-action-text hover:bg-action-soft"
+        >
+          {item.action.label}
+        </button>
+      )}
+      <button type="button" aria-label={closeLabel} onClick={() => onDismiss(item.id)} className="-mt-ds-1 flex h-ds-6 w-ds-6 shrink-0 items-center justify-center rounded-ds-sm text-fg-secondary hover:bg-canvas hover:text-fg">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg>
       </button>
     </div>
   );
 }
 
-export function ToastProvider({ children }: { children: ReactNode }) {
+export function ToastProvider({ children, closeLabel = 'Cerrar' }: { children: ReactNode; closeLabel?: string }) {
   const [items, setItems] = useState<ToastItem[]>([]);
   const nextId = useRef(0);
 
   const dismiss = useCallback((id: number) => setItems((xs) => xs.filter((x) => x.id !== id)), []);
-  const notify = useCallback<Notify>((type, title, text) => setItems((xs) => [...xs, { id: nextId.current++, type, title, text }]), []);
+  const notify = useCallback<Notify>(
+    (type, title, text, options) =>
+      setItems((xs) => [...xs.filter((x) => !(options?.replaceKey && x.replaceKey === options.replaceKey)), { id: nextId.current++, type, title, text, ...options }]),
+    [],
+  );
   const value = useMemo(() => notify, [notify]);
+  const top = items.filter((x) => x.position !== 'bottom-center');
+  const bottom = items.filter((x) => x.position === 'bottom-center');
 
   return (
     <ToastContext.Provider value={value}>
       {children}
       <div className="pointer-events-none fixed right-ds-4 top-ds-4 z-ds-menu flex w-ds-drawer max-w-ds-viewport-inset flex-col gap-ds-2" aria-live="polite">
-        {items.map((it) => (
-          <Toast key={it.id} item={it} onDismiss={dismiss} />
+        {top.map((it) => (
+          <Toast key={it.id} item={it} onDismiss={dismiss} closeLabel={closeLabel} />
+        ))}
+      </div>
+      <div className="pointer-events-none fixed inset-x-0 bottom-ds-6 z-ds-menu flex flex-col items-center gap-ds-2 px-ds-4" aria-live="polite">
+        {bottom.map((it) => (
+          <div key={it.id} className="flex w-ds-modal max-w-full">
+            <div className="w-full">
+              <Toast item={it} onDismiss={dismiss} closeLabel={closeLabel} />
+            </div>
+          </div>
         ))}
       </div>
     </ToastContext.Provider>

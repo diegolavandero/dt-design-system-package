@@ -1,20 +1,20 @@
 // Piezas de la pantalla que el DS aún no tiene como componente. Se arman solo con tokens del DS
 // (clases semánticas `ds-*`) e íconos del catálogo del DS o de Carbon (misma familia).
-import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactElement, type ReactNode } from 'react';
+import { cloneElement, useEffect, useId, useLayoutEffect, useRef, useState, type ButtonHTMLAttributes, type ReactElement, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { cn } from '@/ds';
+import { Button, cn } from '@/ds';
 import { RT_ICONS, type RtIconName } from './icons';
 
 export function RtIcon({ name, size = 16, color = 'currentColor', className }: { name: RtIconName; size?: number; color?: string; className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" fill={color} aria-hidden="true" focusable="false" className={className} dangerouslySetInnerHTML={{ __html: RT_ICONS[name] }} />
+    <svg width={size} height={size} viewBox="0 0 32 32" fill={color} aria-hidden="true" focusable="false" className={cn('shrink-0', className)} dangerouslySetInnerHTML={{ __html: RT_ICONS[name] }} />
   );
 }
 
 /* ── Hint: tooltip azul de ayuda para acciones (patrón «coachmark» de la consola de ruteo) ── */
 type Side = 'top' | 'bottom' | 'left' | 'right';
 
-export function HintBubble({ x, y, side, children }: { x: number; y: number; side: Side; children: ReactNode }) {
+export function HintBubble({ x, y, side, children, id, interactive, onEnter, onLeave }: { x: number; y: number; side: Side; children: ReactNode; id?: string; interactive?: boolean; onEnter?: () => void; onLeave?: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ left: x, top: y });
   useLayoutEffect(() => {
@@ -37,7 +37,7 @@ export function HintBubble({ x, y, side, children }: { x: number; y: number; sid
   }[side];
   const arrowStyle = side === 'top' || side === 'bottom' ? { left: Math.min(Math.max(x - pos.left, 12), (ref.current?.offsetWidth ?? 24) - 12) } : undefined;
   return createPortal(
-    <div ref={ref} role="tooltip" className="pointer-events-none fixed z-ds-menu max-w-ds-popover rounded-ds-md bg-action-text px-ds-3 py-ds-2 text-ds-caption leading-ds-caption text-fg-inverse shadow-ds-md" style={{ left: pos.left, top: pos.top }}>
+    <div ref={ref} id={id} role="tooltip" onMouseEnter={onEnter} onMouseLeave={onLeave} className={cn('fixed z-ds-menu max-w-ds-popover rounded-ds-md bg-action-text px-ds-3 py-ds-2 text-ds-caption leading-ds-caption text-fg-inverse shadow-ds-md', interactive ? 'pointer-events-auto' : 'pointer-events-none')} style={{ left: pos.left, top: pos.top }}>
       {children}
       <span className={cn('absolute h-ds-2 w-ds-2 rotate-45 bg-action-text', arrow)} style={arrowStyle} />
     </div>,
@@ -45,32 +45,53 @@ export function HintBubble({ x, y, side, children }: { x: number; y: number; sid
   );
 }
 
-/** Envuelve un elemento y muestra la ayuda azul al pasar el cursor o al enfocarlo. */
+/**
+ * Envuelve un elemento y muestra la ayuda azul al pasar el cursor o al enfocarlo (WCAG 1.4.13):
+ * se puede descartar con Esc, el cursor puede pasar sobre ella sin que desaparezca y el elemento queda descrito con aria-describedby.
+ */
 export function Hint({ text, side = 'top', children, disabled, block }: { text: ReactNode; side?: Side; children: ReactElement; disabled?: boolean; block?: boolean }) {
-  const [at, setAt] = useState<{ x: number; y: number } | null>(null);
+  const [at, setAt] = useState<{ x: number; y: number; side: Side } | null>(null);
   const ref = useRef<HTMLSpanElement>(null);
+  const timer = useRef<ReturnType<typeof setTimeout>>();
+  const id = useId();
   const show = () => {
+    clearTimeout(timer.current);
     const r = ref.current?.getBoundingClientRect();
     if (!r) return;
-    const x = side === 'left' ? r.left : side === 'right' ? r.right : r.left + r.width / 2;
-    const y = side === 'top' ? r.top : side === 'bottom' ? r.bottom : r.top + r.height / 2;
-    setAt({ x, y });
+    // La ayuda es interactiva (WCAG 1.4.13): si no cabe del lado pedido, se pasa al opuesto para no tapar el propio control.
+    let sd = side;
+    if (sd === 'top' && r.top < 88) sd = 'bottom';
+    else if (sd === 'bottom' && window.innerHeight - r.bottom < 88) sd = 'top';
+    else if (sd === 'right' && window.innerWidth - r.right < 240) sd = 'left';
+    else if (sd === 'left' && r.left < 240) sd = 'right';
+    const x = sd === 'left' ? r.left : sd === 'right' ? r.right : r.left + r.width / 2;
+    const y = sd === 'top' ? r.top : sd === 'bottom' ? r.bottom : r.top + r.height / 2;
+    setAt({ x, y, side: sd });
+  };
+  const hide = () => {
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setAt(null), 120);
   };
   useEffect(() => {
     if (!at) return;
-    const hide = () => setAt(null);
-    window.addEventListener('scroll', hide, true);
-    window.addEventListener('pointerdown', hide, true);
+    const now = () => setAt(null);
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && now();
+    window.addEventListener('scroll', now, true);
+    window.addEventListener('pointerdown', now, true);
+    window.addEventListener('keydown', esc);
     return () => {
-      window.removeEventListener('scroll', hide, true);
-      window.removeEventListener('pointerdown', hide, true);
+      window.removeEventListener('scroll', now, true);
+      window.removeEventListener('pointerdown', now, true);
+      window.removeEventListener('keydown', esc);
     };
   }, [at]);
+  useEffect(() => () => clearTimeout(timer.current), []);
+  const visible = !!at && !disabled;
   return (
-    <span ref={ref} className={block ? 'flex w-full' : 'inline-flex'} onMouseEnter={show} onMouseLeave={() => setAt(null)} onFocus={show} onBlur={() => setAt(null)}>
-      {children}
-      {at && !disabled && (
-        <HintBubble x={at.x} y={at.y} side={side}>
+    <span ref={ref} className={block ? 'flex w-full' : 'inline-flex'} onMouseEnter={show} onMouseLeave={hide} onFocus={show} onBlur={hide}>
+      {visible ? cloneElement(children, { 'aria-describedby': id } as Record<string, string>) : children}
+      {visible && (
+        <HintBubble id={id} x={at.x} y={at.y} side={at.side} interactive onEnter={() => clearTimeout(timer.current)} onLeave={hide}>
           {text}
         </HintBubble>
       )}
@@ -96,22 +117,25 @@ export function IconAction({ icon, label, hint, onClick, active, disabled, size 
   );
 }
 
+/** Checkbox con área de toque de 24 px (WCAG 2.5.8) alrededor del control de 16 px. */
 export function Checkbox({ checked, indeterminate, onChange, label, disabled }: { checked: boolean; indeterminate?: boolean; onChange: (v: boolean) => void; label: string; disabled?: boolean }) {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (ref.current) ref.current.indeterminate = !!indeterminate;
   }, [indeterminate]);
   return (
-    <input
-      ref={ref}
-      type="checkbox"
-      aria-label={label}
-      checked={checked}
-      disabled={disabled}
-      onChange={(e) => onChange(e.target.checked)}
-      onClick={(e) => e.stopPropagation()}
-      className="h-ds-4 w-ds-4 shrink-0 cursor-pointer accent-action disabled:cursor-not-allowed disabled:opacity-ds-disabled"
-    />
+    <span className="inline-flex h-ds-6 w-ds-6 shrink-0 items-center justify-center">
+      <input
+        ref={ref}
+        type="checkbox"
+        aria-label={label}
+        checked={checked}
+        disabled={disabled}
+        onChange={(e) => onChange(e.target.checked)}
+        onClick={(e) => e.stopPropagation()}
+        className="h-ds-4 w-ds-4 cursor-pointer accent-action disabled:cursor-not-allowed disabled:opacity-ds-disabled"
+      />
+    </span>
   );
 }
 
@@ -126,51 +150,22 @@ export function Dot({ color, ring, size = 'md' }: { color: string; ring?: boolea
   );
 }
 
-/** Botón píldora del DS con estado deshabilitado. */
-export function Pill({ variant = 'secondary', children, onClick, disabled, icon, trailing, className, hint }: { variant?: 'primary' | 'secondary'; children: ReactNode; onClick?: () => void; disabled?: boolean; icon?: RtIconName; trailing?: RtIconName; className?: string; hint?: ReactNode }) {
+/** Botón del DS (`Button`) con ayuda azul opcional. La separación entre botones es siempre de 8 px (`gap-ds-2`). */
+export function Pill({ variant = 'secondary', children, onClick, disabled, icon, trailing, className, hint, pressed, elevated }: { variant?: 'primary' | 'secondary'; children: ReactNode; onClick?: () => void; disabled?: boolean; icon?: RtIconName; trailing?: RtIconName; className?: string; hint?: ReactNode; pressed?: boolean; elevated?: boolean }) {
   const btn = (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={cn(
-        'inline-flex h-ds-7 shrink-0 items-center gap-ds-2 whitespace-nowrap rounded-ds-pill px-ds-4 text-ds-body-s font-bold leading-none transition-colors',
-        variant === 'primary'
-          ? 'bg-action text-fg-inverse hover:bg-action-hover disabled:bg-surface-header disabled:text-fg-subtle'
-          : 'border border-action bg-surface text-action-text hover:bg-action-soft disabled:border-line-strong disabled:bg-surface disabled:text-fg-subtle',
-        'disabled:cursor-not-allowed',
-        className,
-      )}
-    >
-      {icon && <RtIcon name={icon} size={14} />}
+    <Button variant={variant} onClick={onClick} disabled={disabled} aria-pressed={pressed} leading={icon && <RtIcon name={icon} size={16} />} trailing={trailing && <RtIcon name={trailing} size={16} />} className={cn(elevated && 'shadow-ds-sm', className)}>
       {children}
-      {trailing && <RtIcon name={trailing} size={14} />}
-    </button>
+    </Button>
   );
   return hint ? <Hint text={hint}>{btn}</Hint> : btn;
 }
 
-/** Botón flotante sobre el mapa (Seleccionar con lazo, Ver, Reset zoom). Mismo estilo que MapPins del DS. */
-export function MapChip({ icon, children, onClick, active, label, hint }: { icon: RtIconName; children?: ReactNode; onClick: () => void; active?: boolean; label?: string; hint?: ReactNode }) {
+/** Botón flotante sobre el mapa: el `Button` secundario del DS con sombra. */
+export function MapChip({ icon, children, onClick, active, hint }: { icon: RtIconName; children: ReactNode; onClick: () => void; active?: boolean; hint?: ReactNode }) {
   return (
-    <Hint text={hint ?? label ?? children} side="bottom">
-      <button
-        type="button"
-        aria-label={label}
-        aria-pressed={active}
-        onClick={(e) => {
-          e.stopPropagation();
-          onClick();
-        }}
-        className={cn(
-          'inline-flex h-ds-8 items-center gap-ds-2 whitespace-nowrap rounded-ds-pill border px-ds-4 text-ds-body-s font-bold leading-none shadow-ds-sm transition-colors',
-          active ? 'border-action-text bg-action-soft text-action-strong' : 'border-line bg-surface text-fg hover:border-line-strong',
-        )}
-      >
-        <RtIcon name={icon} size={16} />
-        {children}
-      </button>
-    </Hint>
+    <Pill icon={icon} pressed={active} elevated hint={hint ?? children} onClick={onClick}>
+      {children}
+    </Pill>
   );
 }
 
@@ -189,65 +184,15 @@ export function CoachBar({ icon, children, onClose }: { icon: RtIconName; childr
   );
 }
 
-/** Select con etiqueta superior (patrón «Tipo de fecha» del DS). */
-export function LabeledSelect({ label, value, options, onChange, hint }: { label: string; value: string; options: { id: string; label: string }[]; onChange: (id: string) => void; hint?: ReactNode }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const id = useId();
-  useEffect(() => {
-    if (!open) return;
-    const close = (e: MouseEvent) => !ref.current?.contains(e.target as Node) && setOpen(false);
-    document.addEventListener('mousedown', close);
-    return () => document.removeEventListener('mousedown', close);
-  }, [open]);
-  const current = options.find((o) => o.id === value);
-  return (
-    <div ref={ref} className="relative" onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}>
-      <button
-        type="button"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-controls={id}
-        onClick={() => setOpen((o) => !o)}
-        className={cn('flex w-full items-center justify-between gap-ds-2 rounded-ds-md border bg-surface px-ds-3 py-ds-1 text-left transition-colors', open ? 'border-action' : 'border-fg-muted hover:bg-canvas')}
-      >
-        <span className="min-w-0">
-          <span className="block text-ds-caption text-fg-secondary">{label}</span>
-          <span className="block truncate text-ds-body-s text-fg">{current?.label}</span>
-        </span>
-        <RtIcon name="chevron--down" size={14} className={cn('shrink-0 transition-transform', open && 'rotate-180')} color="var(--color-fg-muted)" />
-      </button>
-      {hint && <p className="mt-ds-1 text-ds-caption text-fg-muted">{hint}</p>}
-      {open && (
-        <ul id={id} role="listbox" className="absolute left-0 top-full z-ds-dropdown mt-ds-1 w-full overflow-hidden rounded-ds-md border border-line bg-surface py-ds-1 shadow-ds-md">
-          {options.map((o) => (
-            <li
-              key={o.id}
-              role="option"
-              aria-selected={o.id === value}
-              onClick={() => {
-                onChange(o.id);
-                setOpen(false);
-              }}
-              className={cn('flex h-ds-cell cursor-pointer items-center px-ds-3 text-ds-body-s hover:bg-action-soft hover:text-action-strong', o.id === value ? 'font-bold text-action' : 'text-fg')}
-            >
-              {o.label}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
 /** Menú contextual pequeño (popup del lazo, «Ver»). */
-export function MenuItem({ icon, children, onClick, tone = 'action' }: { icon: RtIconName; children: ReactNode; onClick: () => void; tone?: 'action' | 'danger' }) {
+export function MenuItem({ icon, children, onClick, tone = 'action', ...rest }: { icon: RtIconName; children: ReactNode; onClick: () => void; tone?: 'action' | 'danger' } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'children'>) {
   return (
     <button
       type="button"
       role="menuitem"
       onClick={onClick}
-      className={cn('flex w-full items-center gap-ds-3 rounded-ds-md px-ds-3 py-ds-2 text-left text-ds-body-s font-semibold transition-colors', tone === 'danger' ? 'text-danger-fg hover:bg-danger-bg' : 'text-action-text hover:bg-action-soft')}
+      {...rest}
+      className={cn('flex w-full items-center gap-ds-3 rounded-ds-md px-ds-3 py-ds-2 text-left text-ds-body-s font-semibold transition-colors', tone === 'danger' ? 'text-danger-fg hover:bg-danger-bg' : 'text-action-strong hover:bg-action-soft')}
     >
       <RtIcon name={icon} size={18} />
       {children}

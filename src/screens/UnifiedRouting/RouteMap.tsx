@@ -1,14 +1,13 @@
-// Mapa del DS (Leaflet + CARTO Positron, ver docs/sections/MapPins.tsx) con pines, rutas, lazo y arrastre.
+// Mapa del DS (Leaflet, pines de docs/sections/MapPins.tsx) sobre un fondo de calles de Google en gris claro con pines, rutas, lazo y arrastre.
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { cn } from '@/ds';
+import { addBaseLayer } from './mapTiles';
 import { CoachBar, HintBubble, MapChip, RtIcon } from './parts';
 import { DEPOTS, type LatLng } from './data';
 import { RT_ICONS } from './icons';
 
-const TILES = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-const ATTR = '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>';
 const SCL: L.LatLngTuple = [-33.4489, -70.6493];
 
 /** Resuelve un token CSS (p. ej. `--su2`) a su valor: Leaflet dibuja SVG con atributos, que no aceptan var(). */
@@ -90,7 +89,7 @@ export function RouteMap({ pins, vehicles = [], lines = [], showDepots, fitKey, 
     if (!el.current) return;
     const m = L.map(el.current, { center: SCL, zoom: 11, zoomControl: false, scrollWheelZoom: true, attributionControl: true });
     m.attributionControl.setPrefix(false);
-    L.tileLayer(TILES, { attribution: ATTR, subdomains: 'abcd', maxZoom: 19 }).addTo(m);
+    addBaseLayer(m, tok);
     group.current = L.layerGroup().addTo(m);
     map.current = m;
     const ro = new ResizeObserver(() => m.invalidateSize());
@@ -285,7 +284,7 @@ export function RouteMap({ pins, vehicles = [], lines = [], showDepots, fitKey, 
       </div>
 
       {coach && !lasso?.active && (
-        <div className="absolute bottom-ds-6 left-ds-4 z-ds-dropdown max-w-ds-drawer">
+        <div className="absolute left-ds-4 top-ds-4 z-ds-dropdown max-w-ds-drawer">
           <CoachBar icon="touch--1" onClose={onCoachClose}>
             {coach}
           </CoachBar>
@@ -296,13 +295,13 @@ export function RouteMap({ pins, vehicles = [], lines = [], showDepots, fitKey, 
         <MapChip icon="reset" onClick={fit} hint="Fit every stop in view.">
           Reset zoom
         </MapChip>
-        <div className="flex h-ds-8 items-center overflow-hidden rounded-ds-md border border-line bg-surface shadow-ds-sm">
-          <button type="button" aria-label="Zoom out" onClick={() => map.current?.zoomOut()} className="flex h-full w-ds-8 items-center justify-center text-fg hover:bg-canvas">
-            <RtIcon name="subtract" size={18} />
+        <div className="flex h-ds-7 items-center overflow-hidden rounded-ds-pill border border-line bg-surface shadow-ds-sm">
+          <button type="button" aria-label="Zoom out" onClick={() => map.current?.zoomOut()} className="flex h-full w-ds-7 items-center justify-center text-fg hover:bg-canvas">
+            <RtIcon name="subtract" size={16} />
           </button>
           <span className="h-ds-5 w-px bg-line" />
-          <button type="button" aria-label="Zoom in" onClick={() => map.current?.zoomIn()} className="flex h-full w-ds-8 items-center justify-center text-fg hover:bg-canvas">
-            <RtIcon name="add" size={18} />
+          <button type="button" aria-label="Zoom in" onClick={() => map.current?.zoomIn()} className="flex h-full w-ds-7 items-center justify-center text-fg hover:bg-canvas">
+            <RtIcon name="add" size={16} />
           </button>
         </div>
       </div>

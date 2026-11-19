@@ -28,3 +28,6 @@
 .rt-insert-before { box-shadow: 0 calc(var(--stroke-accent) * -1) 0 0 var(--color-action-text); }
 .rt-insert-after { box-shadow: 0 var(--stroke-accent) 0 0 var(--color-action-text); }
 .rt-ghost { pointer-events: none; position: fixed; z-index: var(--z-menu); transform: translate(var(--space-3), var(--space-3)); }
+
+/* Selector de vista: miniaturas 168 px de ancho (la proporción 160:96 la fija el SVG) */
+.rt-thumb { width: calc(var(--size-list) - var(--space-10) - var(--space-2)); }

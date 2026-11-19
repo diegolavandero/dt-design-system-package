@@ -53,7 +53,7 @@ export function Modal({ open, onClose, title, header, size = 'md', children, foo
           <CloseButton onClick={onClose} />
         </div>
         <div className="overflow-y-auto px-ds-5 py-ds-5">{children}</div>
-        {footer && <div className="flex flex-wrap justify-end gap-ds-3 px-ds-5 pb-ds-5">{footer}</div>}
+        {footer && <div className="flex flex-wrap justify-end gap-ds-2 px-ds-5 pb-ds-5">{footer}</div>}
       </div>
     </div>,
     document.body,
