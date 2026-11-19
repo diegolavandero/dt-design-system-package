@@ -14,7 +14,7 @@ export function RtIcon({ name, size = 16, color = 'currentColor', className }: {
 /* ── Hint: tooltip azul de ayuda para acciones (patrón «coachmark» de la consola de ruteo) ── */
 type Side = 'top' | 'bottom' | 'left' | 'right';
 
-export function HintBubble({ x, y, side, children, id, interactive, onEnter, onLeave }: { x: number; y: number; side: Side; children: ReactNode; id?: string; interactive?: boolean; onEnter?: () => void; onLeave?: () => void }) {
+export function HintBubble({ x, y, side, children, id, interactive, onEnter, onLeave, tone = 'info' }: { x: number; y: number; side: Side; children: ReactNode; id?: string; interactive?: boolean; onEnter?: () => void; onLeave?: () => void; tone?: 'info' | 'danger' }) {
   const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ left: x, top: y });
   useLayoutEffect(() => {
@@ -37,9 +37,9 @@ export function HintBubble({ x, y, side, children, id, interactive, onEnter, onL
   }[side];
   const arrowStyle = side === 'top' || side === 'bottom' ? { left: Math.min(Math.max(x - pos.left, 12), (ref.current?.offsetWidth ?? 24) - 12) } : undefined;
   return createPortal(
-    <div ref={ref} id={id} role="tooltip" onMouseEnter={onEnter} onMouseLeave={onLeave} className={cn('fixed z-ds-menu max-w-ds-popover rounded-ds-md bg-action-text px-ds-3 py-ds-2 text-ds-caption leading-ds-caption text-fg-inverse shadow-ds-md', interactive ? 'pointer-events-auto' : 'pointer-events-none')} style={{ left: pos.left, top: pos.top }}>
+    <div ref={ref} id={id} role="tooltip" onMouseEnter={onEnter} onMouseLeave={onLeave} className={cn('fixed z-ds-menu max-w-ds-popover rounded-ds-md px-ds-3 py-ds-2 text-ds-caption leading-ds-caption text-fg-inverse shadow-ds-md', tone === 'danger' ? 'bg-danger-fg' : 'bg-action-text', interactive ? 'pointer-events-auto' : 'pointer-events-none')} style={{ left: pos.left, top: pos.top }}>
       {children}
-      <span className={cn('absolute h-ds-2 w-ds-2 rotate-45 bg-action-text', arrow)} style={arrowStyle} />
+      <span className={cn('absolute h-ds-2 w-ds-2 rotate-45', tone === 'danger' ? 'bg-danger-fg' : 'bg-action-text', arrow)} style={arrowStyle} />
     </div>,
     document.body,
   );
@@ -49,7 +49,7 @@ export function HintBubble({ x, y, side, children, id, interactive, onEnter, onL
  * Envuelve un elemento y muestra la ayuda azul al pasar el cursor o al enfocarlo (WCAG 1.4.13):
  * se puede descartar con Esc, el cursor puede pasar sobre ella sin que desaparezca y el elemento queda descrito con aria-describedby.
  */
-export function Hint({ text, side = 'top', children, disabled, block }: { text: ReactNode; side?: Side; children: ReactElement; disabled?: boolean; block?: boolean }) {
+export function Hint({ text, side = 'top', children, disabled, block, tone }: { text: ReactNode; side?: Side; children: ReactElement; disabled?: boolean; block?: boolean; tone?: 'info' | 'danger' }) {
   const [at, setAt] = useState<{ x: number; y: number; side: Side } | null>(null);
   const ref = useRef<HTMLSpanElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>();
@@ -91,7 +91,7 @@ export function Hint({ text, side = 'top', children, disabled, block }: { text: 
     <span ref={ref} className={block ? 'flex w-full' : 'inline-flex'} onMouseEnter={show} onMouseLeave={hide} onFocus={show} onBlur={hide}>
       {visible ? cloneElement(children, { 'aria-describedby': id } as Record<string, string>) : children}
       {visible && (
-        <HintBubble id={id} x={at.x} y={at.y} side={at.side} interactive onEnter={() => clearTimeout(timer.current)} onLeave={hide}>
+        <HintBubble id={id} tone={tone} x={at.x} y={at.y} side={at.side} interactive onEnter={() => clearTimeout(timer.current)} onLeave={hide}>
           {text}
         </HintBubble>
       )}

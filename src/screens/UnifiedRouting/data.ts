@@ -327,3 +327,18 @@ type Cap3 = [number, number, number];
 export const sumOrderCap = (ids: Iterable<string>): Cap3 => [...ids].reduce((a, id) => a.map((v, i) => v + ORDER_BY_ID.get(id)!.cap[i]) as Cap3, [0, 0, 0] as Cap3);
 export const sumVehicleCap = (ids: Iterable<string>): Cap3 => [...ids].reduce((a, id) => a.map((v, i) => v + VEHICLE_BY_ID.get(id)!.cap[i]) as Cap3, [0, 0, 0] as Cap3);
 export const sumAmount = (ids: Iterable<string>) => [...ids].reduce((a, id) => a + ORDER_BY_ID.get(id)!.amount, 0);
+
+/** Límite de tiempo prometido por ruta. */
+export const MAX_ROUTE_MIN = 12 * 60;
+
+/** Problemas de una ruta tras una edición manual: capacidad excedida, tiempo prometido excedido y paradas fuera de ventana. */
+export function routeIssues(vehicleId: string, s: ReturnType<typeof routeStats>) {
+  const v = VEHICLE_BY_ID.get(vehicleId)!;
+  const cap = s.cap.map((c, i) =>
+    c > v.cap[i] + 1e-9 ? `Capacity ${i + 1} exceeded: this route carries ${fmtNum(c)} but ${v.plate} supports ${v.cap[i]}. Move ${fmtNum(c - v.cap[i])} out of the route or use a larger vehicle.` : null,
+  );
+  const time = s.minutes > MAX_ROUTE_MIN ? `Route time exceeds the promised 12h: it would take ${fmtDuration(s.minutes)}. Remove stops or split the route.` : null;
+  const lateStops = s.timings.flatMap((t, i) => (t.late ? [i + 1] : []));
+  const late = lateStops.length ? `${lateStops.length === 1 ? 'Stop' : 'Stops'} ${lateStops.join(', ')} ${lateStops.length === 1 ? 'arrives' : 'arrive'} after the time window closes. Reorder the stops or move them to another route.` : null;
+  return { cap, time, late };
+}

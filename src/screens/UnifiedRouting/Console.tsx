@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Avatar, Badge, DataTable, FilterBar, Modal, TextField, cn, useToast, type Column } from '@/ds';
-import { ORDER_BY_ID, VEHICLES, VEHICLE_BY_ID, fmtDuration, fmtKm, fmtMoney, fmtNum, fmtTime, routeStats, type Order } from './data';
+import { ORDER_BY_ID, VEHICLES, VEHICLE_BY_ID, fmtDuration, MAX_ROUTE_MIN, routeIssues, fmtKm, fmtMoney, fmtNum, fmtTime, routeStats, type Order } from './data';
 import { RouteMap, type MapLine, type MapPin } from './RouteMap';
 import { Bullet, Checkbox, Dot, Hint, IconAction, MenuItem, Pill, RtIcon, Sep } from './parts';
 import { ViewMenu } from './ViewMenu';
@@ -136,6 +136,7 @@ function RailCard({ title, dot, children, open, onOpen, actions, drop, selected 
 function RouteCard({ r, p, open, onOpen }: { r: Route; p: Planner; open: boolean; onOpen: () => void }) {
   const s = routeStats(r.vehicleId, r.orderIds);
   const v = VEHICLE_BY_ID.get(r.vehicleId)!;
+  const bad = routeIssues(r.vehicleId, s);
   const drop = useDropZone(`route:${r.vehicleId}`, r.locked);
   return (
     <RailCard
@@ -160,8 +161,8 @@ function RouteCard({ r, p, open, onOpen }: { r: Route; p: Planner; open: boolean
       }
     >
       <span className="block text-fg-secondary">{v.driver}</span>
-      <Items items={[<>Stops: {s.stops}</>, <>Duration: {fmtDuration(s.minutes)}</>]} />
-      <Items items={[<>Cap 1: {fmtNum(s.cap[0])}/{v.cap[0]}</>, <>Dist: {fmtKm(s.dist)}</>]} />
+      <Items items={[<>Stops: {s.stops}</>, <Flag issue={bad.time}>Duration: {fmtDuration(s.minutes)}</Flag>]} />
+      <Items items={[<Flag issue={bad.cap[0]}>Cap 1: {fmtNum(s.cap[0])}/{v.cap[0]}</Flag>, <>Dist: {fmtKm(s.dist)}</>]} />
       <span className="block">Amount: {fmtMoney(s.amount)}</span>
       {drop.over && <span className={cn('mt-ds-1 block text-ds-caption font-semibold', r.locked ? 'text-danger-fg' : 'text-action-strong')}>{r.locked ? 'Locked route — unlock it to add orders' : 'Release to add the order here'}</span>}
     </RailCard>
@@ -315,9 +316,9 @@ function PanelShell({ dot, title, subtitle, onClose, children, drop }: { dot: Re
 
 function Items({ items }: { items: ReactNode[] }) {
   return (
-    <span className="flex min-w-0 flex-wrap items-center gap-x-ds-2">
+    <span className="flex min-w-0 flex-wrap items-center gap-x-ds-1">
       {items.map((it, i) => (
-        <span key={i} className="inline-flex items-center gap-ds-2 whitespace-nowrap">
+        <span key={i} className="inline-flex items-center gap-ds-1 whitespace-nowrap">
           {i > 0 && <Bullet />}
           {it}
         </span>
@@ -326,10 +327,22 @@ function Items({ items }: { items: ReactNode[] }) {
   );
 }
 
+/** Valor que incumple un límite: rojo, subrayado punteado (no solo color) y tooltip rojo con la explicación. */
+function Flag({ issue, children }: { issue: string | null; children: ReactNode }) {
+  if (!issue) return <>{children}</>;
+  return (
+    <Hint tone="danger" text={issue}>
+      <span tabIndex={0} className="cursor-help font-semibold text-danger-fg underline decoration-dotted underline-offset-2">
+        {children}
+      </span>
+    </Hint>
+  );
+}
+
 function Stat({ icon, children, items }: { icon: Parameters<typeof RtIcon>[0]['name']; children?: ReactNode; items?: ReactNode[] }) {
   return (
-    <div className="flex items-start gap-ds-2 text-ds-body-s text-fg">
-      <RtIcon name={icon} size={16} className="mt-ds-1 shrink-0" color="var(--color-fg-secondary)" />
+    <div className="flex items-start gap-ds-2 text-ds-caption leading-ds-caption text-fg">
+      <RtIcon name={icon} size={14} className="mt-px shrink-0" color="var(--color-fg-secondary)" />
       {items ? <Items items={items} /> : <span className="min-w-0">{children}</span>}
     </div>
   );
@@ -379,17 +392,24 @@ function RoutePanel({ r, p, onClose, onAssign }: { r: Route; p: Planner; onClose
   const ck = useChecked(r.orderIds);
   const pickups = r.orderIds.filter((id) => order(id).type.startsWith('Pickup')).length;
   const late = s.timings.filter((t) => t.late).length;
+  const bad = routeIssues(r.vehicleId, s);
   return (
     <PanelShell dot={<Dot color={`var(${color})`} />} title={r.vehicleId} subtitle={`Route ${r.vehicleId.slice(3)} · ${v.plate}`} onClose={onClose}>
-      <div className="flex flex-col gap-ds-2 border-b border-line px-ds-4 py-ds-4">
+      <div className="flex flex-col gap-ds-1 border-b border-line px-ds-4 py-ds-3">
         <Stat icon="route" items={[<>Orders: {s.stops}</>, <>Stops: {s.stops}</>, <>Dist.: {fmtKm(s.dist)}</>]} />
         <Stat icon="package" items={[<>Pickups: {pickups}</>, <>Deliveries: {s.stops - pickups}</>, <>{fmtMoney(s.amount)}</>]} />
         <Stat icon="location" items={[<>Origin: {v.originDc}</>, <>End: last stop</>]} />
-        <Stat icon="truck" items={[<>Cap 1: {fmtNum(s.cap[0])}/{v.cap[0]}</>, <>Cap 2: {fmtNum(s.cap[1])}/{v.cap[1]}</>, <>Cap 3: {fmtNum(s.cap[2])}/{v.cap[2]}</>]} />
-        <Stat icon="time" items={[<>Start: {fmtTime(s.start)}</>, <>End: {fmtTime(s.end)}</>, <>T: {fmtDuration(s.minutes)}/12h</>]} />
+        <Stat icon="truck" items={[0, 1, 2].map((i) => <Flag issue={bad.cap[i]}>Cap {i + 1}: {fmtNum(s.cap[i])}/{v.cap[i]}</Flag>)} />
+        <Stat icon="time" items={[<>Start: {fmtTime(s.start)}</>, <>End: {fmtTime(s.end)}</>, <Flag issue={bad.time}>T: {fmtDuration(s.minutes)}/{MAX_ROUTE_MIN / 60}h</Flag>]} />
         <Stat icon="user">Driver: {v.driver}</Stat>
-        {late > 0 && <Stat icon="warning-filled"><span className="text-danger-fg">{late} {late === 1 ? 'stop arrives' : 'stops arrive'} outside the time window</span></Stat>}
-        <div className="mt-ds-2 flex justify-end">
+        {late > 0 && (
+          <Stat icon="warning-filled">
+            <Flag issue={bad.late}>
+              {late} {late === 1 ? 'stop arrives' : 'stops arrive'} outside the time window
+            </Flag>
+          </Stat>
+        )}
+        <div className="mt-ds-1 flex justify-end">
           {r.confirmed ? (
             <Badge variant="success">Route confirmed</Badge>
           ) : (
