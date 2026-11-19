@@ -260,7 +260,7 @@ function OrderCard({ id, idx, color, routeId, timing, checked, onCheck, locked, 
           </span>
         </Hint>
         {idx !== undefined && routeId !== 'unassigned' ? (
-          <span className="flex h-ds-5 w-ds-5 shrink-0 items-center justify-center rounded-ds-pill text-ds-caption font-bold text-fg-inverse" style={{ background: `var(${color})` }}>{idx + 1}</span>
+          <span className="flex h-ds-5 w-ds-5 shrink-0 items-center justify-center box-border rounded-ds-pill border-2 bg-surface text-ds-caption font-bold text-fg" style={{ borderColor: `var(${color})` }}>{idx + 1}</span>
         ) : (
           <Dot color={`var(${color})`} />
         )}
