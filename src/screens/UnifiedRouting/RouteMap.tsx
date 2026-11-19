@@ -6,7 +6,7 @@ import { cn } from '@/ds';
 import { addBaseLayer } from './mapTiles';
 import { CoachBar, HintBubble, MapChip, RtIcon } from './parts';
 import { DEPOTS, type LatLng } from './data';
-import { RT_ICONS } from './icons';
+import { ICON_PATHS } from '@/ds';
 
 const SCL: L.LatLngTuple = [-33.4489, -70.6493];
 
@@ -120,7 +120,7 @@ export function RouteMap({ pins, vehicles = [], lines = [], showDepots, fitKey, 
     }
     if (showDepots) {
       for (const d of DEPOTS) {
-        L.marker([d.lat, d.lng], { icon: L.divIcon({ html: pinHtml('--b5', iconInner(RT_ICONS.store)), className: '', iconSize: [PIN_W, PIN_H], iconAnchor: [PIN_W / 2, Math.round((PIN_H * 40.5) / 49)] }), interactive: true, keyboard: false, zIndexOffset: -100 })
+        L.marker([d.lat, d.lng], { icon: L.divIcon({ html: pinHtml('--b5', iconInner(ICON_PATHS.store)), className: '', iconSize: [PIN_W, PIN_H], iconAnchor: [PIN_W / 2, Math.round((PIN_H * 40.5) / 49)] }), interactive: true, keyboard: false, zIndexOffset: -100 })
           .on('mouseover', () => {
             const s = toScreen(d.lat, d.lng);
             setTip({ x: s.x, y: s.y - PIN_H + 6, content: <><b className="block">{d.name}</b>Distribution center</> });
@@ -130,7 +130,7 @@ export function RouteMap({ pins, vehicles = [], lines = [], showDepots, fitKey, 
       }
     }
     for (const v of vehicles) {
-      L.marker([v.lat, v.lng], { icon: L.divIcon({ html: pinHtml(v.color, iconInner(RT_ICONS.truck), 'rt-pin--vehicle'), className: '', iconSize: [PIN_W, PIN_H], iconAnchor: [PIN_W / 2, Math.round((PIN_H * 40.5) / 49)] }), zIndexOffset: 400, keyboard: false })
+      L.marker([v.lat, v.lng], { icon: L.divIcon({ html: pinHtml(v.color, iconInner(ICON_PATHS.truck), 'rt-pin--vehicle'), className: '', iconSize: [PIN_W, PIN_H], iconAnchor: [PIN_W / 2, Math.round((PIN_H * 40.5) / 49)] }), zIndexOffset: 400, keyboard: false })
         .on('mouseover', () => {
           const s = toScreen(v.lat, v.lng);
           setTip({ x: s.x, y: s.y - PIN_H + 6, content: v.hint });

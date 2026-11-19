@@ -1,5 +1,6 @@
 /** API pública del design system. Las pantallas importan SOLO desde '@/ds'. */
 export * from './icons/Icon';
+export { ICON_PATHS } from './icons/paths';
 export * from './lib/cn';
 export * from './lib/AnimatedNumber';
 export * from './lib/useAnimatedNumber';

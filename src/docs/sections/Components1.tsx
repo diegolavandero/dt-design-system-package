@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import { Icon } from '../icons';
 import { Banner, Card, CodeBlock, CopyCode, SectionHeader, TabCard, TCode, Td, TTable, UsageCard } from '../ui';
 import { cn } from '@/ds/lib/cn';
+import { Button } from '@/ds/ui/Button';
 
 type Head = { title: string; titleKey?: string; description?: string };
 
@@ -131,12 +132,28 @@ export function Buttons({ data }: { data: ButtonsData }) {
       </TTable>
     </div>
   );
+  const iconText = (
+    <div className="flex flex-col gap-4 p-4">
+      <Banner>Variante ícono + texto: el ícono sale de la librería del DS (<TCode>ICON_PATHS</TCode>), mide siempre 16×16, va centrado con el texto y a 8 px de él. <TCode>iconPosition</TCode> lo pasa al final (chevrons).</Banner>
+      <div className="flex flex-wrap items-center gap-2">
+        <Button icon="lasso">Select with lasso</Button>
+        <Button icon="view">View</Button>
+        <Button icon="chevron--down" iconPosition="end">View</Button>
+        <Button variant="primary" icon="add">Add order</Button>
+        <Button variant="primary" icon="arrow-right" iconPosition="end">Next</Button>
+        <Button icon="lasso" disabled>Disabled</Button>
+        <Button icon="lasso" aria-pressed="true">Pressed</Button>
+      </div>
+      <CopyCode text={`<Button icon="lasso">Select with lasso</Button>\n<Button icon="chevron--down" iconPosition="end">View</Button>`} flat>{`<Button icon="lasso">Select with lasso</Button>\n<Button icon="chevron--down" iconPosition="end">View</Button>`}</CopyCode>
+    </div>
+  );
   return (
     <>
       <SectionHeader data={data} />
       <UsageCard snippet={data.pageUsage} />
       <TabCard tabs={[
         { label: 'Preview', content: preview },
+        { label: 'Icon + text', content: iconText },
         { label: 'Code', content: <CopyCode text={data.code ?? ''} flat>{data.code}</CopyCode> },
         { label: 'Tokens', content: tokens },
       ]} />

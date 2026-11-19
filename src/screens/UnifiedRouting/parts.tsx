@@ -3,12 +3,12 @@
 import { cloneElement, useEffect, useId, useLayoutEffect, useRef, useState, type ButtonHTMLAttributes, type ReactElement, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { Button, cn } from '@/ds';
-import { RT_ICONS, type RtIconName } from './icons';
+import { Icon, type IconName } from '@/ds';
+type RtIconName = IconName;
 
+/** Ícono de la librería del DS (misma `Icon` que usa todo el sistema). */
 export function RtIcon({ name, size = 16, color = 'currentColor', className }: { name: RtIconName; size?: number; color?: string; className?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 32 32" fill={color} aria-hidden="true" focusable="false" className={cn('shrink-0', className)} dangerouslySetInnerHTML={{ __html: RT_ICONS[name] }} />
-  );
+  return <Icon name={name} size={size} color={color} className={className} />;
 }
 
 /* ── Hint: tooltip azul de ayuda para acciones (patrón «coachmark» de la consola de ruteo) ── */
@@ -153,7 +153,7 @@ export function Dot({ color, ring, size = 'md' }: { color: string; ring?: boolea
 /** Botón del DS (`Button`) con ayuda azul opcional. La separación entre botones es siempre de 8 px (`gap-ds-2`). */
 export function Pill({ variant = 'secondary', children, onClick, disabled, icon, trailing, className, hint, pressed, elevated }: { variant?: 'primary' | 'secondary'; children: ReactNode; onClick?: () => void; disabled?: boolean; icon?: RtIconName; trailing?: RtIconName; className?: string; hint?: ReactNode; pressed?: boolean; elevated?: boolean }) {
   const btn = (
-    <Button variant={variant} onClick={onClick} disabled={disabled} aria-pressed={pressed} leading={icon && <RtIcon name={icon} size={16} />} trailing={trailing && <RtIcon name={trailing} size={16} />} className={cn(elevated && 'shadow-ds-sm', className)}>
+    <Button variant={variant} onClick={onClick} disabled={disabled} aria-pressed={pressed} icon={icon ?? trailing} iconPosition={icon ? 'start' : 'end'} className={cn(elevated && 'shadow-ds-sm', className)}>
       {children}
     </Button>
   );

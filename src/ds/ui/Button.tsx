@@ -4,18 +4,18 @@ import { cn } from '@/ds/lib/cn';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary';
+  /** Ícono de la librería del DS (`ICON_PATHS`). Siempre 16×16, centrado con el texto y a 8 px de él. Sin `icon`, el botón es solo texto. */
   icon?: IconName;
-  /** Nodo al inicio / al final (p. ej. un ícono fuera del catálogo del DS). Mismo hueco de 8 px que `icon`. */
-  leading?: ReactNode;
-  trailing?: ReactNode;
+  /** Lado del ícono: `start` (antes del texto, por defecto) o `end` (después, p. ej. un chevron). */
+  iconPosition?: 'start' | 'end';
   children: ReactNode;
 }
 
 /**
- * Botones píldora del DS (32 px): primario relleno y secundario outline.
+ * Botones píldora del DS (32 px): primario relleno y secundario outline, solo texto o ícono + texto (`icon`, `iconPosition`).
  * Estados: hover, deshabilitado y presionado (`aria-pressed`, p. ej. modo lazo activo). El foco visible viene de base.css.
  */
-export function Button({ variant = 'secondary', icon, leading, trailing, children, className, type = 'button', ...rest }: ButtonProps) {
+export function Button({ variant = 'secondary', icon, iconPosition = 'start', children, className, type = 'button', ...rest }: ButtonProps) {
   return (
     <button
       type={type}
@@ -28,10 +28,9 @@ export function Button({ variant = 'secondary', icon, leading, trailing, childre
       )}
       {...rest}
     >
-      {icon && <Icon name={icon} size={14} />}
-      {leading}
+      {icon && iconPosition === 'start' && <Icon name={icon} size={16} />}
       {children}
-      {trailing}
+      {icon && iconPosition === 'end' && <Icon name={icon} size={16} />}
     </button>
   );
 }
