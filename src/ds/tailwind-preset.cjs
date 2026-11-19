@@ -25,7 +25,7 @@ module.exports = {
         p: scale('p', [1, 2, 3, 4, 5, 6, 7]),
         indigo: 'var(--indigo)',
         // Semánticos
-        fg: { DEFAULT: semantic('fg'), secondary: semantic('fg-secondary'), muted: semantic('fg-muted'), subtle: semantic('fg-subtle'), inverse: semantic('fg-inverse') },
+        fg: { DEFAULT: semantic('fg'), secondary: semantic('fg-secondary'), muted: semantic('fg-muted'), subtle: semantic('fg-subtle'), inverse: semantic('fg-inverse'), ink: semantic('fg-ink') },
         canvas: semantic('canvas'),
         surface: { DEFAULT: semantic('surface'), subtle: semantic('surface-subtle'), header: semantic('surface-header') },
         line: { DEFAULT: semantic('line'), strong: semantic('line-strong') },

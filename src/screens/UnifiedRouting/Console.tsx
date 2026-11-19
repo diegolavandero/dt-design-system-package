@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Avatar, Badge, DataTable, FilterBar, Modal, TextField, cn, useToast, type Column } from '@/ds';
 import { ORDER_BY_ID, VEHICLES, VEHICLE_BY_ID, fmtDuration, MAX_ROUTE_MIN, routeIssues, fmtKm, fmtMoney, fmtNum, fmtTime, routeStats, type Order } from './data';
 import { RouteMap, type MapLine, type MapPin } from './RouteMap';
-import { Bullet, Checkbox, Dot, Hint, IconAction, MenuItem, Pill, RtIcon, Sep } from './parts';
+import { Bullet, Checkbox, Dot, Hint, IconAction, MenuItem, Pill, RtIcon, Sep, inkOn } from './parts';
 import { ViewMenu } from './ViewMenu';
 import { DragProvider, useDrag, useDropZone, type DragPayload, type DropTarget } from './useDrag';
 import type { Planner, Route } from './usePlanner';
@@ -260,7 +260,7 @@ function OrderCard({ id, idx, color, routeId, timing, checked, onCheck, locked, 
           </span>
         </Hint>
         {idx !== undefined && routeId !== 'unassigned' ? (
-          <span className="flex h-ds-5 w-ds-5 shrink-0 items-center justify-center box-border rounded-ds-pill border-2 bg-surface text-ds-caption font-bold text-fg" style={{ borderColor: `var(${color})` }}>{idx + 1}</span>
+          <span className={cn('flex h-ds-5 w-ds-5 shrink-0 items-center justify-center rounded-ds-pill text-ds-caption font-bold', inkOn(color))} style={{ background: `var(${color})` }}>{idx + 1}</span>
         ) : (
           <Dot color={`var(${color})`} />
         )}
