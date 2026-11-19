@@ -1,0 +1,30 @@
+/* Unified Routing: medidas de layout compuestas solo con tokens del DS y estados que Tailwind no expresa. */
+.rt-rail { width: calc(var(--size-list) + var(--space-7) + var(--space-4)); } /* 288px: riel izquierdo */
+.rt-panel { width: calc(var(--size-list) + var(--space-10) + var(--space-7)); } /* 336px: panel de detalle */
+.rt-split-table { height: calc(var(--size-list) + var(--space-10) + var(--space-5)); } /* tabla sobre el mapa en el asistente */
+.rt-modal-scroll { max-height: calc(var(--size-list) + var(--space-8)); }
+
+/* Mapa */
+.leaflet-container { font-family: var(--font-sans); background: var(--color-canvas); }
+.leaflet-control-attribution { font-size: var(--fs-caption); }
+.rt-pin { line-height: 0; filter: drop-shadow(0 2px 3px color-mix(in srgb, var(--indigo) 30%, transparent)); transition: transform var(--motion-fast) ease; }
+.rt-pin--drag { cursor: grab; }
+.rt-pin--drag:hover { transform: translateY(calc(var(--space-1) * -0.5)); }
+.rt-pin--dim { opacity: var(--opacity-disabled); }
+.rt-pin--marked { filter: drop-shadow(0 0 var(--space-1) var(--b5)) drop-shadow(0 0 var(--space-1) var(--b5)); }
+.rt-pin--marked::after {
+  content: ""; position: absolute; left: 50%; bottom: calc(var(--space-1) * -0.5); width: var(--space-5); height: var(--space-2);
+  transform: translateX(-50%); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--b5) 45%, transparent);
+}
+.rt-pin { position: relative; cursor: pointer; }
+.rt-lasso-frame::after { content: ""; position: absolute; inset: 0; z-index: var(--z-dropdown); pointer-events: none; box-shadow: inset 0 0 0 var(--stroke-accent) var(--color-action-text); }
+.rt-lasso-path { fill: color-mix(in srgb, var(--b6) 14%, transparent); stroke: var(--b6); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+
+/* Arrastrar y soltar */
+.rt-dragging, .rt-dragging * { cursor: grabbing !important; user-select: none; }
+.rt-grab { cursor: grab; }
+.rt-drop-active { outline: 2px dashed var(--color-action-text); outline-offset: -2px; background: var(--color-action-soft) !important; }
+.rt-drop-blocked { outline: 2px dashed var(--color-danger); outline-offset: -2px; cursor: not-allowed !important; }
+.rt-insert-before { box-shadow: 0 calc(var(--stroke-accent) * -1) 0 0 var(--color-action-text); }
+.rt-insert-after { box-shadow: 0 var(--stroke-accent) 0 0 var(--color-action-text); }
+.rt-ghost { pointer-events: none; position: fixed; z-index: var(--z-menu); transform: translate(var(--space-3), var(--space-3)); }
