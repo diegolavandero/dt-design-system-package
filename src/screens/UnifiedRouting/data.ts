@@ -342,3 +342,18 @@ export function routeIssues(vehicleId: string, s: ReturnType<typeof routeStats>)
   const late = lateStops.length ? `${lateStops.length === 1 ? 'Stop' : 'Stops'} ${lateStops.join(', ')} ${lateStops.length === 1 ? 'arrives' : 'arrive'} after the time window closes. Reorder the stops or move them to another route.` : null;
   return { cap, time, late };
 }
+
+/** Órdenes sin asignar más cercanas al origen del vehículo que caben en su capacidad (máx. `limit`). */
+export function suggestOrders(vehicleId: string, pool: string[], limit = 8): string[] {
+  const v = VEHICLE_BY_ID.get(vehicleId)!;
+  const used = [0, 0, 0];
+  const out: string[] = [];
+  for (const id of [...pool].sort((a, b) => km(v, ORDER_BY_ID.get(a)!) - km(v, ORDER_BY_ID.get(b)!))) {
+    const o = ORDER_BY_ID.get(id)!;
+    if (o.cap.some((c, i) => used[i] + c > v.cap[i])) continue;
+    o.cap.forEach((c, i) => (used[i] += c));
+    out.push(id);
+    if (out.length === limit) break;
+  }
+  return out;
+}

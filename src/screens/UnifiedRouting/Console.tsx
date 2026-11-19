@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Avatar, Badge, DataTable, FilterBar, Modal, TextField, cn, useToast, type Column } from '@/ds';
-import { ORDER_BY_ID, VEHICLES, VEHICLE_BY_ID, fmtDuration, MAX_ROUTE_MIN, routeIssues, fmtKm, fmtMoney, fmtNum, fmtTime, routeStats, type Order } from './data';
+import { ORDER_BY_ID, VEHICLES, VEHICLE_BY_ID, fmtDuration, MAX_ROUTE_MIN, routeIssues, suggestOrders, fmtKm, fmtMoney, fmtNum, fmtTime, routeStats, type Order } from './data';
 import { RouteMap, type MapLine, type MapPin } from './RouteMap';
 import { Bullet, Checkbox, Dot, Hint, IconAction, MenuItem, Pill, RtIcon, Sep, inkOn } from './parts';
 import { ViewMenu } from './ViewMenu';
@@ -169,7 +169,7 @@ function RouteCard({ r, p, open, onOpen }: { r: Route; p: Planner; open: boolean
   );
 }
 
-function Rail({ p, panel, setPanel, showUnassigned, setShowUnassigned }: { p: Planner; panel: Panel; setPanel: (x: Panel) => void; showUnassigned: boolean; setShowUnassigned: (v: boolean) => void }) {
+function Rail({ p, panel, setPanel, showUnassigned, setShowUnassigned, onAddRoute }: { p: Planner; panel: Panel; setPanel: (x: Panel) => void; showUnassigned: boolean; setShowUnassigned: (v: boolean) => void; onAddRoute: () => void }) {
   const [q, setQ] = useState('');
   const [searching, setSearching] = useState(false);
   const [menu, setMenu] = useState(false);
@@ -219,7 +219,7 @@ function Rail({ p, panel, setPanel, showUnassigned, setShowUnassigned }: { p: Pl
               <div role="menu" className="absolute right-0 top-full z-ds-menu mt-ds-1 min-w-ds-popover rounded-ds-md border border-line bg-surface p-ds-1 shadow-ds-md">
                 <MenuItem icon="view" onClick={() => { p.routes.forEach((r) => p.patchRoute(r.vehicleId, { hidden: false })); setMenu(false); }}>Show all routes</MenuItem>
                 <MenuItem icon="view--off" onClick={() => { p.routes.forEach((r) => p.patchRoute(r.vehicleId, { hidden: true })); setMenu(false); }}>Hide all routes</MenuItem>
-                <MenuItem icon="undo" onClick={() => { setMenu(false); p.restart(); }}>Start a new plan</MenuItem>
+                <MenuItem icon="add" onClick={() => { setMenu(false); onAddRoute(); }}>Add new route</MenuItem>
               </div>
             )}
           </span>
@@ -393,8 +393,17 @@ function RoutePanel({ r, p, onClose, onAssign }: { r: Route; p: Planner; onClose
   const pickups = r.orderIds.filter((id) => order(id).type.startsWith('Pickup')).length;
   const late = s.timings.filter((t) => t.late).length;
   const bad = routeIssues(r.vehicleId, s);
+  const empty = r.orderIds.length === 0;
+  const drop = useDropZone(`route:${r.vehicleId}`, r.locked);
+  const sel = [...p.selection.keys()].filter((id) => !p.routeOf(id) || p.routeOf(id)!.vehicleId !== r.vehicleId);
+  const fill = (ids: string[], msg: string) => {
+    const snap = p.snapshot();
+    p.move(ids, { kind: 'route', vehicleId: r.vehicleId }, true);
+    p.unselect(ids);
+    toast('info', msg, undefined, { action: { label: 'Undo', onClick: () => p.restore(snap) }, duration: 10000, position: 'bottom-center', replaceKey: 'undo' });
+  };
   return (
-    <PanelShell dot={<Dot color={`var(${color})`} />} title={r.vehicleId} subtitle={`Route ${r.vehicleId.slice(3)} · ${v.plate}`} onClose={onClose}>
+    <PanelShell dot={<Dot color={`var(${color})`} />} title={r.vehicleId} subtitle={`Route ${r.vehicleId.slice(3)} · ${v.plate}`} onClose={onClose} drop={empty ? drop : undefined}>
       <div className="flex flex-col gap-ds-1 border-b border-line px-ds-4 py-ds-3">
         <Stat icon="route" items={[<>Orders: {s.stops}</>, <>Stops: {s.stops}</>, <>Dist.: {fmtKm(s.dist)}</>]} />
         <Stat icon="package" items={[<>Pickups: {pickups}</>, <>Deliveries: {s.stops - pickups}</>, <>{fmtMoney(s.amount)}</>]} />
@@ -415,7 +424,8 @@ function RoutePanel({ r, p, onClose, onAssign }: { r: Route; p: Planner; onClose
           ) : (
             <Pill
               variant="primary"
-              hint="Confirm this route only and notify its driver."
+              disabled={empty}
+              hint={empty ? 'Add orders to this route before confirming it.' : 'Confirm this route only and notify its driver.'}
               onClick={() => {
                 p.patchRoute(r.vehicleId, { confirmed: true });
                 toast('success', `${r.vehicleId} confirmed`, `${v.driver} was notified.`);
@@ -426,6 +436,37 @@ function RoutePanel({ r, p, onClose, onAssign }: { r: Route; p: Planner; onClose
           )}
         </div>
       </div>
+      {empty ? (
+        <div className="flex flex-1 flex-col items-center justify-center gap-ds-3 px-ds-5 py-ds-6 text-center">
+          <span className="flex h-ds-8 w-ds-8 items-center justify-center rounded-ds-lg bg-action-soft">
+            <RtIcon name="draggable" size={20} color="var(--color-action-text)" />
+          </span>
+          <h3 className="text-ds-body-l font-bold text-fg">This route is empty</h3>
+          <p className="text-ds-body-s text-fg-secondary">Drag order cards or map pins onto this route, or move orders here from Unassigned.</p>
+          <div className="flex w-full flex-col items-center gap-ds-2 border-t border-line pt-ds-4">
+            <p className="text-ds-caption font-bold text-fg">Or add them from here</p>
+            <Pill disabled={!sel.length} icon="add" onClick={() => fill(sel, `${sel.length} ${sel.length === 1 ? 'order' : 'orders'} added to ${r.vehicleId}`)} hint={sel.length ? 'Move every order in Selected to this route and optimize the sequence.' : 'Select orders with the lasso or the map first.'}>
+              Add selected orders ({sel.length})
+            </Pill>
+            <Pill
+              disabled={!p.unassigned.length}
+              icon="route"
+              onClick={() => {
+                const ids = suggestOrders(r.vehicleId, p.unassigned);
+                if (!ids.length) return toast('warning', 'No unassigned order fits this vehicle', 'They exceed its capacity.');
+                fill(ids, `${ids.length} nearby ${ids.length === 1 ? 'order' : 'orders'} added to ${r.vehicleId}`);
+              }}
+              hint="Adds up to 8 unassigned orders, the closest to this vehicle’s origin, that fit its capacity."
+            >
+              Suggest nearby orders
+            </Pill>
+            <Pill onClick={() => { p.removeRoute(r.vehicleId); onClose(); }} hint="Delete this empty route.">
+              Remove route
+            </Pill>
+          </div>
+        </div>
+      ) : (
+        <>
       <ListTools
         q={q}
         setQ={setQ}
@@ -451,6 +492,8 @@ function RoutePanel({ r, p, onClose, onAssign }: { r: Route; p: Planner; onClose
           ) : null,
         )}
       </div>
+        </>
+      )}
     </PanelShell>
   );
 }
@@ -770,6 +813,67 @@ function AssignModal({ ids, p, onClose, onDone }: { ids: string[]; p: Planner; o
   );
 }
 
+/* ─────────────── Modal «Add new route» ─────────────── */
+function AddRouteModal({ p, onClose, onDone }: { p: Planner; onClose: () => void; onDone: (vehicleId: string) => void }) {
+  const [target, setTarget] = useState<string | null>(null);
+  const inPlan = new Set(p.routes.map((r) => r.vehicleId));
+  const vehicles = VEHICLES.filter((v) => v.available && !inPlan.has(v.id)).map((v) => ({ v, tag: p.selVehicles.has(v.id) ? 'Selected, no route' : 'Not in this plan' }));
+  const th = 'border-b border-line-strong bg-surface-header px-ds-3 py-ds-2 text-left text-ds-caption font-bold text-fg';
+  const td = 'border-b border-line px-ds-3 py-ds-2 align-middle text-ds-caption text-fg';
+  return (
+    <Modal
+      open
+      size="lg"
+      title="Add new route"
+      onClose={onClose}
+      footer={
+        <>
+          <Pill onClick={onClose}>Cancel</Pill>
+          <Pill variant="primary" disabled={!target} hint={target ? `Create an empty route for ${target}.` : 'Choose a vehicle first.'} onClick={() => onDone(target!)}>
+            Add route
+          </Pill>
+        </>
+      }
+    >
+      <p className="mb-ds-3 text-ds-body-s text-fg-secondary">Choose a vehicle that doesn’t have a route yet: one you selected in step 2 without orders, or one you left out of this plan.</p>
+      {vehicles.length === 0 ? (
+        <p className="rounded-ds-md bg-canvas px-ds-3 py-ds-4 text-center text-ds-body-s text-fg-muted">Every available vehicle already has a route.</p>
+      ) : (
+        <div className="rt-modal-scroll scroll-hover overflow-y-auto rounded-ds-md border border-line">
+          <table className="w-full border-collapse" role="radiogroup" aria-label="Vehicle for the new route">
+            <thead className="sticky top-0 z-ds-raised">
+              <tr>
+                <th className={cn(th, 'w-ds-8')} />
+                <th className={th}>Vehicle</th>
+                <th className={th}>Origin DC</th>
+                <th className={th}>Capacity (1 · 2 · 3)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {vehicles.map(({ v, tag }) => (
+                <tr key={v.id} onClick={() => setTarget(v.id)} className={cn('cursor-pointer hover:bg-canvas', target === v.id && 'bg-action-soft')}>
+                  <td className={cn(td, 'text-center')}>
+                    <input type="radio" name="add-route-target" aria-label={v.id} checked={target === v.id} onChange={() => setTarget(v.id)} className="h-ds-4 w-ds-4 cursor-pointer accent-action" />
+                  </td>
+                  <td className={td}>
+                    <span className="flex items-center gap-ds-2 font-semibold">
+                      <Dot color={`var(${p.colorOf(v.id)})`} />
+                      {v.id}
+                    </span>
+                    <span className="block text-fg-muted">{v.driver} · {tag}</span>
+                  </td>
+                  <td className={td}>{v.originDc}</td>
+                  <td className={td}>{v.cap.join(' · ')}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </Modal>
+  );
+}
+
 /* ─────────────── Consola ─────────────── */
 function ConsoleBody({ p }: { p: Planner }) {
   const toast = useToast();
@@ -781,6 +885,7 @@ function ConsoleBody({ p }: { p: Planner }) {
   const [lasso, setLasso] = useState(false);
   const [popup, setPopup] = useState<{ ids: string[]; fresh: number; x: number; y: number } | null>(null);
   const [assign, setAssign] = useState<string[] | null>(null);
+  const [addRoute, setAddRoute] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [coach, setCoach] = useState(true);
 
@@ -973,7 +1078,7 @@ function ConsoleBody({ p }: { p: Planner }) {
         }}
       />
       <div className="flex min-h-0 flex-1">
-        <Rail p={p} panel={panel} setPanel={setPanel} showUnassigned={showUnassigned} setShowUnassigned={setShowUnassigned} />
+        <Rail p={p} panel={panel} setPanel={setPanel} showUnassigned={showUnassigned} setShowUnassigned={setShowUnassigned} onAddRoute={() => setAddRoute(true)} />
         {view === 'map' && panel?.kind === 'route' && (() => {
           const r = p.routes.find((x) => x.vehicleId === panel.id);
           return r ? <RoutePanel r={r} p={p} onClose={() => setPanel(null)} onAssign={openAssign} /> : null;
@@ -983,6 +1088,18 @@ function ConsoleBody({ p }: { p: Planner }) {
         {main}
       </div>
 
+      {addRoute && (
+        <AddRouteModal
+          p={p}
+          onClose={() => setAddRoute(false)}
+          onDone={(vid) => {
+            p.addRoute(vid);
+            setPanel({ kind: 'route', id: vid });
+            setAddRoute(false);
+            toast('success', `${vid} added`, 'The route is empty. Drag orders onto it to fill it.');
+          }}
+        />
+      )}
       {assign && (
         <AssignModal
           ids={assign}

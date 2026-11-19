@@ -7,6 +7,8 @@ export interface Route {
   locked: boolean;
   hidden: boolean;
   confirmed: boolean;
+  /** Creada a mano con «Add new route»: se conserva aunque quede vacía. */
+  added?: boolean;
 }
 
 /** Destino de una reasignación: una ruta (exista o no) o la bolsa de órdenes sin asignar. */
@@ -66,7 +68,7 @@ export function usePlanner() {
           const old = prev.find((p) => p.vehicleId === x.vehicleId);
           return old && old.orderIds.join() !== x.orderIds.join() ? { ...x, confirmed: false } : x;
         });
-        return next.filter((x) => x.orderIds.length > 0);
+        return next.filter((x) => x.orderIds.length > 0 || x.added);
       });
       setUnassigned((prev) => {
         const lockedIds = new Set(routes.filter((r) => r.locked).flatMap((r) => r.orderIds));
@@ -79,7 +81,9 @@ export function usePlanner() {
   );
 
   const patchRoute = useCallback((vehicleId: string, patch: Partial<Route>) => setRoutes((rs) => rs.map((r) => (r.vehicleId === vehicleId ? { ...r, ...patch } : r))), []);
-  const confirmAll = useCallback(() => setRoutes((rs) => rs.map((r) => ({ ...r, confirmed: true }))), []);
+  const confirmAll = useCallback(() => setRoutes((rs) => rs.map((r) => (r.orderIds.length ? { ...r, confirmed: true } : r))), []);
+  const addRoute = useCallback((vehicleId: string) => setRoutes((rs) => (rs.some((r) => r.vehicleId === vehicleId) ? rs : [...rs, { vehicleId, orderIds: [], locked: false, hidden: false, confirmed: false, added: true }])), []);
+  const removeRoute = useCallback((vehicleId: string) => setRoutes((rs) => rs.filter((r) => r.vehicleId !== vehicleId || r.orderIds.length > 0)), []);
 
   const select = useCallback((ids: string[], source: SelSource) => setSelection((s) => {
     const n = new Map(s);
@@ -113,7 +117,7 @@ export function usePlanner() {
   return {
     step, setStep, selOrders, setSelOrders, selVehicles, setSelVehicles, paramId, setParamId,
     routes, unassigned, selection, planned, colorOf, routeOf,
-    plan, move, patchRoute, confirmAll, select, unselect, clearLassoSelection, restart, snapshot, restore,
+    plan, move, patchRoute, confirmAll, addRoute, removeRoute, select, unselect, clearLassoSelection, restart, snapshot, restore,
   };
 }
 
