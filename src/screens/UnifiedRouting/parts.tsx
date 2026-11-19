@@ -14,7 +14,7 @@ export function RtIcon({ name, size = 16, color = 'currentColor', className }: {
 /* ── Hint: tooltip azul de ayuda para acciones (patrón «coachmark» de la consola de ruteo) ── */
 type Side = 'top' | 'bottom' | 'left' | 'right';
 
-export function HintBubble({ x, y, side, children, id, interactive, onEnter, onLeave, tone = 'info' }: { x: number; y: number; side: Side; children: ReactNode; id?: string; interactive?: boolean; onEnter?: () => void; onLeave?: () => void; tone?: 'info' | 'danger' }) {
+export function HintBubble({ x, y, side, children, id, interactive, onEnter, onLeave, tone = 'info' }: { x: number; y: number; side: Side; children: ReactNode; id?: string; interactive?: boolean; onEnter?: () => void; onLeave?: () => void; tone?: 'info' | 'danger' | 'plain' }) {
   const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ left: x, top: y });
   useLayoutEffect(() => {
@@ -35,11 +35,12 @@ export function HintBubble({ x, y, side, children, id, interactive, onEnter, onL
     left: 'left-full top-1/2 -translate-x-1/2 -translate-y-1/2',
     right: 'right-full top-1/2 translate-x-1/2 -translate-y-1/2',
   }[side];
+  const plainArrow = { top: 'border-b border-r border-line', bottom: 'border-t border-l border-line', left: 'border-t border-r border-line', right: 'border-b border-l border-line' };
   const arrowStyle = side === 'top' || side === 'bottom' ? { left: Math.min(Math.max(x - pos.left, 12), (ref.current?.offsetWidth ?? 24) - 12) } : undefined;
   return createPortal(
-    <div ref={ref} id={id} role="tooltip" onMouseEnter={onEnter} onMouseLeave={onLeave} className={cn('fixed z-ds-menu max-w-ds-popover rounded-ds-md px-ds-3 py-ds-2 text-ds-caption leading-ds-caption text-fg-inverse shadow-ds-md', tone === 'danger' ? 'bg-danger-fg' : 'bg-action-text', interactive ? 'pointer-events-auto' : 'pointer-events-none')} style={{ left: pos.left, top: pos.top }}>
+    <div ref={ref} id={id} role="tooltip" onMouseEnter={onEnter} onMouseLeave={onLeave} className={cn('fixed z-ds-menu max-w-ds-popover rounded-ds-md px-ds-3 py-ds-2 text-ds-caption leading-ds-caption shadow-ds-md', tone === 'danger' ? 'bg-danger-fg text-fg-inverse' : tone === 'plain' ? 'border border-line bg-surface text-fg' : 'bg-action-text text-fg-inverse', interactive ? 'pointer-events-auto' : 'pointer-events-none')} style={{ left: pos.left, top: pos.top }}>
       {children}
-      <span className={cn('absolute h-ds-2 w-ds-2 rotate-45', tone === 'danger' ? 'bg-danger-fg' : 'bg-action-text', arrow)} style={arrowStyle} />
+      <span className={cn('absolute h-ds-2 w-ds-2 rotate-45', tone === 'danger' ? 'bg-danger-fg' : tone === 'plain' ? cn('bg-surface', plainArrow[side]) : 'bg-action-text', arrow)} style={arrowStyle} />
     </div>,
     document.body,
   );

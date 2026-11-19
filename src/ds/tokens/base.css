@@ -17,11 +17,12 @@
 
 @layer utilities {
   /* Scrollbar de tabla: visible solo al pasar el cursor (patrón del DS) */
-  .scroll-hover::-webkit-scrollbar { height: 5px; }
-  .scroll-hover::-webkit-scrollbar-thumb { background: transparent; border-radius: 3px; }
+  .scroll-hover { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+  .scroll-hover:hover { scrollbar-color: var(--color-line-strong) transparent; }
+  .scroll-hover::-webkit-scrollbar { width: 4px; height: 4px; }
+  .scroll-hover::-webkit-scrollbar-thumb { background: transparent; border-radius: 2px; }
   .scroll-hover::-webkit-scrollbar-track { background: transparent; }
   .scroll-hover:hover::-webkit-scrollbar-thumb { background: var(--color-line-strong); }
-  .scroll-hover:hover::-webkit-scrollbar-track { background: var(--color-surface-subtle); }
 }
 
 @keyframes bulk-in {

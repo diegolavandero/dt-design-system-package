@@ -317,7 +317,7 @@ export function RouteMap({ pins, vehicles = [], lines = [], showDepots, fitKey, 
 
       {overlay}
       {tip && (
-        <HintBubble x={tip.x} y={tip.y} side="top">
+        <HintBubble x={tip.x} y={tip.y} side="top" tone="plain">
           {tip.content}
         </HintBubble>
       )}

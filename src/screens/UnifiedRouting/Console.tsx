@@ -810,7 +810,7 @@ function ConsoleBody({ p }: { p: Planner }) {
               <>
                 <b className="block">#{id} · {r.vehicleId} · Stop {i + 1}</b>
                 <span className="block">{o.customer} · {o.address}</span>
-                <span className="mt-ds-1 block font-semibold">{r.locked ? 'Locked route · click to open it' : 'Drag onto a route or between stops · click to open the route'}</span>
+                <span className="-mx-ds-3 -mb-ds-2 mt-ds-2 block rounded-b-ds-md bg-action-soft px-ds-3 py-ds-2 font-semibold text-action-strong">{r.locked ? 'Locked route · click to open it' : 'Drag onto a route or between stops · click to open the route'}</span>
               </>
             ),
           });
@@ -830,7 +830,7 @@ function ConsoleBody({ p }: { p: Planner }) {
             <>
               <b className="block">#{id} · Unassigned</b>
               <span className="block">{o.customer} · {o.address}</span>
-              <span className="mt-ds-1 block font-semibold">{p.selection.has(id) ? 'Click to remove from Selected' : 'Click to select · drag onto a route to assign'}</span>
+              <span className="-mx-ds-3 -mb-ds-2 mt-ds-2 block rounded-b-ds-md bg-action-soft px-ds-3 py-ds-2 font-semibold text-action-strong">{p.selection.has(id) ? 'Click to remove from Selected' : 'Click to select · drag onto a route to assign'}</span>
             </>
           ),
         });
